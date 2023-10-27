@@ -7,60 +7,61 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## E-PARIWISATA PINRANG
+Selamat datang di aplikasi PINISI Choir atau unit kegiatan paduan suara, sebuah proyek perangkat lunak yang dibuat oleh Zulham Abidin. Aplikasi ini merupakan bagian dari upaya untuk menyelesaikan tugas akhir dalam rangka mengejar gelar Sarjana di Jurusan Teknik Informatika dan Komputer, Universitas Negeri Makassar.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Tentang Proyek
+PINISI Choir atau unit kegiatan paduan suara adalah produk dari upaya kolaboratif antara Zulham Abidin sebagai pengembang utama dan Arfah Awaluddin T sebagai pembimbing proyek. Proyek ini melibatkan serangkaian tahap pengembangan yang mencakup analisis kebutuhan, perancangan sistem, pengembangan perangkat lunak, serta pengujian dan implementasi.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Tujuan dari aplikasi ini adalah:
+Meningkatkan visibilitas PINISI Choir atau unit kegiatan paduan suara untuk meningkat integritasi berlembaga dalam hal publikasi kegiatan dan prestasi prestasinya.
+Memudahkan manajemen dan pengelolaan data alumni atau demisioner pengurus harian.
+Kami berharap bahwa PINISI Choir atau unit kegiatan paduan suara akan memberikan manfaat yang signifikan bagi universitas negeri makassar, dan pihak terkait dalam memajukan paduan suara di indonesia timur.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Prasyarat
 
-## Learning Laravel
+Sebelum memulai instalasi proyek ini, pastikan Anda telah memenuhi prasyarat berikut:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- [XAMPP](https://www.apachefriends.org/index.html) atau server web lain yang mendukung PHP v8.2.
+- [Composer](https://getcomposer.org/download/).
+- [GitHub Desktop](https://desktop.github.com/).
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Panduan Instalasi
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Ikuti langkah-langkah berikut untuk menginstal dan menjalankan proyek Laravel:
 
-## Laravel Sponsors
+1. **Clone Repository**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Buka GitHub Desktop atau terminal Git Anda, dan clone repository ini ke direktori lokal Anda, klick kanan pada dekstop open gitbash
+- git clone https://github.com/ZulhamAbidin/pinrang.git
 
-### Premium Partners
+2. **Instal Dependensi Composer**
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Pindah ke direktori proyek yang telah Anda clone, dan jalankan perintah berikut untuk menginstal semua dependensi PHP menggunakan Composer:
+- composer install atau composer install --ignore-platform-req=ext-gd
 
-## Contributing
+3. **Setting .env**
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Salin berkas `.env.example` menjadi `.env` dan konfigurasi pengaturan database Anda di dalam berkas `.env` denngan memasukkan perintah sebagai berikut :
+- cp .env.example .nc
 
-## Code of Conduct
+4. **Generate Kunci Aplikasi**
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Jalankan perintah berikut untuk menghasilkan kunci aplikasi denngan memasukkan perintah sebagai berikut :
+- php artisan key:generate
 
-## Security Vulnerabilities
+5. **Jalankan Migrasi Database**
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Jalankan migrasi database untuk membuat tabel-tabel yang diperlukan denngan memasukkan perintah sebagai berikut : 
+- php artisan migrate
+- php artisan migrate:fresh --seed
 
-## License
+6. **storage link**
+Untuk memastikan berkas-berkas yang disimpan dalam direktori storage dapat diakses secara publik, Anda perlu menjalankan perintah sebagai berikut :
+- php artisan storage:link
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+7. **Jalankan Server Lokal**
+Gunakan perintah berikut untuk menjalankan server pengembangan Laravel denngan memasukkan perintah sebagai berikut :
+- php artisan serve
+- buka browser lalu akses http://localhost:8000
