@@ -7,7 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## PINISI COIR UNIT KEGIATAN PADUAN SUARA UNIVERSITAS NEGERI MAKASSAR
+## UNIT KEGIATAN PADUAN SUARA UNIVERSITAS NEGERI MAKASSAR
 Selamat datang di aplikasi PINISI Choir atau unit kegiatan paduan suara, sebuah proyek perangkat lunak yang dibuat oleh Zulham Abidin. Aplikasi ini merupakan bagian dari upaya untuk menyelesaikan tugas akhir dalam rangka mengejar gelar Sarjana di Jurusan Teknik Informatika dan Komputer, Universitas Negeri Makassar.
 
 Tentang Proyek
