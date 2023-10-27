@@ -1,0 +1,48 @@
+<?php
+
+namespace App\Http\Controllers\Auth;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class AuthenticatedSessionController extends Controller
+{
+    public function create()
+    {
+        return view('auth.login');
+    }
+
+    public function store(LoginRequest $request): RedirectResponse
+    {
+        $request->authenticate();
+
+        $request->session()->regenerate();
+
+        // Ambil peran (role) pengguna setelah login
+        $user = Auth::user();
+        $role = $user->role;
+
+        // Arahkan pengguna sesuai dengan peran (role) mereka
+        if ($role === 'admin') {
+            return redirect()->route('admin');
+        } elseif ($role === 'super_admin') {
+            return redirect()->route('super_admin');
+        }
+
+        return redirect()->intended(RouteServiceProvider::HOME);
+    }
+
+    public function destroy(Request $request): RedirectResponse
+    {
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+    }
+}
