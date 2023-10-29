@@ -10,17 +10,7 @@ use App\Http\Controllers\DataAnggotaController;
 use App\Http\Controllers\Admin\ApprovalController;
 use App\Http\Controllers\Admin\CarouselController;
 use App\Http\Controllers\Admin\PostinganController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\Pengunjung\PengunjungController;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
@@ -81,5 +71,10 @@ Route::middleware(['auth', 'super_admin'])->group(function () {
     Route::get('/admin/postingan/{id}/edit', [PostinganController::class, 'edit'])->name('admin.postingan.edit');
     Route::put('/admin/postingan/{id}', [PostinganController::class, 'update'])->name('admin.postingan.update');
 });
+
+
+// pengunjung
+Route::get('/pengunjung/news', [PengunjungController::class, 'ListBerita'])->name('ListBerita');
+Route::get('/pengunjung/news/{id}', [PengunjungController::class, 'DetailBerita'])->name('pengunjung.news.show');
 
 require __DIR__ . '/auth.php';

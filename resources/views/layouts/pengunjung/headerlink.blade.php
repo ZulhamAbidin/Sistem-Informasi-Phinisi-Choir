@@ -7,7 +7,7 @@
                 <div class="main-sidemenu navbar px-0">
                     <a class="navbar-brand ps-0 d-none d-lg-block" href="{{ route('deskripsi.index') }}">
                         <img alt="" class="logo-2" src="../assets/images/brand/logo-3.png">
-                        <img src="../assets/images/brand/logo.png" class="logo-3" alt="logo">
+                        <img src="../assets/images/brand/logo-2.png" class="logo-3" alt="logo">
                     </a>
                     <ul class="side-menu">
                         <li class="slide">

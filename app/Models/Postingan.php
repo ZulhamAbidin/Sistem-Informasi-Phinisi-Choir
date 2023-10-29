@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use App\Models\Komentar; 
 use Illuminate\Database\Eloquent\Model;
 
 class Postingan extends Model
@@ -31,7 +31,7 @@ class Postingan extends Model
         return round($averageRating, 2); // Mengambil rata-rata dan membulatkannya ke 2 desimal
     }
 
-    public function komentar()
+    public function komentars()
     {
         return $this->hasMany(Komentar::class, 'postingan_id');
     }

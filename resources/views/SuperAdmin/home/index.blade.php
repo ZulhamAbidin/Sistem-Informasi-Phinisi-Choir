@@ -1,6 +1,51 @@
 @extends('layouts.main')
 @section('container')
 
+    <style>
+        .carousel-caption.d-md-block {
+        text-align: center !important;
+        background-color: rgba(0, 0, 0, 0.5) !important;
+        position: relative !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        }
+        
+        .my-title,
+        .my-description {
+        margin: 0 !important;
+        line-height: 1.2 !important;
+        font-weight: 700 !important;
+        color: #fff !important;
+        font-family: "Poppins" !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 10px;
+        }
+        
+        .my-title {
+        font-size: 40px !important;
+        }
+        
+        .my-description {
+        font-size: 10px !important;
+        }
+        
+        @media (max-width: 767px) {
+        .my-title,
+        .my-description {
+        font-size: 10px !important;
+        }
+        }
+    </style>
+
     <div class="main-container container-fluid">
         <div class="page-header">
             <h1 class="page-title">Kelola Slider</h1>
@@ -72,31 +117,34 @@
                 </div>
             </div>
         </div>
+
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
 
                     <div id="carousel-captions" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
-                            @foreach ($carousels as $key => $carousel)
-                                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                    <img class="d-block w-100 br-5" alt=""
-                                        src="{{ asset('storage/uploads/' . $carousel->image_path) }}"
-                                        data-bs-holder-rendered="true">
-                                    <div class="carousel-item-background d-none d-md-block"></div>
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h3>{{ $carousel->title }}</h3>
-                                        <p>{{ $carousel->description }}</p>
-                                    </div>
+                            @foreach ($carousels as $carousel)
+                            <div class="carousel-item{{ $loop->first ? ' active' : '' }}">
+                                <img class="d-block h-50 br-5" alt="" src="{{ asset('storage/uploads/' . $carousel->image_path) }}"
+                                    data-bs-holder-rendered="true">
+                                <div class="carousel-item-background"></div>
+                                <div class="">
+                                    <h1 class="my-title items-center justify-content-center">{{ $carousel->title }} <br> {{
+                                        $carousel->description }}</h1>
+                                    {{-- <p class="my-description">{{ $carousel->description }}</p> --}}
                                 </div>
+                            </div>
                             @endforeach
                         </div>
+                    
                         <a class="carousel-control-prev" href="#carousel-captions" role="button" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="sr-only">Previous</span>
                         </a>
+                    
                         <a class="carousel-control-next" href="#carousel-captions" role="button" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="carousel-control-next-icon" ariahidden="true"></span>
                             <span class="sr-only">Next</span>
                         </a>
                     </div>
