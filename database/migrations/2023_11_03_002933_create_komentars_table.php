@@ -11,11 +11,12 @@ class CreateKomentarsTable extends Migration
         Schema::create('komentars', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('postingan_id');
-            $table->foreign('postingan_id')->references('id')->on('postingans')->onDelete('cascade');
             $table->string('nama');
             $table->text('isi_komentar');
             $table->integer('rating')->default(0);
             $table->timestamps();
+
+            $table->foreign('postingan_id')->references('id')->on('postingans')->onDelete('cascade');
         });
     }
 
