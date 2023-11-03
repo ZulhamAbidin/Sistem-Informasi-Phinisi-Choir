@@ -98,15 +98,24 @@
                                         </li>
                                     </ul>
                                     <div class="header-nav-right d-none d-lg-flex">
-                                        @if(auth()->check())
-                                        <a href="{{ route('admin.postingan.index') }}"
-                                            class="btn ripple btn-min w-sm btn-outline-primary me-2 my-auto d-lg-none d-xl-block d-block">Dashboard
-                                        </a>
+                                        @auth
+                                        @if (auth()->user()->role === 'admin')
+                                        <div class="d-lg-none d-xl-block">
+                                            <a href="{{ route('admin.index') }}" class="btn ripple btn-min w-sm btn-primary me-2 my-auto">Dashboard</a>
+                                        </div>
                                         @else
-                                        <a href="{{ route('login') }}"
-                                            class="btn ripple btn-min w-sm btn-primary me-2 my-auto d-lg-none d-xl-block d-block">Login
-                                        </a>
+                                        <div class="d-lg-none d-xl-block">
+                                            <a href="{{ route('dashboard.index') }}" class="btn ripple btn-min w-sm btn-primary me-2 my-auto">Dashboard</a>
+                                        </div>
                                         @endif
+                                        @endauth
+                                        
+                                        @guest
+                                        <div class="d-lg-none d-xl-block">
+                                            <a href="{{ route('login') }}" class="btn ripple btn-min w-sm btn-primary me-2 my-auto">Login</a>
+                                        </div>
+                                        @endguest
+
                                     </div>
                                 </div>
                             </div>

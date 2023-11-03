@@ -141,8 +141,20 @@
                                         <input type="hidden" name="centang_biru" value="{{ Auth::check() ? 1 : 0 }}">
                                         <label for="nama">Nama</label>
                                         <?php
-                                        $namaValue = Auth::check() ? auth()->user()->nama_lengkap : old('nama', ''); // Mengambil dari users jika sudah login, jika belum ambil dari form input
-                                        $readonly = Auth::check() ? 'readonly' : '';
+                                        $namaValue = '';
+                                        $readonly = '';
+                                        
+                                        if (Auth::check()) {
+                                            $user = auth()->user();
+                                            if ($user->role === 'admin') {
+                                                $namaValue = $user->nama_lengkap . ' (Anggota Pengurus)';
+                                                $readonly = 'readonly';
+                                            } else {
+                                                $namaValue = $user->nama_lengkap;
+                                            }
+                                        } else {
+                                            $namaValue = old('nama', '');
+                                        }
                                         ?>
                                         <input type="text" class="form-control mb-2" id="nama" name="nama" placeholder="Nama lengkap" required
                                             value="{{ $namaValue }}" {{ $readonly }}>
@@ -157,31 +169,33 @@
                                 </form>
                                 </div>
 
-
                                 {{-- komentar balasan --}}
                                 @foreach ($komentar->balasanKomentars as $balasan)
-                                    @if ($balasan->parent_komentar_id === $komentar->id)
-                                        <div class="media mb-5 overflow-visible">
-                                            <div class="me-6">
-                                                {{-- <a href="profile.html"> <img class="media-object rounded-circle thumb-sm" alt="64x64"
-                                            src="../assets/images/users/2.jpg"> </a> --}}
-                                            </div>
-                                            <div class="media-body border p-4 overflow-visible br-5">
-                                                <h5 class="mt-0">
-                                                    @if ($balasan->centang_biru)
-                                                        <img src="{{ asset('assets/images/logo.webp') }}" alt=""
-                                                            class="img-fluid"
-                                                            style="width: 24px; height: 24px;"><!-- Tampilkan centang biru dengan ukuran fs-24 -->
-                                                    @endif
-                                                    {{ $balasan->nama }}
-                                                </h5>
-                                                <span>
-                                                    <i class="fe fe-thumb-up text-danger"></i>
-                                                </span>
-                                                <p>{{ $balasan->isi_balasan }}</p>
-                                            </div>
-                                        </div>
-                                    @endif
+                                @if ($balasan->parent_komentar_id === $komentar->id)
+                                <div class="media mb-5 overflow-visible">
+                                    <div class="me-6">
+                                        {{-- <a href="profile.html"> <img class="media-object rounded-circle thumb-sm" alt="64x64"
+                                                src="../assets/images/users/2.jpg"> </a> --}}
+                                    </div>
+                                    <div class="media-body border p-4 overflow-visible br-5">
+                                        <h5 class="mt-0">
+                                            @if ($balasan->centang_biru)
+                                            <img src="{{ asset('assets/images/logo.webp') }}" alt="" class="img-fluid"
+                                                style="width: 24px; height: 24px;"><!-- Tampilkan centang biru dengan ukuran fs-24 -->
+                                            @endif
+                                            @php
+                                            $namaBalasan = $balasan->nama;
+                                            $namaBalasan = str_replace('(Anggota Pengurus)', '<small>(anggota pengurus)</small>', $namaBalasan);
+                                            @endphp
+                                            {!! $namaBalasan !!}
+                                        </h5>
+                                        <span>
+                                            <i class="fe fe-thumb-up text-danger"></i>
+                                        </span>
+                                        <p>{{ $balasan->isi_balasan }}</p>
+                                    </div>
+                                </div>
+                                @endif
                                 @endforeach
                                 {{-- komentar balasan --}}
 

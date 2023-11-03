@@ -106,8 +106,7 @@ class PengunjungController extends Controller
             return 0;
         }
     }
-
-    public function tambahBalasanKomentar(Request $request, Postingan $beritadetail, $komentarId)
+public function tambahBalasanKomentar(Request $request, Postingan $beritadetail, $komentarId)
 {
     $komentar = Komentar::findOrFail($komentarId);
 
@@ -124,17 +123,28 @@ class PengunjungController extends Controller
 
     $parentKomentarId = $komentar->id;
 
-    $centangBiru = false;
+    $centangBiru = Auth::check();
+
+    $namaLengkap = '';
+
     if (Auth::check()) {
-        $centangBiru = true;
+        $user = auth()->user();
+        $namaLengkap = $user->nama_lengkap;
+
+        // Tambahkan "(Anggota Pengurus)" jika user memiliki role sebagai admin
+        if ($user->role === 'admin') {
+            $namaLengkap .= ' (Anggota Pengurus)';
+        }
+    } else {
+        // Ambil dari input form jika user tidak masuk
+        $namaLengkap = $request->input('nama');
     }
 
-    $namaLengkap = Auth::check() ? auth()->user()->nama_lengkap : $request->input('nama');
     $readonly = Auth::check() ? 'readonly' : '';
 
     // Membuat objek BalasanKomentar
     $balasanKomentar = new BalasanKomentar([
-        'nama' => $namaLengkap, // Mengambil nilai 'nama_lengkap' dari model User jika sudah login, jika belum, ambil dari form input
+        'nama' => $namaLengkap, // Ambil 'nama_lengkap' dari model User jika sudah masuk, jika belum, ambil dari inputan form
         'isi_balasan' => $request->input('isi_balasan'),
         'komentar_id' => $komentar->id,
         'parent_komentar_id' => $parentKomentarId,
@@ -147,5 +157,6 @@ class PengunjungController extends Controller
         ->route('pengunjung.news.show', ['id' => $beritadetail->id])
         ->with('success', 'Balasan komentar berhasil ditambahkan.');
 }
+
 
 }
