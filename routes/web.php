@@ -76,5 +76,8 @@ Route::middleware(['auth', 'super_admin'])->group(function () {
 // pengunjung
 Route::get('/pengunjung/news', [PengunjungController::class, 'ListBerita'])->name('ListBerita');
 Route::get('/pengunjung/news/{id}', [PengunjungController::class, 'DetailBerita'])->name('pengunjung.news.show');
+Route::post('/pengunjung/news/{id}/tambah-komentar', [PengunjungController::class, 'tambahKomentar'])->name('pengunjung.news.komentar.tambah');
+
+
 
 require __DIR__ . '/auth.php';

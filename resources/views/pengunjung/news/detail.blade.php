@@ -60,8 +60,7 @@
                                 </a>
                                 <a href="javascript:void(0);" class="d-flex me-4 mb-2"><i
                                         class="fe fe-award fs-16 me-1 p-3 bg-secondary-transparent text-success bradius"></i>
-                                    <div class="mt-3 ms-1 text-muted font-weight-semibold">Rating
-                                        {{ $beritadetail->rating }} </div>
+                                    <div class="mt-3 ms-1 text-muted font-weight-semibold">Rating: {{ number_format($averageRating, 2) }} </div>
                                 </a>
                                 <div class="ms-auto">
                                     <a href="javascript:void(0);" class="d-flex mb-2"><i
@@ -99,6 +98,43 @@
 
                     </div>
 
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card">
+                        <div class="card-header">Tambah Komentar</div>
+        
+                        <div class="card-body">
+                           <form method="post" action="{{ route('pengunjung.news.komentar.tambah', ['id' => $beritadetail->id]) }}">
+                            @csrf
+                            
+                        
+                            <input type="hidden" name="postingan_id" value="{{ $beritadetail->id }}"> <!-- Gunakan ID dari $beritadetail -->
+                        
+                            <div>
+                                <label for="nama">Nama:</label>
+                                <input type="text" id="nama" name="nama" value="{{ old('nama') }}">
+                            </div>
+                        
+                            <div>
+                                <label for="isi_komentar">Komentar:</label>
+                                <textarea id="isi_komentar" name="isi_komentar">{{ old('isi_komentar') }}</textarea>
+                            </div>
+                        
+                            <div>
+                                <label for="rating">Rating (1-5):</label>
+                                <input type="number" id="rating" name="rating" value="{{ old('rating') }}" min="1" max="5">
+                            </div>
+                        
+                            <button type="submit">Tambah Komentar</button>
+                        </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

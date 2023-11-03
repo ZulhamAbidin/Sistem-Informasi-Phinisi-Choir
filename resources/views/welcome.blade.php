@@ -7,6 +7,7 @@
     <div class="main-content mt-0">
         <div class="side-app">
             <div class="main-container">
+                
 
                 {{-- POSTINGAN DENGAN RATING TERTINGGI --}}
                 <div class="section bg-landing" id="Blog">
@@ -46,7 +47,7 @@
                                                                     </a>
                                                                     <div class="dropdown-menu dropdown-menu-end">
                                                                         <a class="dropdown-item"
-                                                                            href="{{-- {{ route('admin.postingan.show', $postingan->id) }} --}}">
+                                                                            href="{{ route('pengunjung.news.show', $postingan->id) }}">
                                                                             Lihat
                                                                             Postingan</a>
                                                                     </div>
@@ -55,7 +56,7 @@
                                                         </div>
                                                         <div class="mt-4">
                                                             <div class="d-flex">
-                                                                <a href="{{-- {{ route('admin.postingan.show', $postingan->id) }} --}}" class="w-100"><img
+                                                                <a href="{{ route('pengunjung.news.show', $postingan->id) }}" class="w-100"><img
                                                                         src="{{ asset('storage/uploads/' . $postingan->sampul) }}"
                                                                         alt="img" class="br-5"></a>
                                                             </div>
