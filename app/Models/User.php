@@ -22,8 +22,9 @@ class User extends Authenticatable
         'nama_lengkap',
         'nra',
         'password',
-         'role', 
-         'status',
+        'role', 
+        'status',
+        'foto', 
     ];
 
     public function anggota()
@@ -36,7 +37,10 @@ class User extends Authenticatable
         return $this->anggota()->exists();
     }
 
-    
+    public function komentars()
+    {
+        return $this->hasMany(Komentar::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

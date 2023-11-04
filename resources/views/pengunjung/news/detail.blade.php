@@ -8,6 +8,7 @@
                 <div class="container mt-4 pt-5">
                     <div class="row">
 
+                        {{-- POSTINGAN DETAIL  --}}
                         <div class="col-12 col-lg-9">
 
                             <style>
@@ -109,6 +110,7 @@
                             </div>
                         </div>
 
+                        {{-- POSTINGAN YANG SERUPA  --}}
                         <div class="col-12 col-lg-3">
 
                             <div class="card">
@@ -140,6 +142,7 @@
 
                         </div>
 
+                        {{-- LIST KOMENTAR  --}}
                         <div class="col-12 col-lg-6">
 
                             <div class="card-header">
@@ -147,9 +150,9 @@
                             </div>
 
                             @foreach ($beritadetail->komentars as $komentar)
-                                <div class="media mb-5 overflow-visible d-block d-sm-flex mt-5">
+                                <div class="media overflow-visible d-block d-sm-flex mt-5">
                                     <div class="me-3 mb-2">
-                                        <a href="#"> <img class="media-object rounded-circle thumb-sm" alt="64x64" src="{{ asset('assets/images/users/5.jpg') }}"> </a>
+                                        {{-- <a href="#"> <img class="media-object rounded-circle thumb-sm" alt="64x64" src="{{ asset('assets/images/users/5.jpg') }}"> </a> --}}
                                     </div>
                                     <div class="media-body overflow-visible">
                                         <div class="border mb-5 p-4 br-5">
@@ -159,10 +162,19 @@
                                                         data-bs-toggle="dropdown" role="button" aria-haspopup="true"
                                                         aria-expanded="false"><i class="fe fe-more-vertical"></i></a>
                                                     <div class="dropdown-menu dropdown-menu-end" style="">
-                                                        <a class="dropdown-item" href="javascript:void(0)"><i class="fe fe-edit mx-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0)"><i class="fe fe-corner-up-left mx-1"></i>Reply</a>
-                                                        <a class="dropdown-item" href="javascript:void(0)"><i class="fe fe-flag mx-1"></i> Report Abuse</a>
-                                                        <a class="dropdown-item" href="javascript:void(0)"><i class="fe fe-trash-2 mx-1"></i> Delete</a>
+                                                        <a class="dropdown-item" href="javascript:void(0)"><i class="fe fe-flag mx-1"></i> Laporkan</a>
+                                                        @if(Auth::check() && Auth::user()->role === 'super_admin')
+                                                        <!-- Tombol Delete hanya ditampilkan untuk Super Admin -->
+                                                        <a class="dropdown-item" href="{{ route('pengunjung.news.komentar.hapus', ['komentarId' => $komentar->id]) }}"
+                                                            onclick="event.preventDefault(); document.getElementById('delete-komentar-{{ $komentar->id }}').submit();">
+                                                            <i class="fe fe-trash-2 mx-1"></i> Delete
+                                                        </a>
+                                                        <form id="delete-komentar-{{ $komentar->id }}"
+                                                            action="{{ route('pengunjung.news.komentar.hapus', ['komentarId' => $komentar->id]) }}" method="POST"
+                                                            style="display: none;">
+                                                            @csrf
+                                                        </form>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </nav>
@@ -222,16 +234,11 @@
                                             </form>
                                         </div>
 
-
-
                                         @foreach ($komentar->balasanKomentars as $balasan)
                                             @if ($balasan->parent_komentar_id === $komentar->id)
                                                 <div class="media mb-5 overflow-visible">
-                                                    <div class="me-3">
-                                                        <a href="#"> <img
-                                                                class="media-object rounded-circle thumb-sm"
-                                                                alt="64x64"
-                                                                src="{{ asset('assets/images/users/2.jpg') }}"> </a>
+                                                    <div class="me-5">
+                                                        {{-- <a href="#"> <img  class="media-object rounded-circle thumb-sm"  alt="64x64" src="{{ asset('assets/images/users/2.jpg') }}"> </a> --}}
                                                     </div>
                                                     <div class="media-body border p-4 overflow-visible br-5">
                                                         <nav class="nav float-end">
@@ -251,18 +258,24 @@
                                                                     <a class="dropdown-item" href="javascript:void(0)"><i
                                                                             class="fe fe-flag mx-1"></i> Report
                                                                         Abuse</a>
-                                                                    <a class="dropdown-item" href="javascript:void(0)"><i
-                                                                            class="fe fe-trash-2 mx-1"></i>
-                                                                        Delete</a>
+                                                                        
+                                                                    @if(Auth::check() && Auth::user()->role === 'super_admin')
+                                                                    <a class="dropdown-item" href="{{ route('pengunjung.news.komentar.hapus', ['komentarId' => $komentar->id]) }}"
+                                                                        onclick="event.preventDefault(); document.getElementById('delete-komentar-{{ $komentar->id }}').submit();">
+                                                                        <i class="fe fe-trash-2 mx-1"></i> Delete
+                                                                    </a>
+                                                                    <form id="delete-komentar-{{ $komentar->id }}"
+                                                                        action="{{ route('pengunjung.news.komentar.hapus', ['komentarId' => $komentar->id]) }}" method="POST"
+                                                                        style="display: none;">
+                                                                        @csrf
+                                                                    </form>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </nav>
                                                         <h5 class="mt-0">
                                                             @if ($balasan->centang_biru)
-                                                                {{-- <span class="badge "><i class="fa fa-check-circle bg-success"></i></span> --}}
-                                                                {{-- <span class="icons"><i class="ri-star-line"></i></span> --}}
                                                                 <a class="social-icon text-success" href="javascript:void(0)"><i class="fe fe-check-circle"></i></a>
-                                                                {{-- <span class=""><i class="fe fe-check btn-succes"></i></span> --}}
                                                             @endif
                                                             @php
                                                                 $namaBalasan = $balasan->nama;
@@ -286,65 +299,56 @@
                             
                         </div>
 
-                    </div>
-
-
-                </div>
-
-                <div class="col-12 col-lg-6">
-                    <div class="card-header">
-                        <div class="card-title">Tambahkan Komentar</div>
-                    </div>
-                    <div class="card-body">
-                        <form class="form-horizontal m-t-20" method="post"
-                            action="{{ route('pengunjung.news.komentar.tambah', ['id' => $beritadetail->id]) }}">
-                            @csrf
-                            <input type="hidden" name="postingan_id" value="{{ $beritadetail->id }}">
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <input class="form-control" id="nama" name="nama"
-                                        value="{{ old('nama') }}" type="text" required=""
-                                        placeholder="Username*">
-                                </div>
+                        {{-- TAMBAH KOMENTAR  --}}
+                        <div class="col-12 col-lg-6">
+                            <div class="card-header">
+                                <div class="card-title">Tambahkan Komentar</div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <textarea class="form-control" id="isi_komentar" name="isi_komentar">{{ old('isi_komentar') }}</textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <div class="rating-stars block" id="rating-1" style="cursor: pointer;">
-                                        <input type="hidden" id="rating-input" name="rating"
-                                            value="{{ old('rating') }}" min="1">
-                                        <i class="fa fa-star" data-value="1" style="color:#f1c40f"></i>
-                                        <i class="fa fa-star" data-value="2" style="color:#f1c40f"></i>
-                                        <i class="fa fa-star" data-value="3" style="color: rgb(236, 240, 241);"></i>
-                                        <i class="fa fa-star" data-value="4" style="color: rgb(236, 240, 241);"></i>
-                                        <i class="fa fa-star" data-value="5" style="color: rgb(236, 240, 241);"></i>
+                            <div class="card-body">
+                                <form class="form-horizontal m-t-20" method="post"
+                                    action="{{ route('pengunjung.news.komentar.tambah', ['id' => $beritadetail->id]) }}">
+                                    @csrf
+                                    <input type="hidden" name="postingan_id" value="{{ $beritadetail->id }}">
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <input class="form-control" id="nama" name="nama" value="{{ old('nama') }}" type="text" required=""
+                                                placeholder="Username*">
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <textarea class="form-control" id="isi_komentar"
+                                                name="isi_komentar">{{ old('isi_komentar') }}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <div class="rating-stars block" id="rating-1" style="cursor: pointer;">
+                                                <input type="hidden" id="rating-input" name="rating" value="{{ old('rating') }}" min="1">
+                                                <i class="fa fa-star" data-value="1" style="color:#f1c40f"></i>
+                                                <i class="fa fa-star" data-value="2" style="color:#f1c40f"></i>
+                                                <i class="fa fa-star" data-value="3" style="color: rgb(236, 240, 241);"></i>
+                                                <i class="fa fa-star" data-value="4" style="color: rgb(236, 240, 241);"></i>
+                                                <i class="fa fa-star" data-value="5" style="color: rgb(236, 240, 241);"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <button type="submit" class="btn btn-primary btn-rounded  waves-effect waves-light">Submit</button>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="">
-                                <button type="submit"
-                                    class="btn btn-primary btn-rounded  waves-effect waves-light">Submit</button>
-                            </div>
-                        </form>
+                        </div>
+
                     </div>
                 </div>
-
-
 
             </div>
         </div>
-
     </div>
-    </div>
-    </div>
-
-
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script>
         $(document).ready(function() {
             $('.rating-stars i').click(function() {
@@ -375,6 +379,7 @@
             });
         });
     </script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const lihatKomentarButtons = document.querySelectorAll('.lihat-komentar-btn');
@@ -394,7 +399,6 @@
             });
         });
     </script>
-
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -420,4 +424,5 @@
             });
         });
     </script>
+
 @endsection

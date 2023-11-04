@@ -45,15 +45,13 @@ class PengunjungController extends Controller
         $averageRating = $beritadetail->komentars()->avg('rating');
 
         $postinganLainnya = Postingan::where('id', '!=', $id)
-                                    ->inRandomOrder() 
-                                    ->take(5) 
-                                    ->get();
+            ->inRandomOrder()
+            ->take(5)
+            ->get();
 
         return view('pengunjung.news.detail', compact('beritadetail', 'averageRating', 'postinganLainnya'));
     }
 
-
-    
     public function totalRating(Postingan $beritadetail)
     {
         return $beritadetail->komentars()->sum('rating');
@@ -103,7 +101,6 @@ class PengunjungController extends Controller
         return redirect()->route('pengunjung.news.show', ['id' => $komentar->postingan_id]);
     }
 
-
     public function tambahBalasanKomentar(Request $request, Postingan $beritadetail, $komentarId)
     {
         $komentar = Komentar::findOrFail($komentarId);
@@ -150,5 +147,28 @@ class PengunjungController extends Controller
         return redirect()
             ->route('pengunjung.news.show', ['id' => $beritadetail->id])
             ->with('success', 'Balasan komentar berhasil ditambahkan.');
+    }
+
+    public function hapusKomentar($komentarId)
+    {
+        $komentar = Komentar::find($komentarId);
+
+        if (!$komentar) {
+            return redirect()
+                ->back()
+                ->with('error', 'Komentar tidak ditemukan');
+        }
+
+        if (auth()->user()->role !== 'super_admin') {
+            return redirect()
+                ->back()
+                ->with('error', 'Anda tidak diizinkan menghapus komentar');
+        }
+
+        $komentar->delete();
+
+        return redirect()
+            ->back()
+            ->with('success', 'Komentar berhasil dihapus');
     }
 }
