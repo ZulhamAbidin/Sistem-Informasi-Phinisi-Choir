@@ -53,6 +53,24 @@ class PengunjungController extends Controller
     }
 
 
+    
+    public function totalRating(Postingan $beritadetail)
+    {
+        return $beritadetail->komentars()->sum('rating');
+    }
+
+    public function averageRating(Postingan $beritadetail)
+    {
+        $totalRating = $this->totalRating($beritadetail);
+        $totalKomentar = $beritadetail->komentars()->count();
+
+        if ($totalKomentar > 0) {
+            return $totalRating / $totalKomentar;
+        } else {
+            return 0;
+        }
+    }
+
     public function tambahKomentar(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -85,22 +103,6 @@ class PengunjungController extends Controller
         return redirect()->route('pengunjung.news.show', ['id' => $komentar->postingan_id]);
     }
 
-    public function totalRating(Postingan $beritadetail)
-    {
-        return $beritadetail->komentars()->sum('rating');
-    }
-
-    public function averageRating(Postingan $beritadetail)
-    {
-        $totalRating = $this->totalRating($beritadetail);
-        $totalKomentar = $beritadetail->komentars()->count();
-
-        if ($totalKomentar > 0) {
-            return $totalRating / $totalKomentar;
-        } else {
-            return 0;
-        }
-    }
 
     public function tambahBalasanKomentar(Request $request, Postingan $beritadetail, $komentarId)
     {
