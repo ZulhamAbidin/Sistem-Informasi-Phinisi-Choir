@@ -17,8 +17,6 @@
                             <tr>
                                 <th>Nama Lengkap</th>
                                 <th>NRA</th>
-                                <th>Role</th>
-                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -27,12 +25,8 @@
                                 <tr>
                                     <td>{{ $user->nama_lengkap }}</td>
                                     <td>{{ $user->nra }}</td>
-                                    <td>{{ $user->role }}</td>
-                                    <td>{{ $user->status }}</td>
                                     <td>
-                                        <button class="ubah-status btn btn-primary" data-user-id="{{ $user->id }}">Ubah
-                                            Status menjadi
-                                            terverifikasi</button>
+                                        <button class="ubah-status btn btn-outline-primary" data-user-id="{{ $user->id }}">Konfirmasi Pendaftaran</button>
                                     </td>
                                 </tr>
                             @endforeach

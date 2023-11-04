@@ -218,7 +218,7 @@
                                                             <div class="form-group">
                                                                 <label for="notelfon">No. Telepon</label>
                                                                 <input type="text" class="form-control"
-                                                                    name="notelfon" placeholder="Contoh : 0895801138822" required>
+                                                                    name="notelfon" placeholder="Contoh : +62895801138822" required>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="motto">Motto</label>

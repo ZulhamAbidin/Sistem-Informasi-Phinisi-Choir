@@ -40,7 +40,7 @@ class DataAnggotaController extends Controller
             'notelfon' => 'nullable|string',
             'motto' => 'nullable|string',
             'deskripsi' => 'nullable|string',
-            'foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'foto' => 'image',
         ]);
 
         $user = Auth::user();
