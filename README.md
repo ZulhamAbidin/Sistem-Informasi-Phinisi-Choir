@@ -34,8 +34,7 @@ Ikuti langkah-langkah berikut untuk menginstal dan menjalankan proyek Laravel:
 1. **Clone Repository**
 
 Buka GitHub Desktop atau terminal Git Anda, dan clone repository ini ke direktori lokal Anda, klick kanan pada dekstop open gitbash
-- git clone https://github.com/ZulhamAbidin/pinrang.git
-
+- git clone https://github.com/ZulhamAbidin/Sistem-Informasi-Phinisi-Choir.git
 2. **Instal Dependensi Composer**
 
 Pindah ke direktori proyek yang telah Anda clone, dan jalankan perintah berikut untuk menginstal semua dependensi PHP menggunakan Composer:
