@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pengunjung;
 
 use Carbon\Carbon;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\Komentar;
 use App\Models\Postingan;
 use Illuminate\Http\Request;
@@ -98,7 +99,9 @@ class PengunjungController extends Controller
         $postingan->update([
             'rating' => $averageRating,
         ]);
-        return redirect()->route('pengunjung.news.show', ['id' => $komentar->postingan_id]);
+
+        Alert::success('Berhasil', 'Menambahkan Komentar.');
+        return redirect()->back();
     }
 
     public function tambahBalasanKomentar(Request $request, Postingan $beritadetail, $komentarId)
@@ -144,31 +147,50 @@ class PengunjungController extends Controller
 
         $balasanKomentar->save();
 
-        return redirect()
-            ->route('pengunjung.news.show', ['id' => $beritadetail->id])
-            ->with('success', 'Balasan komentar berhasil ditambahkan.');
+        Alert::success('Berhasil', 'Balasan komentar berhasil Ditambahkan.');
+        return redirect()->back();
     }
 
     public function hapusKomentar($komentarId)
     {
         $komentar = Komentar::find($komentarId);
 
-        if (!$komentar) {
-            return redirect()
-                ->back()
-                ->with('error', 'Komentar tidak ditemukan');
-        }
-
         if (auth()->user()->role !== 'super_admin') {
             return redirect()
                 ->back()
-                ->with('error', 'Anda tidak diizinkan menghapus komentar');
+                ->with('error', 'Anda tidak memiliki izin untuk menghapus komentar.');
+        }
+
+        if (!$komentar) {
+            return redirect()
+                ->back()
+                ->with('error', 'Komentar tidak ditemukan.');
         }
 
         $komentar->delete();
 
-        return redirect()
-            ->back()
-            ->with('success', 'Komentar berhasil dihapus');
+        Alert::success('Berhasil', 'komentar berhasil dihapus.');
+
+        return redirect()->back();
+    }
+
+    public function hapusBalasanKomentar($komentarId)
+    {
+        $balasanKomentar = BalasanKomentar::find($komentarId);
+
+        if (auth()->user()->role !== 'super_admin') {
+            return response()->json(['message' => 'Anda tidak diizinkan untuk menghapus balasan komentar.'], 403);
+        }
+
+        if (!$balasanKomentar) {
+            return response()->json(['message' => 'Balasan komentar tidak ditemukan.'], 404);
+        }
+
+        $balasanKomentar->delete();
+
+        Alert::success('Berhasil', 'Balasan komentar berhasil dihapus.');
+
+        return redirect()->back();
+
     }
 }

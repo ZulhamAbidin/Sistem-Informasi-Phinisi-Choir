@@ -24,6 +24,8 @@
         <img src="{{ asset('assets/images/loader.svg') }}" class="loader-img" alt="Loader">
     </div>
 
+    @include('sweetalert::alert')
+
     <div class="page">
         <div class="page-main">
             <div class="hor-header header">
@@ -139,7 +141,7 @@
                         <div class="top-footer">
                             <div class="row">
                                 <div class="col-lg-4 col-sm-12 col-md-12 reveal revealleft">
-                                    <h6 class="text-justify">About</h6>
+                                    <h6 class="text-justify">About cek</h6>
                                     <p class=""> Unit Kegiatan Mahasiswa Paduan Suara Mahasiswa Universitas Negeri
                                         Makassar Pinisi Choir (UKM PSM UNM Pinisi Choir)
                                         merupakan organisasi kemahasiswaan resmi tingkat Universitas Negeri Makassar
@@ -212,6 +214,8 @@
     </div>
 
     <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+    
+    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/bootstrap/js/popper.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>

@@ -258,14 +258,14 @@
                                                                     <a class="dropdown-item" href="javascript:void(0)"><i
                                                                             class="fe fe-flag mx-1"></i> Report
                                                                         Abuse</a>
-                                                                        
                                                                     @if(Auth::check() && Auth::user()->role === 'super_admin')
-                                                                    <a class="dropdown-item" href="{{ route('pengunjung.news.komentar.hapus', ['komentarId' => $komentar->id]) }}"
-                                                                        onclick="event.preventDefault(); document.getElementById('delete-komentar-{{ $komentar->id }}').submit();">
+                                                                    <!-- Tombol Delete hanya ditampilkan untuk Super Admin -->
+                                                                    <a class="dropdown-item" href="{{ route('pengunjung.news.komentar.balasan.hapus', ['komentarId' => $balasan->id]) }}"
+                                                                        onclick="event.preventDefault(); document.getElementById('delete-balasan-komentar-{{ $balasan->id }}').submit();">
                                                                         <i class="fe fe-trash-2 mx-1"></i> Delete
                                                                     </a>
-                                                                    <form id="delete-komentar-{{ $komentar->id }}"
-                                                                        action="{{ route('pengunjung.news.komentar.hapus', ['komentarId' => $komentar->id]) }}" method="POST"
+                                                                    <form id="delete-balasan-komentar-{{ $balasan->id }}"
+                                                                        action="{{ route('pengunjung.news.komentar.balasan.hapus', ['komentarId' => $balasan->id]) }}" method="POST"
                                                                         style="display: none;">
                                                                         @csrf
                                                                     </form>
@@ -325,8 +325,8 @@
                                         <div class="col-xs-12">
                                             <div class="rating-stars block" id="rating-1" style="cursor: pointer;">
                                                 <input type="hidden" id="rating-input" name="rating" value="{{ old('rating') }}" min="1">
-                                                <i class="fa fa-star" data-value="1" style="color:#f1c40f"></i>
-                                                <i class="fa fa-star" data-value="2" style="color:#f1c40f"></i>
+                                                <i class="fa fa-star" data-value="1" style="color: rgb(236, 240, 241);"></i>
+                                                <i class="fa fa-star" data-value="2" style="color: rgb(236, 240, 241);"></i>
                                                 <i class="fa fa-star" data-value="3" style="color: rgb(236, 240, 241);"></i>
                                                 <i class="fa fa-star" data-value="4" style="color: rgb(236, 240, 241);"></i>
                                                 <i class="fa fa-star" data-value="5" style="color: rgb(236, 240, 241);"></i>

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Anggota;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\BalasanKomentar;
 use Illuminate\Support\Facades\Auth;
 
 class DataAnggotaController extends Controller
@@ -65,4 +66,5 @@ class DataAnggotaController extends Controller
 
         return response()->json(['success' => true]);
     }
+
 }

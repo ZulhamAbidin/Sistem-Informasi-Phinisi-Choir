@@ -81,6 +81,8 @@ Route::post('/pengunjung/news/{id}/tambah-komentar', [PengunjungController::clas
 Route::post('/pengunjung/news/{beritadetail}/{komentarId}/tambah-balasan-komentar', [PengunjungController::class, 'tambahBalasanKomentar'])->name('pengunjung.news.tambah-balasan-komentar');
 // Rute untuk menghapus komentar
 Route::post('/pengunjung/news/delete-komentar/{komentarId}', [PengunjungController::class, 'hapusKomentar'])->name('pengunjung.news.komentar.hapus');
+Route::post('/pengunjung/news/{komentarId}/hapus-balasan-komentar', [PengunjungController::class, 'hapusBalasanKomentar'])->name('pengunjung.news.komentar.balasan.hapus');
+
 
 
 require __DIR__ . '/auth.php';
