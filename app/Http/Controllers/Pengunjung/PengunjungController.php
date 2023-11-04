@@ -42,18 +42,21 @@ class PengunjungController extends Controller
         }
 
         $beritadetail->selisihWaktu = Carbon::parse($beritadetail->created_at)->diffForHumans();
-
-        // Menghitung rata-rata rating
         $averageRating = $beritadetail->komentars()->avg('rating');
 
-        // Mengirim rata-rata rating ke view
-        return view('pengunjung.news.detail', compact('beritadetail', 'averageRating'));
+        $postinganLainnya = Postingan::where('id', '!=', $id)
+                                    ->inRandomOrder() 
+                                    ->take(5) 
+                                    ->get();
+
+        return view('pengunjung.news.detail', compact('beritadetail', 'averageRating', 'postinganLainnya'));
     }
+
 
     public function tambahKomentar(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'postingan_id' => 'required', // Pastikan 'postingan_id' disertakan dalam request
+            'postingan_id' => 'required',
             'nama' => ['required', 'regex:/^[a-zA-Z\s]+$/'],
             'isi_komentar' => 'required',
             'rating' => 'required|numeric|min:1|max:5',
@@ -67,26 +70,18 @@ class PengunjungController extends Controller
         }
 
         $komentar = new Komentar([
-            'postingan_id' => $request->input('postingan_id'), // Set 'postingan_id' dari permintaan
+            'postingan_id' => $request->input('postingan_id'),
             'nama' => $request->input('nama'),
             'isi_komentar' => $request->input('isi_komentar'),
             'rating' => $request->input('rating'),
         ]);
 
         $komentar->save();
-
-        // Dapatkan postingan berdasarkan ID yang diambil dari entitas Komentar
         $postingan = Postingan::find($komentar->postingan_id);
-
-        // Hitung rata-rata rating dari komentar
         $averageRating = $postingan->komentars->avg('rating');
-
-        // Perbarui nilai 'rating' pada postingan
         $postingan->update([
             'rating' => $averageRating,
         ]);
-
-        // Redirect ke halaman tampilan detail postingan
         return redirect()->route('pengunjung.news.show', ['id' => $komentar->postingan_id]);
     }
 
@@ -106,57 +101,52 @@ class PengunjungController extends Controller
             return 0;
         }
     }
-public function tambahBalasanKomentar(Request $request, Postingan $beritadetail, $komentarId)
-{
-    $komentar = Komentar::findOrFail($komentarId);
 
-    $validator = Validator::make($request->all(), [
-        'isi_balasan' => 'required',
-    ]);
+    public function tambahBalasanKomentar(Request $request, Postingan $beritadetail, $komentarId)
+    {
+        $komentar = Komentar::findOrFail($komentarId);
 
-    if ($validator->fails()) {
-        return redirect()
-            ->back()
-            ->withErrors($validator)
-            ->withInput();
-    }
+        $validator = Validator::make($request->all(), [
+            'isi_balasan' => 'required',
+        ]);
 
-    $parentKomentarId = $komentar->id;
-
-    $centangBiru = Auth::check();
-
-    $namaLengkap = '';
-
-    if (Auth::check()) {
-        $user = auth()->user();
-        $namaLengkap = $user->nama_lengkap;
-
-        // Tambahkan "(Anggota Pengurus)" jika user memiliki role sebagai admin
-        if ($user->role === 'admin') {
-            $namaLengkap .= ' (Anggota Pengurus)';
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
         }
-    } else {
-        // Ambil dari input form jika user tidak masuk
-        $namaLengkap = $request->input('nama');
+
+        $parentKomentarId = $komentar->id;
+
+        $centangBiru = Auth::check();
+
+        $namaLengkap = '';
+
+        if (Auth::check()) {
+            $user = auth()->user();
+            $namaLengkap = $user->nama_lengkap;
+            if ($user->role === 'admin') {
+                $namaLengkap .= ' (Anggota Pengurus)';
+            }
+        } else {
+            $namaLengkap = $request->input('nama');
+        }
+
+        $readonly = Auth::check() ? 'readonly' : '';
+
+        $balasanKomentar = new BalasanKomentar([
+            'nama' => $namaLengkap,
+            'isi_balasan' => $request->input('isi_balasan'),
+            'komentar_id' => $komentar->id,
+            'parent_komentar_id' => $parentKomentarId,
+            'centang_biru' => $centangBiru,
+        ]);
+
+        $balasanKomentar->save();
+
+        return redirect()
+            ->route('pengunjung.news.show', ['id' => $beritadetail->id])
+            ->with('success', 'Balasan komentar berhasil ditambahkan.');
     }
-
-    $readonly = Auth::check() ? 'readonly' : '';
-
-    // Membuat objek BalasanKomentar
-    $balasanKomentar = new BalasanKomentar([
-        'nama' => $namaLengkap, // Ambil 'nama_lengkap' dari model User jika sudah masuk, jika belum, ambil dari inputan form
-        'isi_balasan' => $request->input('isi_balasan'),
-        'komentar_id' => $komentar->id,
-        'parent_komentar_id' => $parentKomentarId,
-        'centang_biru' => $centangBiru,
-    ]);
-
-    $balasanKomentar->save();
-
-    return redirect()
-        ->route('pengunjung.news.show', ['id' => $beritadetail->id])
-        ->with('success', 'Balasan komentar berhasil ditambahkan.');
-}
-
-
 }

@@ -75,6 +75,7 @@ Route::middleware(['auth', 'super_admin'])->group(function () {
 
 // pengunjung
 Route::get('/pengunjung/news', [PengunjungController::class, 'ListBerita'])->name('ListBerita');
+Route::get('/pengunjung/news/{id}/postingan-lainnya', [PengunjungController::class, 'tampilkanPostinganLainnya'])->name('pengunjung.news.postingan-lainnya');
 Route::get('/pengunjung/news/{id}', [PengunjungController::class, 'DetailBerita'])->name('pengunjung.news.show');
 Route::post('/pengunjung/news/{id}/tambah-komentar', [PengunjungController::class, 'tambahKomentar'])->name('pengunjung.news.komentar.tambah');
 Route::post('/pengunjung/news/{beritadetail}/{komentarId}/tambah-balasan-komentar', [PengunjungController::class, 'tambahBalasanKomentar'])->name('pengunjung.news.tambah-balasan-komentar');

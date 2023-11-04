@@ -105,7 +105,7 @@
                                         </div>
                                         @else
                                         <div class="d-lg-none d-xl-block">
-                                            <a href="{{ route('dashboard.index') }}" class="btn ripple btn-min w-sm btn-primary me-2 my-auto">Dashboard</a>
+                                            <a href="{{ route('admin.postingan.index') }}" class="btn ripple btn-min w-sm btn-primary me-2 my-auto">Dashboard</a>
                                         </div>
                                         @endif
                                         @endauth
@@ -220,10 +220,6 @@
     <script src="{{ asset('assets/plugins/counters/counters-1.js') }}"></script>
     <script src="{{ asset('assets/plugins/owl-carousel/owl.carousel.js') }}"></script>
     <script src="{{ asset('assets/plugins/company-slider/slider.js') }}"></script>
-    <script src="{{ asset('assets/plugins/rating/jquery-rate-picker.js') }}"></script>
-    <script src="{{ asset('assets/plugins/rating/rating-picker.js') }}"></script>
-    <script src="{{ asset('assets/plugins/ratings-2/jquery.star-rating.js') }}"></script>
-    <script src="{{ asset('assets/plugins/ratings-2/star-rating.js') }}"></script>
     <script src="{{ asset('assets/js/sticky.js') }}"></script>
     <script src="{{ asset('assets/js/landing.js') }}"></script>
 
