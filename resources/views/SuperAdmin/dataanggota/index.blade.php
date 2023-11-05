@@ -6,7 +6,7 @@
         <h1 class="page-title">Lihat Data Anggota</h1>
         <div>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('superadmin.home.index') }}">Lihat</a></li>
+                <li class="breadcrumb-item"><a href="#">Lihat</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Data Anggota</li>
             </ol>
         </div>

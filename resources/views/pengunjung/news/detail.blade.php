@@ -166,7 +166,7 @@
                             <div class="card-header">
                                 <div class="card-title">Komentar</div>
                             </div>
-
+                            
                             @foreach ($beritadetail->komentars as $komentar)
                                 <div class="media overflow-visible d-block d-sm-flex mt-5">
                                     <div class="me-3 mb-2">
@@ -203,21 +203,6 @@
                                             <p class="font-13 text-muted">{{ $komentar->isi_komentar }}.</p>
 
                                             <div class="d-flex">
-
-                                                {{-- <a class="like" href="javascript:;">
-                                                    <span class="badge btn-danger-light rounded-pill py-2 px-3">
-                                                        <i class="fe fe-heart me-1"></i>
-                                                        56</span>
-                                                </a>
-                                                 --}}
-                                                <!-- Komentar -->
-                                                {{-- <a class="like" href="{{ route('komentar.like', ['id' => $komentar->id]) }}">
-                                                    <span class="badge btn-danger-light rounded-pill py-2 px-3"
-                                                        id="likeKomentarButton">
-                                                        <i class="fe fe-heart me-1"></i>
-                                                        {{ $komentar->jumlah_suka }}
-                                                    </span>
-                                                </a> --}}
 
                                                 <form id="likeForm" method="POST" action="{{ route('komentar.like', ['id' => $komentar->id]) }}">
                                                     @csrf
