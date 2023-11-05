@@ -151,6 +151,14 @@ class PengunjungController extends Controller
         return redirect()->back();
     }
 
+    public function showKomentar()
+{
+    $komentar = Komentar::find($id); // Mengambil data komentar dari model
+
+    return view('pengunjung.news.detail', ['komentar' => $komentar]);
+}
+
+
     public function hapusKomentar($komentarId)
     {
         $komentar = Komentar::find($komentarId);
@@ -191,6 +199,50 @@ class PengunjungController extends Controller
         Alert::success('Berhasil', 'Balasan komentar berhasil dihapus.');
 
         return redirect()->back();
+    }
 
+    public function likePostingan($id)
+    {
+        $beritadetail = Postingan::find($id);
+
+        if ($beritadetail) {
+            $beritadetail->jumlah_suka += 1;
+            $beritadetail->save();
+            Alert::success('Berhasil', 'Menambahkan Like.'); // Menampilkan alert sukses
+            return redirect()->back(); // Kembali ke halaman sebelumnya
+        }
+
+        Alert::error('Gagal', 'Postingan tidak ditemukan.'); // Menampilkan alert error
+        return redirect()->back(); // Kembali ke halaman sebelumnya
+    }
+
+    public function likeKomentar($id)
+    {
+        $komentar = Komentar::find($id);
+
+        if ($komentar) {
+            $komentar->jumlah_suka += 1;
+            $komentar->save();
+            Alert::success('Berhasil', 'Menambahkan Like pada Komentar.'); // Menampilkan alert sukses
+            return redirect()->back(); // Kembali ke halaman sebelumnya
+        }
+
+        Alert::error('Gagal', 'Komentar tidak ditemukan.'); // Menampilkan alert error
+        return redirect()->back(); // Kembali ke halaman sebelumnya
+    }
+
+    public function likeBalasanKomentar($id)
+    {
+        $balasanKomentar = BalasanKomentar::find($id);
+
+        if ($balasanKomentar) {
+            $balasanKomentar->jumlah_suka += 1;
+            $balasanKomentar->save();
+            Alert::success('Berhasil', 'Menambahkan Like pada Balasan Komentar.');
+            return redirect()->back();
+        }
+
+        Alert::error('Gagal', 'Balasan Komentar tidak ditemukan.');
+        return redirect()->back();
     }
 }

@@ -24,7 +24,6 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
-                                    <div id="listBerita">
                                         @if (!is_null($listberita) && count($listberita) > 0)
                                             @foreach ($listberita as $postingan)
                                                 <div class="col-12 col-md-6 col-lg-4 reveal revealrotate active">
@@ -114,7 +113,6 @@
                                         @else
                                             <p>Admin Belum Mengunggah Postingan Yang Serupa Dengan Pencarian Anda.</p>
                                         @endif
-                                    </div>
                                 </div>
                             </div>
                         </div>

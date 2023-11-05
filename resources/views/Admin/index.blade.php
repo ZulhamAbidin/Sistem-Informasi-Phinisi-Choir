@@ -5,20 +5,17 @@
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Sash – Bootstrap 5  Admin & Dashboard Template">
-    <meta name="Zulham Abidin" content="Phinisi Choir">
-    <meta name="keywords"
-        content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
+    <meta name="description" content="PSM UNM">
+    <meta name="Zulham Abidin" content="PSM">
+    <meta name="keywords" content="PADUAN SUARA UNM.">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/brand/favicon.ico') }}" />
     <title>DATA PENGURUS</title>
     <link id="style" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/dark-style.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/transparent-style.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet" />
-    <link id="theme" rel="stylesheet" type="text/css" media="all"
-        href="{{ asset('assets/colors/color1.css') }}" />
-
-    <!-- Referensi ke file CSS SweetAlert -->
+    <link href="{{ asset('assets/colors/color1.css') }}" id="theme" rel="stylesheet" type="text/css" media="all"  />
     <link href="{{ asset('assets/js/alert/sweetalert2.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/js/alert/sweetalert2.min.css') }}" rel="stylesheet" />
     
@@ -27,7 +24,7 @@
 <body class="app ltr landing-page horizontal">
 
     <div id="global-loader">
-        <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
+        <img src="{{ asset('assets/images/loader.svg') }}" class="loader-img" alt="Loader">
     </div>
 
     <div class="page">
@@ -80,7 +77,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="main-sidemenu navbar px-0">
-                                    <a class="navbar-brand ps-0 d-none d-lg-block" href="index.html">
+                                    <a class="navbar-brand ps-0 d-none d-lg-block" href="/">
                                         <img alt="" class="logo-2"
                                             src="{{ asset('assets/images/brand/logo-3.png') }}">
                                         <img src="{{ asset('assets/images/brand/logo.png') }}" class="logo-3"
@@ -105,82 +102,127 @@
 
             <!--app-content open-->
             <div class="main-content mt-0">
+
                 <div class="side-app">
-
                     <div class="main-container">
-                        <div class="">
+                        
 
-                           
-
-
-                            <!-- ROW-1 OPEN -->
-                            <div class="section pb-0">
-
-                                <div class="container">
-                                    <div class="col-xl-9">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h3 class="card-title mx-auto text-justify">Data Anggota Unit Kegiatan Mahasiswa Paduan Suara Mahasiswa Universitas Negeri Makassar Pinisi Choir</h3>
-                                            </div>
-                                            @if ($anggota)
-                                            <div class="card-body">
-                                                <div class="email-media">
-                                                    <div class="mt-0 d-sm-flex">
-                                                        @if ($anggota->foto)
-                                                             <img class="me-2 rounded-circle avatar avatar-lg" src="{{ asset('storage/uploads/' . $anggota->foto) }}" alt="avatar">
-                                                        @endif
-                                                        <div class="media-body pt-0">
-                                                            <div class="float-end d-none d-md-flex fs-15">
-                                                                <small class="me-3 mt-3 text-muted"></small>
-                                                                
-                                                                <a href="javascript:void(0)" class="me-3 email-icon text-secondary bg-secondary-transparent"
-                                                                    data-bs-toggle="tooltip" title="" data-bs-original-title="Reply" aria-label="Reply"><i
-                                                                        class="fa fa-reply"></i></a>
-                                                                <div class="me-3">
-                                                                    <a href="javascript:void(0)" class="text-danger email-icon bg-danger-transparent"
-                                                                        data-bs-toggle="dropdown" role="button" aria-haspopup="true"
-                                                                        aria-expanded="false"><i class="fe fe-more-horizontal"></i></a>
-                                                                    <div class="dropdown-menu dropdown-menu-end">
-
-                                                                        <a class="dropdown-item" href="#createModal" data-bs-effect="effect-scale" data-bs-toggle="modal"><i class="fe fe-share me-2"></i>
-                                                                            Reupload Data Diri</a>
-
+                                @if ($anggota)
+                                    <div class="container">
+                                        <div class="row justify-content-center mt-4">
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="wideget-user mb-2">
+                                                            <div class="row">
+                                                                <div class="col-lg-12 col-md-12">
+                                                                    <div class="row">
+                                                                        <div class="panel profile-cover">
+                                                                            <div class="profile-cover__action bg-img"></div>
+                                                                            <div class="profile-cover__img">
+                                        
+                                                                                <div class="profile-img-1">
+                                                                                    @if ($anggota->foto)
+                                                                                    <img src="{{ asset('storage/uploads/' . $anggota->foto) }}" alt="img">
+                                                                                    @endif
+                                                                                </div>
+                                                                                <div class="profile-img-content text-dark text-start">
+                                                                                    <div class="text-dark">
+                                                                                        <h3 class="h3 mb-2">{{ $anggota->nama_lengkap }}</h3>
+                                                                                        <h5 class="text-muted">{{ $anggota->jabatan }}</h5>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            {{-- <div class="btn-profile">
+                                                                                <a href="https://wa.me/{{ $anggota->notelfon }}"
+                                                                                    class="btn btn-outline-primary mt-1 mb-1"> <i class="fa fa-whatsapp"></i>
+                                                                                    <span>Hubungi Secara Personal</span></a>
+                                        
+                                                                            </div> --}}
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                        
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <div class="card-body">
+                                                        <div class="card-body mt-5">
+                                                            <div class="row">
+                                                                <div class="col-12 col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="nama_lengkap" class="form-label">Nama Lengkap</label>
+                                                                        <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap"
+                                                                            value="{{ $anggota->nama_lengkap }}" readonly>
                                                                     </div>
                                                                 </div>
+                                                                <div class="col-12 col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="jabatan" class="form-label">Jabatan</label>
+                                                                        <input type="text" class="form-control" id="jabatan" name="jabatan" value="{{ $anggota->jabatan }}"
+                                                                            readonly>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="generasi" class="form-label">Generasi</label>
+                                                                        <input type="text" class="form-control" id="generasi" name="generasi" value="{{ $anggota->generasi }}"
+                                                                            readonly>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="alamat" class="form-label">Alamat</label>
+                                                                        <input type="text" class="form-control" id="alamat" name="alamat" value="{{ $anggota->alamat }}"
+                                                                            readonly>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="notelfon" class="form-label">Nomor Telepon</label>
+                                                                        <input type="text" class="form-control" id="notelfon" name="notelfon" value="{{ $anggota->notelfon }}"
+                                                                            readonly>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="motto" class="form-label">Motto</label>
+                                                                        <input type="text" class="form-control" id="motto" name="motto" value="{{ $anggota->motto }}" readonly>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="mb-3">
+                                                                        <label for="deskripsi" class="form-label">Deskripsi</label>
+                                                                        <textarea class="form-control" id="deskripsi" name="deskripsi" rows="10"
+                                                                            readonly>{{ $anggota->deskripsi }}</textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 mb-3">
+                                                                    <a class="btn btn-primary" href="#createModal" data-bs-effect="effect-scale" data-bs-toggle="modal"><i class="fe fe-share me-2"></i> Reupload Data Diri</a>
+                                                                </div>
                                                             </div>
-                                                            <div class="media-title text-dark font-weight-semibold mt-1">{{ $anggota->nama_lengkap }} <span
-                                                                    class="text-muted font-weight-semibold"></span></div>
-                                                            <small class="mb-0">Jabatan {{ $anggota->jabatan }} Generasi ke {{ $anggota->generasi }}</small><br>
-                                                            <small class="mb-0 text-lowercase">Alamat Saya {{ $anggota->alamat }}, {{ $anggota->notelfon }}</small><br>
+                                                        
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="eamil-body mt-5">
-                                                    <h6>Saya {{ $anggota->nama_lengkap }}</h6><br>
-                                                    <p class="text-lowercase text-justify">{{ $anggota->deskripsi }}</p>
-                                                    <br>
-                                                    <small class="mb-0 font-italic">{{ $anggota->motto }}</small>
-                                                    <hr>
-                                                   
-                                                </div>
                                             </div>
-                                            @else
-                                            <div class="d-block text-center">
-                                                <br>
-                                                <p>Anda belum mengunggah data diri anda. Data diri anda akan tampil di halaman utama list data pengurus.</p>
-                                                <a class="dropdown-item" href="#createModal" data-bs-effect="effect-scale" data-bs-toggle="modal">
-                                                    <i class="fe fe-share me-2"></i> Lengkapi Data Diri Sekarang
-                                                </a>
-                                            </div>
-                                            @endif
-                                            
                                         </div>
                                     </div>
-                                </div>
+                                @else
+                                    <div class="d-block text-center">
+                                        <br>
+                                        <p>Anda belum mengunggah data diri anda. Data diri anda akan tampil di halaman utama list data pengurus.</p>
+                                        <a class="dropdown-item" href="#createModal" data-bs-effect="effect-scale" data-bs-toggle="modal">
+                                            <i class="fe fe-share me-2"></i> Lengkapi Data Diri Sekarang
+                                        </a>
+                                    </div>
+                                @endif
+
 
                                 <div class="container">
                                     <div class="row">
-                                       
                                         <div class="modal fade" id="createModal">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
@@ -247,15 +289,11 @@
                                         </div>
                                     </div>
                                 </div>
-
-                            </div>
-
-                        </div>
+                           
                     </div>
-                    <!-- CONTAINER CLOSED-->
                 </div>
             </div>
-            <!--app-content closed-->
+            
         </div>
 
         <!-- FOOTER OPEN -->
@@ -417,6 +455,9 @@
     <!-- JQUERY JS -->
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 
+    <!-- INPUT MASK JS-->
+    <script src="{{ asset('assets/plugins/input-mask/jquery.mask.min.js') }}"></script>
+
     <!-- BOOTSTRAP JS -->
     <script src="{{ asset('assets/plugins/bootstrap/js/popper.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
@@ -430,13 +471,11 @@
     <script src="{{ asset('assets/plugins/owl-carousel/owl.carousel.js') }}"></script>
     <script src="{{ asset('assets/plugins/company-slider/slider.js') }}"></script>
 
-    <!-- Star Rating Js-->
-    <script src="{{ asset('assets/plugins/rating/jquery-rate-picker.js') }}"></script>
-    <script src="{{ asset('assets/plugins/rating/rating-picker.js') }}"></script>
+    <!-- SIDEBAR JS -->
+    <script src="{{ asset('assets/plugins/sidebar/sidebar.js') }}"></script>
 
-    <!-- Star Rating-1 Js-->
-    <script src="{{ asset('assets/plugins/ratings-2/jquery.star-rating.js') }}"></script>
-    <script src="{{ asset('assets/plugins/ratings-2/star-rating.js') }}"></script>
+    <!-- Color Theme js -->
+    <script src="{{ asset('assets/js/themeColors.js') }}"></script>
 
     <!-- Sticky js -->
     <script src="{{ asset('assets/js/sticky.js') }}"></script>

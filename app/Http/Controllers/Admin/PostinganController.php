@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use App\Models\Postingan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session; 
+use Illuminate\Support\Facades\Session;
 
 class PostinganController extends Controller
 {
@@ -46,7 +46,7 @@ class PostinganController extends Controller
         }
 
         if ($request->hasFile('gambar_pendukung')) {
-            $supportImageNames = []; 
+            $supportImageNames = [];
 
             foreach ($request->file('gambar_pendukung') as $supportImage) {
                 $supportImageName = time() . '_' . uniqid() . '_support.' . $supportImage->extension();
@@ -54,7 +54,7 @@ class PostinganController extends Controller
                 $supportImageNames[] = $supportImageName;
             }
         } else {
-            $supportImageNames = []; 
+            $supportImageNames = [];
         }
 
         $postingan = new Postingan([
@@ -65,7 +65,7 @@ class PostinganController extends Controller
             'jumlah_suka' => 0,
             'sumber' => $request->input('sumber'),
             'sampul' => $imageName,
-            'gambar_pendukung' => implode(',', $supportImageNames), 
+            'gambar_pendukung' => implode(',', $supportImageNames),
         ]);
 
         $postingan->save();
@@ -89,71 +89,73 @@ class PostinganController extends Controller
     }
 
     public function edit($id)
-{
-    $postingan = Postingan::find($id);
+    {
+        $postingan = Postingan::find($id);
 
-    if (!$postingan) {
-        return redirect()
-            ->route('admin.postingan.index')
-            ->with('error', 'Postingan tidak ditemukan.');
+        if (!$postingan) {
+            return redirect()
+                ->route('admin.postingan.index')
+                ->with('error', 'Postingan tidak ditemukan.');
+        }
+
+        return view('SuperAdmin.postingan.edit', compact('postingan'));
     }
-
-    return view('SuperAdmin.postingan.edit', compact('postingan'));
-}
 
     public function update(Request $request, $id)
-{
-    $this->validate($request, [
-        'judul_postingan' => 'required',
-        'deskripsi' => 'required',
-        'lokasi' => 'required',
-        'kategori' => 'required',
-        'sumber' => 'required',
-    ]);
+    {
+        $this->validate($request, [
+            'judul_postingan' => 'required',
+            'deskripsi' => 'required',
+            'lokasi' => 'required',
+            'kategori' => 'required',
+            'sumber' => 'required',
+        ]);
 
-    $postingan = Postingan::find($id);
+        $postingan = Postingan::find($id);
 
-    if (!$postingan) {
-        return redirect()->route('admin.postingan.index');
-    }
-
-    if ($request->hasFile('sampul')) {
-        Storage::disk('public')->delete('uploads/' . $postingan->sampul);
-
-        $image = $request->file('sampul');
-        $imageName = time() . '.' . $image->extension();
-        $image->storeAs('uploads', $imageName, 'public');
-
-        $postingan->sampul = $imageName;
-    }
-
-    if ($request->hasFile('gambar_pendukung')) {
-        $supportImageNames = [];
-
-        foreach ($request->file('gambar_pendukung') as $supportImage) {
-            $supportImageName = time() . '_' . uniqid() . '_support.' . $supportImage->extension();
-            $supportImage->storeAs('uploads', $supportImageName, 'public');
-            $supportImageNames[] = $supportImageName;
+        if (!$postingan) {
+            return redirect()->route('admin.postingan.index');
         }
 
-        $oldSupportImages = explode(',', $postingan->gambar_pendukung);
-        foreach ($oldSupportImages as $oldImage) {
-            Storage::disk('public')->delete('uploads/' . $oldImage);
+        if ($request->hasFile('sampul')) {
+            Storage::disk('public')->delete('uploads/' . $postingan->sampul);
+
+            $image = $request->file('sampul');
+            $imageName = time() . '.' . $image->extension();
+            $image->storeAs('uploads', $imageName, 'public');
+
+            $postingan->sampul = $imageName;
         }
 
-        $postingan->gambar_pendukung = implode(',', $supportImageNames);
+        if ($request->hasFile('gambar_pendukung')) {
+            $supportImageNames = [];
+
+            foreach ($request->file('gambar_pendukung') as $supportImage) {
+                $supportImageName = time() . '_' . uniqid() . '_support.' . $supportImage->extension();
+                $supportImage->storeAs('uploads', $supportImageName, 'public');
+                $supportImageNames[] = $supportImageName;
+            }
+
+            $oldSupportImages = explode(',', $postingan->gambar_pendukung);
+            foreach ($oldSupportImages as $oldImage) {
+                Storage::disk('public')->delete('uploads/' . $oldImage);
+            }
+
+            $postingan->gambar_pendukung = implode(',', $supportImageNames);
+        }
+        $postingan->judul_postingan = $request->input('judul_postingan');
+        $postingan->deskripsi = $request->input('deskripsi');
+        $postingan->kategori = $request->input('kategori');
+        $postingan->lokasi = $request->input('lokasi');
+        $postingan->sumber = $request->input('sumber');
+        $postingan->save();
+
+        return redirect()
+            ->route('admin.postingan.index')
+            ->with('success', 'Postingan berhasil diperbarui!');
     }
-    $postingan->judul_postingan = $request->input('judul_postingan');
-    $postingan->deskripsi = $request->input('deskripsi');
-    $postingan->kategori = $request->input('kategori');
-    $postingan->lokasi = $request->input('lokasi');
-    $postingan->sumber = $request->input('sumber');
-    $postingan->save();
 
-    return redirect()->route('admin.postingan.index')->with('success', 'Postingan berhasil diperbarui!');
-}
-
- public function destroy($id)
+    public function destroy($id)
     {
         $postingans = Postingan::find($id);
 

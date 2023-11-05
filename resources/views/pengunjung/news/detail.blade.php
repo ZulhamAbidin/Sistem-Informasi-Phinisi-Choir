@@ -23,6 +23,12 @@
                                         display: block !important;
                                     }
                                 }
+
+                              .tai {
+                            border: none !important;
+                            outline: none !important;
+                            background: transparent !important
+                            }
                             </style>
 
                             <div class="card">
@@ -81,7 +87,19 @@
                                             <div class="mt-3 ms-1 text-muted font-weight-semibold">
                                                 {{ $beritadetail->created_at->format('d F Y') }}</div>
                                         </a>
-                                        <a href="javascript:void(0);" class="d-flex me-4 mb-2"><i
+                                        {{-- <a href="javascript:void(0);" class="d-flex me-4 mb-2"><i
+                                                class="fe fe-heart fs-16 me-1 p-3 bg-secondary-transparent text-success bradius"></i>
+                                            <div class="mt-3 ms-1 text-muted font-weight-semibold">Like
+                                                {{ $beritadetail->jumlah_suka }} </div>
+                                        </a> --}}
+                                        {{-- <a href="{{ route('pengunjung.news.like', ['id' => $beritadetail->id]) }}" class="d-flex me-4 mb-2">
+                                            <i class="fe fe-heart fs-16 me-1 p-3 bg-secondary-transparent text-success bradius"></i>
+                                            <div class="mt-3 ms-1 text-muted font-weight-semibold">Like {{ $beritadetail->jumlah_suka }} </div>
+                                        </a> --}}
+                                        <!-- HTML -->
+                                        <a href="{{ route('pengunjung.news.like', ['id' => $beritadetail->id]) }}"
+                                            class="d-flex me-4 mb-2" id="likeButton">
+                                            <i
                                                 class="fe fe-heart fs-16 me-1 p-3 bg-secondary-transparent text-success bradius"></i>
                                             <div class="mt-3 ms-1 text-muted font-weight-semibold">Like
                                                 {{ $beritadetail->jumlah_suka }} </div>
@@ -162,18 +180,20 @@
                                                         data-bs-toggle="dropdown" role="button" aria-haspopup="true"
                                                         aria-expanded="false"><i class="fe fe-more-vertical"></i></a>
                                                     <div class="dropdown-menu dropdown-menu-end" style="">
-                                                        <a class="dropdown-item" href="javascript:void(0)"><i class="fe fe-flag mx-1"></i> Laporkan</a>
-                                                        @if(Auth::check() && Auth::user()->role === 'super_admin')
-                                                        <!-- Tombol Delete hanya ditampilkan untuk Super Admin -->
-                                                        <a class="dropdown-item" href="{{ route('pengunjung.news.komentar.hapus', ['komentarId' => $komentar->id]) }}"
-                                                            onclick="event.preventDefault(); document.getElementById('delete-komentar-{{ $komentar->id }}').submit();">
-                                                            <i class="fe fe-trash-2 mx-1"></i> Delete
-                                                        </a>
-                                                        <form id="delete-komentar-{{ $komentar->id }}"
-                                                            action="{{ route('pengunjung.news.komentar.hapus', ['komentarId' => $komentar->id]) }}" method="POST"
-                                                            style="display: none;">
-                                                            @csrf
-                                                        </form>
+                                                        <a class="dropdown-item" href="javascript:void(0)"><i
+                                                                class="fe fe-flag mx-1"></i> Laporkan</a>
+                                                        @if (Auth::check() && Auth::user()->role === 'super_admin')
+                                                            <!-- Tombol Delete hanya ditampilkan untuk Super Admin -->
+                                                            <a class="dropdown-item"
+                                                                href="{{ route('pengunjung.news.komentar.hapus', ['komentarId' => $komentar->id]) }}"
+                                                                onclick="event.preventDefault(); document.getElementById('delete-komentar-{{ $komentar->id }}').submit();">
+                                                                <i class="fe fe-trash-2 mx-1"></i> Delete
+                                                            </a>
+                                                            <form id="delete-komentar-{{ $komentar->id }}"
+                                                                action="{{ route('pengunjung.news.komentar.hapus', ['komentarId' => $komentar->id]) }}"
+                                                                method="POST" style="display: none;">
+                                                                @csrf
+                                                            </form>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -181,18 +201,39 @@
                                             <h5 class="mt-0">{{ $komentar->nama }}</h5>
                                             <span><i class="fe fe-thumb-up text-danger"></i></span>
                                             <p class="font-13 text-muted">{{ $komentar->isi_komentar }}.</p>
-                                            
+
                                             <div class="d-flex">
 
-                                                <a class="like" href="javascript:;">
+                                                {{-- <a class="like" href="javascript:;">
                                                     <span class="badge btn-danger-light rounded-pill py-2 px-3">
                                                         <i class="fe fe-heart me-1"></i>
                                                         56</span>
                                                 </a>
-                                                
-                                                <span class="reply me-4" style="margin-left: 1% !important"  data-commentid="{{ $komentar->id }}">
+                                                 --}}
+                                                <!-- Komentar -->
+                                                {{-- <a class="like" href="{{ route('komentar.like', ['id' => $komentar->id]) }}">
+                                                    <span class="badge btn-danger-light rounded-pill py-2 px-3"
+                                                        id="likeKomentarButton">
+                                                        <i class="fe fe-heart me-1"></i>
+                                                        {{ $komentar->jumlah_suka }}
+                                                    </span>
+                                                </a> --}}
+
+                                                <form id="likeForm" method="POST" action="{{ route('komentar.like', ['id' => $komentar->id]) }}">
+                                                    @csrf
+                                                    <button type="submit" class="like tai">
+                                                        <span class="badge btn-danger-light rounded-pill py-2 px-3" id="likeKomentarButton">
+                                                            <i class="fe fe-heart me-1"></i>
+                                                            {{ $komentar->jumlah_suka }}
+                                                        </span>
+                                                    </button>
+                                                </form>
+
+                                                <span class="reply me-4" style="margin-left: 1% !important"
+                                                    data-commentid="{{ $komentar->id }}">
                                                     <div class="reply-button">
-                                                        <span class="reply-badge badge btn-outline-success rounded-pill py-2 px-2">
+                                                        <span
+                                                            class="reply-badge badge btn-succes bg-success rounded-pill py-2 px-2">
                                                             <i class="fe fe-corner-up-left mx-1"></i>Reply
                                                         </span>
                                                     </div>
@@ -200,34 +241,37 @@
 
                                             </div>
 
-                                            <form method="POST" style="display: none;" class="comment-form mt-4" data-commentid="{{ $komentar->id }}" action="{{ route('pengunjung.news.tambah-balasan-komentar', ['beritadetail' => $beritadetail->id, 'komentarId' => $komentar->id]) }}">
+                                            <form method="POST" style="display: none;" class="comment-form mt-4"
+                                                data-commentid="{{ $komentar->id }}"
+                                                action="{{ route('pengunjung.news.tambah-balasan-komentar', ['beritadetail' => $beritadetail->id, 'komentarId' => $komentar->id]) }}">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <input type="hidden" name="centang_biru" value="{{ Auth::check() ? 1 : 0 }}">
+                                                    <input type="hidden" name="centang_biru"
+                                                        value="{{ Auth::check() ? 1 : 0 }}">
                                                     <label for="nama">Nama</label>
                                                     <?php
-                                                                                                                                            $namaValue = '';
-                                                                                                                                            $readonly = '';
-                                                                                                                                            
-                                                                                                                                            if (Auth::check()) {
-                                                                                                                                                $user = auth()->user();
-                                                                                                                                                if ($user->role === 'admin') {
-                                                                                                                                                    $namaValue = $user->nama_lengkap . ' (Anggota Pengurus)';
-                                                                                                                                                    $readonly = 'readonly';
-                                                                                                                                                } else {
-                                                                                                                                                    $namaValue = $user->nama_lengkap;
-                                                                                                                                                }
-                                                                                                                                            } else {
-                                                                                                                                                $namaValue = old('nama', '');
-                                                                                                                                            }
-                                                                                                                                            ?>
-                                                    <input type="text" class="form-control mb-2" id="nama" name="nama" placeholder="Nama lengkap" required
+                                                    $namaValue = '';
+                                                    $readonly = '';
+                                                    
+                                                    if (Auth::check()) {
+                                                        $user = auth()->user();
+                                                        if ($user->role === 'admin') {
+                                                            $namaValue = $user->nama_lengkap . ' (Anggota Pengurus)';
+                                                            $readonly = 'readonly';
+                                                        } else {
+                                                            $namaValue = $user->nama_lengkap;
+                                                        }
+                                                    } else {
+                                                        $namaValue = old('nama', '');
+                                                    }
+                                                    ?>
+                                                    <input type="text" class="form-control mb-2" id="nama"
+                                                        name="nama" placeholder="Nama lengkap" required
                                                         value="{{ $namaValue }}" {{ $readonly }}>
                                                     <label for="isi_balasan">Balasan Komentar</label>
-                                                    <textarea name="isi_balasan" class="form-control @error('isi_balasan') is-invalid @enderror"
-                                                        rows="3">{{ old('isi_balasan') }}</textarea>
+                                                    <textarea name="isi_balasan" class="form-control @error('isi_balasan') is-invalid @enderror" rows="3">{{ old('isi_balasan') }}</textarea>
                                                     @error('isi_balasan')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                        <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                                 <button type="submit" class="btn btn-sm btn-primary">Balas</button>
@@ -251,31 +295,30 @@
                                                                 <div class="dropdown-menu dropdown-menu-end"
                                                                     style="">
                                                                     <a class="dropdown-item" href="javascript:void(0)"><i
-                                                                            class="fe fe-edit mx-1"></i> Edit</a>
-                                                                    <a class="dropdown-item" href="javascript:void(0)"><i
-                                                                            class="fe fe-corner-up-left mx-1"></i>
-                                                                        Reply</a>
-                                                                    <a class="dropdown-item" href="javascript:void(0)"><i
                                                                             class="fe fe-flag mx-1"></i> Report
                                                                         Abuse</a>
-                                                                    @if(Auth::check() && Auth::user()->role === 'super_admin')
-                                                                    <!-- Tombol Delete hanya ditampilkan untuk Super Admin -->
-                                                                    <a class="dropdown-item" href="{{ route('pengunjung.news.komentar.balasan.hapus', ['komentarId' => $balasan->id]) }}"
-                                                                        onclick="event.preventDefault(); document.getElementById('delete-balasan-komentar-{{ $balasan->id }}').submit();">
-                                                                        <i class="fe fe-trash-2 mx-1"></i> Delete
-                                                                    </a>
-                                                                    <form id="delete-balasan-komentar-{{ $balasan->id }}"
-                                                                        action="{{ route('pengunjung.news.komentar.balasan.hapus', ['komentarId' => $balasan->id]) }}" method="POST"
-                                                                        style="display: none;">
-                                                                        @csrf
-                                                                    </form>
+                                                                    @if (Auth::check() && Auth::user()->role === 'super_admin')
+                                                                        <!-- Tombol Delete hanya ditampilkan untuk Super Admin -->
+                                                                        <a class="dropdown-item"
+                                                                            href="{{ route('pengunjung.news.komentar.balasan.hapus', ['komentarId' => $balasan->id]) }}"
+                                                                            onclick="event.preventDefault(); document.getElementById('delete-balasan-komentar-{{ $balasan->id }}').submit();">
+                                                                            <i class="fe fe-trash-2 mx-1"></i> Delete
+                                                                        </a>
+                                                                        <form
+                                                                            id="delete-balasan-komentar-{{ $balasan->id }}"
+                                                                            action="{{ route('pengunjung.news.komentar.balasan.hapus', ['komentarId' => $balasan->id]) }}"
+                                                                            method="POST" style="display: none;">
+                                                                            @csrf
+                                                                        </form>
                                                                     @endif
                                                                 </div>
                                                             </div>
                                                         </nav>
                                                         <h5 class="mt-0">
                                                             @if ($balasan->centang_biru)
-                                                                <a class="social-icon text-success" href="javascript:void(0)"><i class="fe fe-check-circle"></i></a>
+                                                                <a class="social-icon text-success"
+                                                                    href="javascript:void(0)"><i
+                                                                        class="fe fe-check-circle"></i></a>
                                                             @endif
                                                             @php
                                                                 $namaBalasan = $balasan->nama;
@@ -285,10 +328,18 @@
                                                         </h5>
                                                         <span><i class="fe fe-thumb-up text-danger"></i></span>
                                                         <p class="font-13 text-muted">{{ $balasan->isi_balasan }}.</p>
-                                                        <a class="like" href="javascript:;"><span
-                                                                class="badge btn-danger-light rounded-pill py-2 px-3"><i
-                                                                    class="fe fe-heart me-1"></i>56</span></a>
-
+                                                        
+                                                        
+  
+                                                        <form id="likeBalasanKomentarForm" style="" method="POST" action="{{ route('balasan_komentar.like', ['id' => $balasan->id]) }}">
+                                                            @csrf
+                                                            <button type="submit" class="like tai">
+                                                                <span class="badge btn-danger-light rounded-pill py-2 px-3" id="likeBalasanKomentarButton">
+                                                                    <i class="fe fe-heart me-1"></i>
+                                                                    {{ $balasan->jumlah_suka }}
+                                                                </span>
+                                                            </button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             @endif
@@ -296,7 +347,7 @@
                                     </div>
                                 </div>
                             @endforeach
-                            
+
                         </div>
 
                         {{-- TAMBAH KOMENTAR  --}}
@@ -311,30 +362,37 @@
                                     <input type="hidden" name="postingan_id" value="{{ $beritadetail->id }}">
                                     <div class="form-group">
                                         <div class="col-xs-12">
-                                            <input class="form-control" id="nama" name="nama" value="{{ old('nama') }}" type="text" required=""
+                                            <input class="form-control" id="nama" name="nama"
+                                                value="{{ old('nama') }}" type="text" required=""
                                                 placeholder="Username*">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-xs-12">
-                                            <textarea class="form-control" id="isi_komentar"
-                                                name="isi_komentar">{{ old('isi_komentar') }}</textarea>
+                                            <textarea class="form-control" id="isi_komentar" name="isi_komentar">{{ old('isi_komentar') }}</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-xs-12">
                                             <div class="rating-stars block" id="rating-1" style="cursor: pointer;">
-                                                <input type="hidden" id="rating-input" name="rating" value="{{ old('rating') }}" min="1">
-                                                <i class="fa fa-star" data-value="1" style="color: rgb(236, 240, 241);"></i>
-                                                <i class="fa fa-star" data-value="2" style="color: rgb(236, 240, 241);"></i>
-                                                <i class="fa fa-star" data-value="3" style="color: rgb(236, 240, 241);"></i>
-                                                <i class="fa fa-star" data-value="4" style="color: rgb(236, 240, 241);"></i>
-                                                <i class="fa fa-star" data-value="5" style="color: rgb(236, 240, 241);"></i>
+                                                <input type="hidden" id="rating-input" name="rating"
+                                                    value="{{ old('rating') }}" min="1">
+                                                <i class="fa fa-star" data-value="1"
+                                                    style="color: rgb(236, 240, 241);"></i>
+                                                <i class="fa fa-star" data-value="2"
+                                                    style="color: rgb(236, 240, 241);"></i>
+                                                <i class="fa fa-star" data-value="3"
+                                                    style="color: rgb(236, 240, 241);"></i>
+                                                <i class="fa fa-star" data-value="4"
+                                                    style="color: rgb(236, 240, 241);"></i>
+                                                <i class="fa fa-star" data-value="5"
+                                                    style="color: rgb(236, 240, 241);"></i>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="">
-                                        <button type="submit" class="btn btn-primary btn-rounded  waves-effect waves-light">Submit</button>
+                                        <button type="submit"
+                                            class="btn btn-primary btn-rounded  waves-effect waves-light">Submit</button>
                                     </div>
                                 </form>
                             </div>
@@ -348,6 +406,134 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+@if(isset($komentar) && isset($balasan))
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const likeBalasanKomentarButtons = document.querySelectorAll('.likeBalasanKomentarButton');
+        likeBalasanKomentarButtons.forEach(likeBalasanKomentarButton => {
+            likeBalasanKomentarButton.addEventListener('click', function (event) {
+                event.preventDefault();
+                const likeBalasanKomentarIcon = likeBalasanKomentarButton.querySelector('i');
+                const balasanId = likeBalasanKomentarButton.getAttribute('data-balasan-id');
+                const balasanKomentarRoute = @json(route('balasan_komentar.like', ['id' => ':balasanId']));
+                const requestRoute = balasanKomentarRoute.replace(':balasanId', balasanId);
+
+                fetch(requestRoute, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        },
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            likeBalasanKomentarIcon.classList.add('text-danger');
+                            localStorage.setItem(`likedBalasanKomentar${balasanId}`, 'true');
+                            setTimeout(() => {
+                                location.reload();
+                            }, 1000);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+
+                const liked = localStorage.getItem(`likedBalasanKomentar${balasanId}`);
+                if (liked) {
+                    likeBalasanKomentarIcon.classList.add('text-danger');
+                }
+            });
+        });
+    });
+</script>
+@endif
+
+@if(isset($komentar) && isset($balasan))
+<script>
+   document.addEventListener('DOMContentLoaded', function () {
+       const likeKomentarButtons = document.querySelectorAll('.likeKomentarButton');
+       likeKomentarButtons.forEach(likeKomentarButton => {
+           likeKomentarButton.addEventListener('click', function (event) {
+               event.preventDefault();
+               const likeKomentarIcon = likeKomentarButton.querySelector('i');
+               const komentarId = likeKomentarButton.getAttribute('data-komentar-id');
+               const komentarRoute = @json(route('komentar.like', ['id' => ':komentarId']));
+               const requestRoute = komentarRoute.replace(':komentarId', komentarId);
+
+               fetch(requestRoute, {
+                       method: 'POST',
+                       headers: {
+                           'Content-Type': 'application/json',
+                           'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                       },
+                   })
+                   .then(response => {
+                       if (response.ok) {
+                           likeKomentarIcon.classList.add('text-danger');
+                           localStorage.setItem(`likedKomentar${komentarId}`, 'true');
+                       }
+                       setTimeout(() => {
+                           location.reload();
+                       }, 1000);
+                   })
+                   .catch(error => {
+                       console.error('Error:', error);
+                   });
+
+               const liked = localStorage.getItem(`likedKomentar${komentarId}`);
+               if (liked) {
+                   likeKomentarIcon.classList.add('text-danger');
+               }
+           });
+       });
+   });
+</script>
+@endif
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const likeButton = document.getElementById('likeButton');
+            const likeIcon = likeButton.querySelector('i');
+            const postId = '{{ $beritadetail->id }}';
+
+            likeButton.addEventListener('click', function(event) {
+                event.preventDefault();
+
+                const liked = localStorage.getItem('liked');
+
+                if (!liked) {
+                    fetch(`/pengunjung/news/${postId}/like`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            },
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                likeIcon.classList.add(
+                                    'text-danger');
+                                localStorage.setItem('liked',
+                                    'true');
+
+                                setTimeout(() => {
+                                    location.reload();
+                                }, 1000);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                }
+            });
+
+            const liked = localStorage.getItem('liked');
+            if (liked) {
+                likeIcon.classList.add('text-danger');
+            }
+        });
+    </script>
 
     <script>
         $(document).ready(function() {
@@ -424,5 +610,4 @@
             });
         });
     </script>
-
 @endsection

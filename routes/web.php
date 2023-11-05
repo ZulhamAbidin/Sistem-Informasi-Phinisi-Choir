@@ -84,6 +84,10 @@ Route::post('/pengunjung/news/{id}/tambah-komentar', [PengunjungController::clas
 Route::post('/pengunjung/news/{beritadetail}/{komentarId}/tambah-balasan-komentar', [PengunjungController::class, 'tambahBalasanKomentar'])->name('pengunjung.news.tambah-balasan-komentar');
 Route::post('/pengunjung/news/delete-komentar/{komentarId}', [PengunjungController::class, 'hapusKomentar'])->name('pengunjung.news.komentar.hapus');
 Route::post('/pengunjung/news/{komentarId}/hapus-balasan-komentar', [PengunjungController::class, 'hapusBalasanKomentar'])->name('pengunjung.news.komentar.balasan.hapus');
+Route::post('/pengunjung/news/{id}/like', [PengunjungController::class, 'likePostingan'])->name('pengunjung.news.like');
+Route::post('/pengunjung/news/komentar/{id}/like', [PengunjungController::class, 'likeKomentar'])->name('komentar.like');
+Route::post('/pengunjung/news/balasan_komentar/{id}/like', [PengunjungController::class, 'likeBalasanKomentar'])->name('balasan_komentar.like');
+
 
 //DATA ANGGOTA
 Route::get('/SuperAdmin/dataanggota/index', [DataAnggotaControllerList::class, 'index'])->name('dataanggota.index');
