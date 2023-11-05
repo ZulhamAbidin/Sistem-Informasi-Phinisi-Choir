@@ -73,7 +73,7 @@
                     <ul class="slide-menu">
                         <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
                         <li><a href="{{ route('dataanggota.index') }}" class="slide-item">List Data Anggota</a></li>
-                        <li><a href="{{-- {{ route('destinasi-kuliner.create') }} --}}" class="slide-item">Tambah Data Anggota</a></li>
+                        <li><a href="{{ route('dataanggota.create') }}" class="slide-item">Tambah Data Anggota</a></li>
                     </ul>
                 </li>
 
