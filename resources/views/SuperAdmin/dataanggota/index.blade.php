@@ -18,33 +18,40 @@
     <div class="row row-cols-4">
 
         @foreach ($anggota as $anggotas)
-         
-        <div class="col-xl-3 col-sm-6 col-md-6">
-            <div class="card border p-0">
-                <div class="card-body text-center">
-                    <span class="avatar avatar-xxl brround cover-image" data-bs-image-src="{{ asset('storage/uploads/' . $anggotas->foto) }}" style="background: url(&quot;{{ asset('storage/uploads/' . $anggotas->foto) }}&quot;) center center;"></span>
-                    <h4 class="h4 mb-0 mt-3">{{ $anggotas->nama_lengkap }}</h4>
-                    <p class="card-text">{{ $anggotas->jabatan }}</p>
-                </div>
-                <div class="card-footer text-center">
-                    <div class="row user-social-detail">
-                        <div class="social-profile me-4 rounded text-center">
-                            <a href="{{ $anggotas->tautan_facebook }}"><i class="fa fa-facebook"></i></a>
-                        </div>
-                        <div class="social-profile me-4 rounded text-center">
-                            <a href="https://wa.me/{{ $anggotas->notelfon }}"><i class="fa fa-whatsapp"></i></a>
-                        </div>
-                        <div class="social-profile me-4 rounded text-center">
-                            <a href="{{ $anggotas->tautan_twitter }}"><i class="fa fa-twitter"></i></a>
+        <div class="col-md-6 col-xl-4 col-sm-6">
+            <div class="card">
+                <div class="product-grid6">
+                    <div class="product-image6 p-5">
+                        <ul class="icons">
+                            <li>
+                                <a href="{{ route('detail.anggota', ['id' => $anggotas->id]) }}" class="btn btn-primary"> <i class="fe fe-eye"> </i> </a>
+                            </li>
+                            <li><a href="" class="btn btn-success"><i class="fe fe-edit"></i></a></li>
+                            <li>
+                                <form method="POST" action="{{ route('dataanggota.destroy', $anggotas->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data anggota ini?')"><i class="fe fe-x"></i></button>
+                                </form>
+                            </li>
+                        </ul>
+                        <a href="{{ route('detail.anggota', ['id' => $anggotas->id]) }}">
+                            <img class="rounded-circle d-block mx-auto" style="width: 100px; height: 100px; object-fit: cover;"
+                                src="{{ asset('storage/uploads/' . $anggotas->foto) }}" alt="img">
+                        </a>
+                    </div>
+                    <div class="card-body pt-0 pb-0">
+                        <div class="product-content text-center">
+                            <h1 class="title fw-bold fs-20"><a href="#">{{ $anggotas->nama_lengkap }}</a></h1>
+                             <p class="">{{ $anggotas->nama_lengkap }} </p>
                         </div>
                     </div>
-                </div>
-                <div class="card-footer text-center">
-                    <a href="{{ route('detail.anggota', ['id' => $anggotas->id]) }}" class="btn btn-block btn-primary btn-sm">Lihat Profil Lengkap</a>
+                    <div class="card-footer text-center">
+                        <a href="{{ route('detail.anggota', ['id' => $anggotas->id]) }}" class="btn btn-primary mb-1"><i class="fe fe fe-eye mx-2"></i>Lihat Detail</a>
+                    </div>
                 </div>
             </div>
         </div>
-
         @endforeach
 
     </div>
@@ -63,3 +70,4 @@
         @endif
 </script>
 @endpush
+

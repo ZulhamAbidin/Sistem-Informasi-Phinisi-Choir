@@ -17,7 +17,7 @@ use App\Http\Controllers\Admin\DataAnggotaController as DataAnggotaControllerLis
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 //INPUT DATA ANGGOTA PENGURUS ROLE = USER ADMIN
-Route::middleware(['auth', 'admin', 'verifyUserStatus'])->group(function () {
+Route::middleware(['auth', 'admin', 'super_admin'])->group(function () {
     Route::get('/admin', [DataAnggotaController::class, 'index'])->name('admin.index');
     Route::get('/admin/get-user-data', [DataAnggotaController::class, 'getUserData'])->name('get.user.data');
     Route::get('/admin/create', [DataAnggotaController::class, 'create'])->name('admin.create');
@@ -78,6 +78,8 @@ Route::middleware(['super_admin'])->group(function () {
     Route::get('/SuperAdmin/dataanggota/{id}', [DataAnggotaControllerList::class, 'show'])->name('detail.anggota');
     Route::get('/SuperAdmin/dataanggota/create', [DataAnggotaControllerList::class, 'create'])->name('dataanggota.create');
     Route::post('/SuperAdmin/dataanggota/store', [DataAnggotaControllerList::class, 'store'])->name('dataanggota.store');
+    Route::delete('/SuperAdmin/dataanggota/{id}', [DataAnggotaControllerList::class, 'destroy'])->name('dataanggota.destroy');
+    
 
     // POSTINGAN ROLE = USER SUPER ADMIN
     Route::get('/admin/postingan/create', [PostinganController::class, 'create'])->name('admin.postingan.create');
@@ -91,12 +93,12 @@ Route::middleware(['super_admin'])->group(function () {
 
 // TAMBAH SLIDER PADA HALAMAN HOME  ROLE = USER SUPER ADMIN
 Route::prefix('SuperAdmin/home')->group(function () {
-    Route::get('index', [CarouselController::class, 'index'])->name('superadmin.home.index');
-    Route::get('create', [CarouselController::class, 'create'])->name('superadmin.home.create');
-    Route::post('store', [CarouselController::class, 'store'])->name('superadmin.home.store');
-    Route::get('edit/{carousel}', [CarouselController::class, 'edit'])->name('superadmin.home.edit');
-    Route::put('update/{carousel}', [CarouselController::class, 'update'])->name('superadmin.home.update');
-    Route::delete('destroy/{carousel}', [CarouselController::class, 'destroy'])->name('superadmin.home.destroy');
+    Route::get('index', [CarouselController::class, 'index'])->name('superadmin.home.index')->middleware(['super_admin']);
+    Route::get('create', [CarouselController::class, 'create'])->name('superadmin.home.create')->middleware(['super_admin']);
+    Route::post('store', [CarouselController::class, 'store'])->name('superadmin.home.store')->middleware(['super_admin']);
+    Route::get('edit/{carousel}', [CarouselController::class, 'edit'])->name('superadmin.home.edit')->middleware(['super_admin']);
+    Route::put('update/{carousel}', [CarouselController::class, 'update'])->name('superadmin.home.update')->middleware(['super_admin']);
+    Route::delete('destroy/{carousel}', [CarouselController::class, 'destroy'])->name('superadmin.home.destroy')->middleware(['super_admin']);
 });
 
 require __DIR__ . '/auth.php';
