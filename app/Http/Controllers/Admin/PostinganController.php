@@ -14,7 +14,7 @@ class PostinganController extends Controller
 {
     public function index()
     {
-        $postingans = Postingan::where('kategori', 'news')->get();
+        $postingans = Postingan::where('kategori', 'news')->paginate(3);
         $postingans->transform(function ($postingan) {
             $postingan->selisihWaktu = Carbon::parse($postingan->created_at)->diffForHumans();
             return $postingan;

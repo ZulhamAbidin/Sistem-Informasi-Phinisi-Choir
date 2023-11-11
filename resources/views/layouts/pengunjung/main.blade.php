@@ -79,7 +79,7 @@
                                         </a>
                                         <ul class="side-menu">
                                             <li class="slide">
-                                                <a class="bok active" data-bs-toggle="slide" href="/"><span class="side-menu__label">Home</span></a>
+                                                <a class="bok active" data-bs-toggle="slide" href="{{ route('welcome') }}"><span class="side-menu__label">Home</span></a>
                                             </li>
                                             <li class="slide">
                                                 <a class="bok" data-bs-toggle="slide" href="{{ route('ListBerita') }}"><span class="side-menu__label">News</span></a>
@@ -91,7 +91,7 @@
                                                 <a class="bok" data-bs-toggle="slide" href="{{ route('ListAchievement') }}"><span class="side-menu__label">Achievement</span></a>
                                             </li>
                                             <li class="slide">
-                                                <a class="bok" data-bs-toggle="slide" href="{{ route('ListCompetition') }}"><span class="side-menu__label">Testimonials</span></a>
+                                                <a class="bok" data-bs-toggle="slide" href="{{ route('welcome') }}#testimonials"><span class="side-menu__label">Testimonials</span></a>
                                             </li>
                                             <li class="slide">
                                                 <a class="bok" data-bs-toggle="slide" href="{{ route('ListCompetition') }}"><span class="side-menu__label">About Us</span></a>

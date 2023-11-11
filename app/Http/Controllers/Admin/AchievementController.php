@@ -13,8 +13,8 @@ class AchievementController extends Controller
 {
     public function index()
     {
-        $postingans = Postingan::where('kategori', 'achievement')->get();
-
+        // $postingans = Postingan::where('kategori', 'achievement')->get();
+        $postingans = Postingan::where('kategori', 'achievement')->paginate(3);
         $postingans->transform(function ($postingan) {
             $postingan->selisihWaktu = Carbon::parse($postingan->created_at)->diffForHumans();
             return $postingan;

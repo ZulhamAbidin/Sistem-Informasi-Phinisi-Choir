@@ -30,14 +30,10 @@
                 </li>
 
                 <li class="slide">
-                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="{{-- {{ route('visimisi.index') }} --}}">
+                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="">
                         <i class="side-menu__icon fa fa-music"></i>
                         <span class="side-menu__label">Profile Lembaga</span>
                     </a>
-                </li>
-
-                <li class="sub-category">
-                    <h3>MASTER</h3>
                 </li>
 
                 <li class="slide">
@@ -52,6 +48,53 @@
                     </ul>
                 </li>
 
+                {{-- SUB SUB MENU --}}
+                {{-- <li class="slide">
+                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
+                        <i class="side-menu__icon fa fa-pencil"></i>
+                        <span class="side-menu__label">Postingan</span><i class="angle fe fe-chevron-right"></i></a>
+
+                    <ul class="slide-menu">
+                        <li class="side-menu-label1"><a href="javascript:void(0)">Submenu items</a></li>
+
+                        <li class="sub-slide">
+                            <a class="sub-side-menu__item" data-bs-toggle="sub-slide" href="javascript:void(0)"><span
+                                    class="sub-side-menu__label">News</span><i class="sub-angle fe fe-chevron-right"></i></a>
+                            <ul class="sub-slide-menu">
+                                <li><a class="sub-slide-item" href="{{ route('admin.postingan.index') }}">List News</a></li>
+                                <li><a class="sub-slide-item" href="{{ route('admin.postingan.create') }}">Create News</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="slide-menu">
+                        <li class="side-menu-label1"><a href="javascript:void(0)">Submenu items</a></li>
+                    
+                        <li class="sub-slide">
+                            <a class="sub-side-menu__item" data-bs-toggle="sub-slide" href="javascript:void(0)"><span
+                                    class="sub-side-menu__label">Achievement</span><i class="sub-angle fe fe-chevron-right"></i></a>
+                            <ul class="sub-slide-menu">
+                                <li><a class="sub-slide-item" href="{{ route('admin.achievement.index') }}">List Achievement</a></li>
+                                <li><a class="sub-slide-item" href="{{ route('admin.postingan.create') }}">Create Achievement</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="slide-menu">
+                        <li class="side-menu-label1"><a href="javascript:void(0)">Submenu items</a></li>
+                    
+                        <li class="sub-slide">
+                            <a class="sub-side-menu__item" data-bs-toggle="sub-slide" href="javascript:void(0)"><span
+                                    class="sub-side-menu__label">Competition</span><i class="sub-angle fe fe-chevron-right"></i></a>
+                            <ul class="sub-slide-menu">
+                                <li><a class="sub-slide-item" href="{{ route('admin.competition.index') }}">List Competition</a></li>
+                                <li><a class="sub-slide-item" href="{{ route('admin.postingan.create') }}">Create Competition</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    
+                </li> --}}
           
                 <li class="slide">
                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
@@ -61,10 +104,9 @@
                     <ul class="slide-menu">
                         <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
                         <li><a href="{{ route('admin.postingan.index') }}" class="slide-item">List News</a></li>
-                        <li><a href="{{ route('admin.postingan.create') }}" class="slide-item">Buat News</a></li>
+                        <li><a href="{{ route('admin.postingan.create') }}" class="slide-item">Create News</a></li>
                     </ul>
                 </li>
-
 
                 <li class="slide">
                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
@@ -74,7 +116,7 @@
                     <ul class="slide-menu">
                         <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
                         <li><a href="{{ route('admin.achievement.index') }}" class="slide-item">List Achievement</a></li>
-                        <li><a href="{{ route('admin.postingan.create') }}" class="slide-item">Buat Achievement</a></li>
+                        <li><a href="{{ route('admin.postingan.create') }}" class="slide-item">Create Achievement</a></li>
                     </ul>
                 </li>
 
@@ -86,7 +128,7 @@
                     <ul class="slide-menu">
                         <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
                         <li><a href="{{ route('admin.competition.index') }}" class="slide-item">List Competition</a></li>
-                        <li><a href="{{ route('admin.postingan.create') }}" class="slide-item">Buat Competition</a></li>
+                        <li><a href="{{ route('admin.postingan.create') }}" class="slide-item">Create Competition</a></li>
                     </ul>
                 </li>
 
@@ -105,25 +147,38 @@
 
                 <li class="slide">
                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
-                        <i class="side-menu__icon fa fa-user-plus"></i><span class="side-menu__label">Management Users</span>
+                        <i class="side-menu__icon fa fa-lock"></i><span class="side-menu__label">Kelola Users Login</span>
                         <i class="angle fe fe-chevron-right"></i>
                     </a>
                     <ul class="slide-menu">
                         <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
-                        <li><a href="{{-- {{ route('destinasi-hotel.index') }} --}}" class="slide-item">Tambah User Login </a></li>
+                        <li><a href="{{ route('manajemenuser.index') }}" class="slide-item">List User Login </a></li>
+                        <li><a href="{{ route('manajemenuser.create') }}" class="slide-item">Tambah User Login </a></li>
                     </ul>
                 </li>
 
+                <li class="slide">
+                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
+                        <i class="side-menu__icon fa fa-pencil-square"></i><span class="side-menu__label">Testimonial</span>
+                        <i class="angle fe fe-chevron-right"></i>
+                    </a>
+                    <ul class="slide-menu">
+                        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
+                        <li><a href="{{ route('testimonials.index') }}" class="slide-item">List Testimonial</a></li>
+                        <li><a href="{{ route('testimonials.create') }}" class="slide-item">Tambah Testimonial</a></li>
+                    </ul>
+                </li>
+{{-- 
                 <li class="sub-category">
                     <h3>General</h3>
-                </li>
+                </li> --}}
 
-                <li class="slide">
-                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="{{-- {{ route('profile.edit') }} --}}">
+                {{-- <li class="slide">
+                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="">
                         <i class="side-menu__icon fa fa-cog"></i>
                         <span class="side-menu__label">Pengaturan Profile</span>
                     </a>
-                </li>
+                </li> --}}
                 
                 <li class="slide">
                     <form action="{{ route('logout') }}" method="post" class="side-menu__item has-link" data-bs-toggle="slide">

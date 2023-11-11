@@ -11,10 +11,7 @@ class ApprovalController extends Controller
 {
    public function index()
 {
-    // Mendapatkan pengguna yang sedang login
     $loggedInUser = Auth::user();
-
-    // Mendapatkan semua pengguna dengan status "belum_terverifikasi" kecuali pengguna yang sedang login
     $users = User::where('status', 'belum_terverifikasi')
         ->where('id', '!=', $loggedInUser->id)
         ->get();

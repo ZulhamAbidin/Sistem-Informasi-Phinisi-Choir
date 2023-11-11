@@ -7,7 +7,7 @@
     <div class="main-content mt-0">
         <div class="side-app">
             <div class="main-container">
-                
+
 
                 {{-- POSTINGAN DENGAN RATING TERTINGGI --}}
                 <div class="section bg-landing" id="Blog">
@@ -56,7 +56,8 @@
                                                         </div>
                                                         <div class="mt-4">
                                                             <div class="d-flex">
-                                                                <a href="{{ route('pengunjung.news.show', $postingan->id) }}" class="w-100"><img
+                                                                <a href="{{ route('pengunjung.news.show', $postingan->id) }}"
+                                                                    class="w-100"><img
                                                                         src="{{ asset('storage/uploads/' . $postingan->sampul) }}"
                                                                         alt="img" class="br-5"></a>
                                                             </div>
@@ -105,6 +106,42 @@
                     </div>
                 </div>
 
+                <div class="testimonial-owl-landing section pb-0" id="testimonials">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card bg-transparent">
+                                    <div class="card-body pt-5">
+                                        <h4 class="text-center fw-semibold text-white-80">Testimonials </h4>
+                                        <span class="landing-title"></span>
+                                        <h3 class="text-center fw-semibold text-white-80 mb-7">Bagaimana Pendapat Orang Mengenai Pinisi Choir</h3>
+                                        <div class="testimonial-carousel">
+                                            @foreach ($testimonials as $testimonial)
+                                                <div class="slide text-center">
+                                                    <div class="row">
+                                                        <div class="col-xl-8 col-md-12 d-block mx-auto">
+                                                            <div class="testimonia">
+                                                                <p class="text-white-80">
+                                                                    "{{ $testimonial->content }}"
+                                                                </p>
+                                                                <h3 class="title">{{ $testimonial->name }}</h3>
+                                                                <span class="post mb-4">{{ $testimonial->jabatan }}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <img class="rounded-circle d-block mx-auto" src="{{ asset('storage/uploads/' . $testimonial->foto) }}"  style="width: 120px; height: 120px; object-fit: cover;" alt="{{ $testimonial->name }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ROW-9 CLOSED -->
 
             </div>
 

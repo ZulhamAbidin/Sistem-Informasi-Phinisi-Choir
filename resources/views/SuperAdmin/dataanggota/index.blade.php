@@ -110,6 +110,10 @@
             @endforeach
 
         </div>
+
+        <div class="card-footer">
+            {{ $anggota->links('pagination::bootstrap-5') }}
+        </div>
     </div>
     @if (session('success'))
         <div class="sweet-alert  visible" data-custom-class="" data-has-cancel-button="false" data-has-confirm-button="true"

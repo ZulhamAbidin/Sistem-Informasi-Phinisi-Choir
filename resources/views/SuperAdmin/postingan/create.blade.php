@@ -34,21 +34,32 @@
                                         <input type="text" name="judul_postingan" class="form-control" required>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    {{-- <div class="form-group">
-                                        <label for="kategori">Kategori</label>
-                                        <input type="text" name="kategori" class="form-control" required>
-                                    </div> --}}
+
+                                {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="kategori">Kategori</label>
                                         <select name="kategori" class="form-control form-select" data-bs-placeholder="Select Country">
-                                            <option value="news">news</option>
+                                            <option value="news" selected>news</option>
                                             <option value="competition">competition</option>
                                             <option value="achievement">achievement</option>
                                         </select>
                                     </div>
+                                </div> --}}
+
+                                <div class="col-md-6 d-none">
+                                    <div class="form-group">
+                                        <label for="kategori">Kategori</label>
+                                        <input type="text" name="kategori" class="form-control" value="news" readonly>
+                                    </div>
                                 </div>
                             
+                                <div class="col-md-6 d-none">
+                                    <div class="form-group">
+                                        <label for="sumber">Sumber</label>
+                                        <input type="text" name="sumber" class="form-control" value="Pinisi Choir" readonly>
+                                    </div>
+                                </div>
+                                
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="lokasi">Lokasi</label>
@@ -56,12 +67,6 @@
                                     </div>
                                 </div>
                                 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="sumber">Sumber</label>
-                                        <input type="text" name="sumber" class="form-control" placeholder="PINISI CHOIR" readonly>
-                                    </div>
-                                </div>
                            
                                 <div class="col-md-6">
                                     <div class="form-group">

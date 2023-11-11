@@ -7,14 +7,12 @@ use App\Models\Anggota;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use RealRashid\SweetAlert\Facades\Alert;
-// use Illuminate\Support\Facades\Storage;
 
 class DataAnggotaController extends Controller
 {
     public function index()
     {
-        $anggota = Anggota::all();
-
+        $anggota = Anggota::paginate(3);
         return view('SuperAdmin.dataanggota.index', compact('anggota'));
     }
 

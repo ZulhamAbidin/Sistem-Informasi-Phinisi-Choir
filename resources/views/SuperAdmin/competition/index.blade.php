@@ -49,6 +49,7 @@
             </div>
             @endforeach
         </div>
+
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
@@ -131,6 +132,10 @@
                     @endif
                 </div>
             </div>
+        </div>
+
+        <div class="col-md-12">
+            {{ $postingans->links('pagination::bootstrap-5') }}
         </div>
     </div>
 </div>
