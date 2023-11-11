@@ -8,6 +8,7 @@ use App\Models\Postingan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PostinganController extends Controller
 {
@@ -70,8 +71,7 @@ class PostinganController extends Controller
 
         $postingan->save();
 
-        session()->flash('success', 'Postingan berhasil disimpan!');
-
+        Alert::success('Berhasil', 'Postingan berhasil simpan.');
         return redirect()->route('admin.postingan.index');
     }
 
@@ -150,26 +150,27 @@ class PostinganController extends Controller
         $postingan->sumber = $request->input('sumber');
         $postingan->save();
 
-        return redirect()
-            ->route('admin.postingan.index')
-            ->with('success', 'Postingan berhasil diperbarui!');
+        Alert::success('Berhasil', 'Postingan berhasil diperbarui.');
+        return redirect()->route('admin.postingan.index');
     }
 
+  
     public function destroy($id)
-    {
-        $postingans = Postingan::find($id);
+{
+    $postingan = Postingan::find($id);
 
-        if (!$postingans) {
-            return redirect()
-                ->route('admin.postingan.index')
-                ->with('error', 'postingan tidak ditemukan.');
-        }
-
-        $postingans->delete();
-
+    if (!$postingan) {
         return redirect()
             ->route('admin.postingan.index')
-            ->with('success', 'postingan berhasil dihapus.');
+            ->with('error', 'Postingan tidak ditemukan.');
     }
+
+    $postingan->delete();
+
+    return redirect()
+        ->route('admin.postingan.index')
+        ->with('success', 'Postingan berhasil dihapus.');
+}
+
 
 }

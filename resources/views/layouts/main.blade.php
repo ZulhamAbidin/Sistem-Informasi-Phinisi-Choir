@@ -1,13 +1,11 @@
 <!doctype html>
 <html lang="en" dir="ltr">
-
 <head>
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/brand/logo-2.png') }}" />
-    <!-- TITLE -->
     <title>PINISI CHOIR</title>
     <link id="style" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
@@ -15,17 +13,16 @@
     <link href="{{ asset('assets/css/transparent-style.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/skin-modes.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet " />
-    <script src="{{ asset('/vendor/datatables/buttons.server-side.js') }}"></script>
-    <link id="theme" rel="stylesheet" type="text/css" media="all"
-        href="{{ asset('assets/colors/color1.css') }}" />
-
-    {{-- <!-- Referensi ke file CSS SweetAlert --> --}}
-    <link href="{{ asset('assets/js/alert/sweetalert2.css') }}" rel="stylesheet" />
-    {{-- <link href="{{ asset('assets/js/alert/sweetalert2.min.css') }}" rel="stylesheet" />  --}}
-
+    <link id="theme" rel="stylesheet" type="text/css" media="all" href="{{ asset('assets/colors/color1.css') }}" />
 </head>
 
 <body class="app sidebar-mini ltr light-mode">
+
+    <div id="global-loader">
+        <img src="{{ asset('assets/images/loader.svg') }}" class="loader-img" alt="Loader">
+    </div>
+
+    @include('sweetalert::alert')
 
     <div class="page">
         <div class="page-main">
@@ -44,32 +41,16 @@
         </div>
 
         @include('layouts.footer')
-
+        
     </div>
 
     <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 
-    <script>
-        @if (Session::has('success'))
-            Swal.fire({
-                title: 'Sukses!',
-                text: '{{ Session::get('success') }}',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        @endif
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="{{ asset('assets/js/alert/sweetalert2.all.js') }}"></script>
-    <script src="{{ asset('assets/js/alert/sweetalert2.js') }}"></script>
+    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 
     <script src="{{ asset('assets/plugins/select2/select2.full.min.js')}}"></script>
     <script src="{{ asset('assets/js/select2.js')}}"></script>
-    <!-- INPUT MASK JS-->
     <script src="{{ asset('assets/plugins/input-mask/jquery.mask.min.js') }}"></script>
-
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/bootstrap/js/popper.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>

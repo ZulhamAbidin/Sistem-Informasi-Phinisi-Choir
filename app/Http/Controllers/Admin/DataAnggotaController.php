@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Anggota;
 use Storage;
+use App\Models\Anggota;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use RealRashid\SweetAlert\Facades\Alert;
 // use Illuminate\Support\Facades\Storage;
 
 class DataAnggotaController extends Controller
@@ -76,7 +77,7 @@ class DataAnggotaController extends Controller
 
         $anggota->save();
 
-        session()->flash('success', 'Berhasil Mendaftarkan Anggota Baru!');
+        Alert::success('Berhasil', 'Berhasil Mendaftarkan  Baru.');
         return redirect()->route('dataanggota.index');
     }
 
@@ -88,14 +89,14 @@ class DataAnggotaController extends Controller
         if (!$anggota) {
             return redirect()
                 ->route('dataanggota.index')
-                ->with('error', 'data anggota tidak ditemukan.');
+                ->with('error', 'postingan tidak ditemukan.');
         }
 
         $anggota->delete();
 
         return redirect()
             ->route('dataanggota.index')
-            ->with('success', 'data anggota berhasil dihapus.');
+            ->with('success', 'anggota berhasil dihapus.');
     }
 
 }

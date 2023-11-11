@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Carousel;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CarouselController extends Controller
 {
@@ -48,9 +49,8 @@ class CarouselController extends Controller
 
         $carousel->save();
 
-        return redirect()
-            ->route('superadmin.home.index')
-            ->with('success', 'Carousel berhasil ditambahkan.');
+        Alert::success('Berhasil', 'Berhasil Menmbahkan Slider Pada Halaman Utama.');
+        return redirect()->route('superadmin.home.index');
     }
 
     public function update(Request $request, Carousel $carousel)
@@ -73,15 +73,14 @@ class CarouselController extends Controller
 
         $carousel->save();
 
-        return redirect()
-            ->route('superadmin.home.index')
-            ->with('success', 'Carousel berhasil diperbarui.');
+        Alert::success('Berhasil', 'Slider Pada Halaman Utama Berhasil Diperbarui.');
+        return redirect()->route('superadmin.home.index');
     }
 
   public function destroy(Carousel $carousel)
 {
     if ($carousel) {
-        $carousel->delete(); // Hapus data carousel dari database
+        $carousel->delete(); 
         return redirect()->route('superadmin.home.index')
             ->with('success', 'Carousel berhasil dihapus');
     } else {

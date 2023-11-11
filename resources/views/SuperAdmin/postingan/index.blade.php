@@ -13,6 +13,7 @@
         </div>
 
         <div class="row ">
+
             <div class="col-md-12">
                 @foreach ($postingans as $postingan)
                     <div class="modal text-center" id="confirmDeleteModal{{ $postingan->id }}" tabindex="-1" role="dialog"
@@ -30,17 +31,17 @@
                                                 d="M12,14a1,1,0,0,1-1-1V9a1,1,0,0,1,2,0v4A1,1,0,0,1,12,14Z"></path>
                                         </svg></span>
                                     <h4 class="h4 mb-3 mt-3">Peringatan</h4>
-                                    <p class="card-text">Apakah kamu yakin ingin menghapus data ini?</p>
+                                    <p class="card-text">Apakah kamu yakin ingin menghapus postingan ini?</p>
                                 </div>
                                 <div class="modal-footer">
                                     <a href="javascript:void(0)" class="btn btn-white"
                                         onclick="hideCustomAlert({{ $postingan->id }})">Cancel</a>
-                                    <form action="{{ route('admin.postingan.destroy', ['id' => $postingan->id]) }}"
-                                        method="POST">
+                                    <form action="{{ route('admin.postingan.destroy', ['id' => $postingan->id]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Delete</button>
                                     </form>
+
                                 </div>
                             </div>
                         </div>
@@ -74,8 +75,8 @@
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-end">
                                                     <a class="dropdown-item" href="{{ route('admin.postingan.edit', ['id' => $postingan->id]) }}">Edit Postingan</a>
-                                                    <button class="dropdown-item" onclick="showCustomAlert({{ $postingan->id }})">Hapus Postingan</button>
                                                     <a class="dropdown-item" href="{{ route('admin.postingan.show', $postingan->id) }}"> Lihat Postingan</a>
+                                                    <button class="dropdown-item" onclick="showCustomAlert({{ $postingan->id }})">Hapus</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -123,50 +124,80 @@
     </div>
 
     @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
+    <div class="sweet-alert showSweetAlert visible" data-custom-class="" data-has-cancel-button="false"
+        data-has-confirm-button="true" data-allow-outside-click="false" data-has-done-function="false" data-animation="pop"
+        data-timer="null" style="display: block; margin-top: -176px;">
+        <!-- Konten SweetAlert Anda -->
+        <div class="sa-icon sa-error" style="display: none;">
+            <span class="sa-x-mark">
+                <span class="sa-line sa-left"></span>
+                <span class="sa-line sa-right"></span>
+            </span>
         </div>
-    @endif
+        <div class="sa-icon sa-warning" style="display: none;">
+            <span class="sa-body"></span>
+            <span class="sa-dot"></span>
+        </div>
+        <div class="sa-icon sa-info" style="display: none;"></div>
+        <div class="sa-icon sa-success" style="display: none;">
+            <span class="sa-line sa-tip"></span>
+            <span class="sa-line sa-long"></span>
+    
+            <div class="sa-placeholder"></div>
+            <div class="sa-fix"></div>
+        </div>
+        <div class="sa-icon sa-custom"
+            style="display: block; background-image: url(&quot;{{ asset('assets/images/brand/logo-2.png') }}&quot;); width: 80px; height: 80px;width:80px; height:80px">
+        </div>
+        <h3>Berhasil</h3>
+        <p style="display: block;">{{ session('success') }}</p>
+        <fieldset>
+            <input type="text" tabindex="3" placeholder="">
+            <div class="sa-input-error"></div>
+        </fieldset>
+        <div class="sa-error-container">
+            <div class="icon">!</div>
+            <p>Not valid!</p>
+        </div>
+        <div class="sa-button-container">
+            <button class="cancel" tabindex="2" style="display: none; box-shadow: none;">Cancel</button>
+            <div class="sa-confirm-button-container">
+                <button class="confirm" tabindex="1"
+                    style="display: inline-block; background-color: rgb(140, 212, 245); box-shadow: rgba(140, 212, 245, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset;"
+                    onclick="hideSweetAlert()">OK</button>
+                <div class="la-ball-fall">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function hideSweetAlert() {
+                        const sweetAlert = document.querySelector('.sweet-alert');
+                        sweetAlert.classList.remove('visible');
+                        sweetAlert.classList.add('invisible');
+                    }
+    </script>
 
     <script>
         function showCustomAlert(postinganId) {
-            var modalId = "confirmDeleteModal" + postinganId;
-            $("#" + modalId).modal("show");
-        }
-
-        function hideCustomAlert(postinganId) {
-            var modalId = "confirmDeleteModal" + postinganId;
-            $("#" + modalId).modal("hide");
-        }
+                        var modalId = "confirmDeleteModal" + postinganId;
+                        $("#" + modalId).modal("show");
+                    }
+            
+                    function hideCustomAlert(postinganId) {
+                        var modalId = "confirmDeleteModal" + postinganId;
+                        $("#" + modalId).modal("hide");
+                        
+                    }
     </script>
+    @endif
+    
+   
 @endsection
-
-@push('scripts')
-    <script>
-        $(document).on('click', '.delete-post', function(e) {
-            e.preventDefault();
-            const postId = $(this).data('id');
-
-            Swal.fire({
-                title: 'Konfirmasi Hapus',
-                text: 'Apakah Anda yakin ingin menghapus postingan ini?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, Hapus!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = '/admin/postingan/' + postId;
-                }
-            });
-        });
-    </script>
-@endpush
-
-
-
 
 {{-- LIST POSTINGAN DALAM BENTUK TABEL --}}
 {{-- <div class="table-responsive">
