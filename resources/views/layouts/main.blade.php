@@ -22,11 +22,12 @@
         <img src="{{ asset('assets/images/loader.svg') }}" class="loader-img" alt="Loader">
     </div>
 
-    @include('sweetalert::alert')
+    
 
     <div class="page">
         <div class="page-main">
-
+            @include('sweetalert::alert')
+            
             @include('layouts.header')
 
             @include('layouts.sidebar')
@@ -41,7 +42,7 @@
         </div>
 
         @include('layouts.footer')
-        
+
     </div>
 
     <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>

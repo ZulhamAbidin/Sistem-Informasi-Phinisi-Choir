@@ -10,6 +10,8 @@ use App\Http\Controllers\DataAnggotaController;
 use App\Http\Controllers\Admin\ApprovalController;
 use App\Http\Controllers\Admin\CarouselController;
 use App\Http\Controllers\Admin\PostinganController;
+use App\Http\Controllers\Admin\AchievementController;
+use App\Http\Controllers\Admin\CompetitionController;
 use App\Http\Controllers\Pengunjung\PengunjungController;
 use App\Http\Controllers\Admin\DataAnggotaController as DataAnggotaControllerList;
 
@@ -60,17 +62,22 @@ Route::middleware(['auth', 'super_admin'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// PENGUNJUNG LIHAT POSITNGAN USER NONE LOGIN
-Route::get('/pengunjung/news', [PengunjungController::class, 'ListBerita'])->name('ListBerita');
-Route::get('/pengunjung/news/{id}/postingan-lainnya', [PengunjungController::class, 'tampilkanPostinganLainnya'])->name('pengunjung.news.postingan-lainnya');
-Route::get('/pengunjung/news/{id}', [PengunjungController::class, 'DetailBerita'])->name('pengunjung.news.show');
-Route::post('/pengunjung/news/{id}/tambah-komentar', [PengunjungController::class, 'tambahKomentar'])->name('pengunjung.news.komentar.tambah');
-Route::post('/pengunjung/news/{beritadetail}/{komentarId}/tambah-balasan-komentar', [PengunjungController::class, 'tambahBalasanKomentar'])->name('pengunjung.news.tambah-balasan-komentar');
-Route::post('/pengunjung/news/delete-komentar/{komentarId}', [PengunjungController::class, 'hapusKomentar'])->name('pengunjung.news.komentar.hapus');
-Route::post('/pengunjung/news/{komentarId}/hapus-balasan-komentar', [PengunjungController::class, 'hapusBalasanKomentar'])->name('pengunjung.news.komentar.balasan.hapus');
-Route::post('/pengunjung/news/{id}/like', [PengunjungController::class, 'likePostingan'])->name('pengunjung.news.like');
-Route::post('/pengunjung/news/komentar/{id}/like', [PengunjungController::class, 'likeKomentar'])->name('komentar.like');
-Route::post('/pengunjung/news/balasan_komentar/{id}/like', [PengunjungController::class, 'likeBalasanKomentar'])->name('balasan_komentar.like');
+// PENGUNJUNG LIST ALL KATEGORY
+Route::get('/pengunjung', [PengunjungController::class, 'ListBerita'])->name('ListBerita');
+Route::get('/pengunjung/competition', [PengunjungController::class, 'ListCompetition'])->name('ListCompetition');
+Route::get('/pengunjung/achievement', [PengunjungController::class, 'ListAchievement'])->name('ListAchievement');
+
+//DETAIL ALL KATEGORY
+Route::get('/pengunjung/{id}/postingan-lainnya', [PengunjungController::class, 'tampilkanPostinganLainnya'])->name('pengunjung.news.postingan-lainnya');
+Route::get('/pengunjung/{id}', [PengunjungController::class, 'DetailBerita'])->name('pengunjung.news.show');
+Route::post('/pengunjung/{id}/tambah-komentar', [PengunjungController::class, 'tambahKomentar'])->name('pengunjung.news.komentar.tambah');
+Route::post('/pengunjung/{beritadetail}/{komentarId}/tambah-balasan-komentar', [PengunjungController::class, 'tambahBalasanKomentar'])->name('pengunjung.news.tambah-balasan-komentar');
+Route::post('/pengunjung/delete-komentar/{komentarId}', [PengunjungController::class, 'hapusKomentar'])->name('pengunjung.news.komentar.hapus');
+Route::post('/pengunjung/{komentarId}/hapus-balasan-komentar', [PengunjungController::class, 'hapusBalasanKomentar'])->name('pengunjung.news.komentar.balasan.hapus');
+Route::post('/pengunjung/{id}/like', [PengunjungController::class, 'likePostingan'])->name('pengunjung.news.like');
+Route::post('/pengunjung/komentar/{id}/like', [PengunjungController::class, 'likeKomentar'])->name('komentar.like');
+Route::post('/pengunjung/balasan_komentar/{id}/like', [PengunjungController::class, 'likeBalasanKomentar'])->name('balasan_komentar.like');
+
 
 Route::middleware(['super_admin'])->group(function () {
     //DATA ANGGOTA
@@ -79,11 +86,15 @@ Route::middleware(['super_admin'])->group(function () {
     Route::get('/SuperAdmin/dataanggota/create', [DataAnggotaControllerList::class, 'create'])->name('dataanggota.create');
     Route::post('/SuperAdmin/dataanggota/store', [DataAnggotaControllerList::class, 'store'])->name('dataanggota.store');
     Route::delete('/SuperAdmin/dataanggota/{id}', [DataAnggotaControllerList::class, 'destroy'])->name('dataanggota.destroy');
+    Route::get('/SuperAdmin/dataanggota/{id}/edit', [DataAnggotaControllerList::class, 'edit'])->name('dataanggota.edit');
+    Route::put('/SuperAdmin/dataanggota/{id}', [DataAnggotaControllerList::class, 'update'])->name('dataanggota.update');
     
-
     // POSTINGAN ROLE = USER SUPER ADMIN
-    Route::get('/admin/postingan/create', [PostinganController::class, 'create'])->name('admin.postingan.create');
     Route::get('/admin/postingan', [PostinganController::class, 'index'])->name('admin.postingan.index');
+    Route::get('/admin/achievement', [AchievementController::class, 'index'])->name('admin.achievement.index');
+    Route::get('/admin/competition', [CompetitionController::class, 'index'])->name('admin.competition.index');
+
+    Route::get('/admin/postingan/create', [PostinganController::class, 'create'])->name('admin.postingan.create');
     Route::post('/admin/postingan', [PostinganController::class, 'store'])->name('admin.postingan.store');
     Route::get('/admin/postingan/{id}', [PostinganController::class, 'show'])->name('admin.postingan.show');
     Route::delete('/admin/postingan/{id}', [PostinganController::class, 'destroy'])->name('admin.postingan.destroy');

@@ -69,61 +69,57 @@
             <div class="landing-top-header overflow-hidden">
                 <div class="top sticky overflow-hidden">
                     <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
-                    <div class="app-sidebar bg-transparent horizontal-main">
-                        <div class="container">
-                            <div class="row">
-                                <div class="main-sidemenu navbar px-0">
-                                    <a class="navbar-brand ps-0 d-none d-lg-block" href="">
-                                        <img alt="" class="logo-2" src="{{ asset('assets/images/brand/logo-3.png')}}">
-                                        <img src="{{ asset('assets/images/brand/logo.png')}}" class="logo-3" alt="logaao">
-                                    </a>
-                                    <ul class="side-menu">
-                                        <li class="slide">
-                                            <a class="bok active" data-bs-toggle="slide" href="/"><span
-                                                    class="side-menu__label">Home</span></a>
-                                        </li>
-                                        <li class="slide">
-                                            <a class="bok" data-bs-toggle="slide" href="{{ route('ListBerita') }}"><span
-                                                    class="side-menu__label">News</span></a>
-                                        </li>
-                                        <li class="slide">
-                                            <a class="bok" data-bs-toggle="slide" href="#About"><span
-                                                    class="side-menu__label">Event</span></a>
-                                        </li>
-                                        <li class="slide">
-                                            <a class="bok" data-bs-toggle="slide" href="#About"><span
-                                                    class="side-menu__label">Achievements</span></a>
-                                        </li>
-                                        <li class="slide">
-                                            <a class="bok" data-bs-toggle="slide" href="#About"><span
-                                                    class="side-menu__label">About Us</span></a>
-                                        </li>
-                                    </ul>
-                                    <div class="header-nav-right d-none d-lg-flex">
-                                        @auth
-                                        @if (auth()->user()->role === 'admin')
-                                        <div class="d-lg-none d-xl-block">
-                                            <a href="{{ route('admin.index') }}" class="btn ripple btn-min w-sm btn-primary me-2 my-auto">Dashboard</a>
-                                        </div>
-                                        @else
-                                        <div class="d-lg-none d-xl-block">
-                                            <a href="{{ route('admin.postingan.index') }}" class="btn ripple btn-min w-sm btn-primary me-2 my-auto">Dashboard</a>
-                                        </div>
-                                        @endif
-                                        @endauth
-                                        
-                                        @guest
-                                        <div class="d-lg-none d-xl-block">
-                                            <a href="{{ route('login') }}" class="btn ripple btn-min w-sm btn-primary me-2 my-auto">Login</a>
-                                        </div>
-                                        @endguest
+                        <div class="app-sidebar bg-transparent horizontal-main">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="main-sidemenu navbar px-0">
+                                        <a class="navbar-brand ps-0 d-none d-lg-block" href="">
+                                            <img alt="" class="logo-2" src="{{ asset('assets/images/brand/logo-3.png')}}">
+                                            <img src="{{ asset('assets/images/brand/logo.png')}}" class="logo-3" alt="logaao">
+                                        </a>
+                                        <ul class="side-menu">
+                                            <li class="slide">
+                                                <a class="bok active" data-bs-toggle="slide" href="/"><span class="side-menu__label">Home</span></a>
+                                            </li>
+                                            <li class="slide">
+                                                <a class="bok" data-bs-toggle="slide" href="{{ route('ListBerita') }}"><span class="side-menu__label">News</span></a>
+                                            </li>
+                                            <li class="slide">
+                                                <a class="bok" data-bs-toggle="slide" href="{{ route('ListCompetition') }}"><span class="side-menu__label">Competition</span></a>
+                                            </li>
+                                            <li class="slide">
+                                                <a class="bok" data-bs-toggle="slide" href="{{ route('ListAchievement') }}"><span class="side-menu__label">Achievement</span></a>
+                                            </li>
+                                            <li class="slide">
+                                                <a class="bok" data-bs-toggle="slide" href="{{ route('ListCompetition') }}"><span class="side-menu__label">Testimonials</span></a>
+                                            </li>
+                                            <li class="slide">
+                                                <a class="bok" data-bs-toggle="slide" href="{{ route('ListCompetition') }}"><span class="side-menu__label">About Us</span></a>
+                                            </li>
+                                        </ul>
+                                        <div class="header-nav-right d-none d-lg-flex">
+                                            @auth
+                                                @if (auth()->user()->role === 'admin')
+                                                    <div class="d-lg-none d-xl-block">
+                                                        <a href="{{ route('admin.index') }}" class="btn ripple btn-min w-sm btn-primary me-2 my-auto">Dashboard</a>
+                                                    </div>
+                                                @else
+                                                    <div class="d-lg-none d-xl-block">
+                                                        <a href="{{ route('admin.postingan.index') }}" class="btn ripple btn-min w-sm btn-primary me-2 my-auto">Dashboard</a>
+                                                    </div>
+                                                @endif
+                                            @endauth
+                                            @guest
+                                                <div class="d-lg-none d-xl-block">
+                                                    <a href="{{ route('login') }}" class="btn ripple btn-min w-sm btn-primary me-2 my-auto">Login</a>
+                                                </div>
+                                            @endguest
 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!--/APP-SIDEBAR-->
                 </div>
             </div>
 

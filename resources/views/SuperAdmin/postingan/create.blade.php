@@ -42,10 +42,9 @@
                                     <div class="form-group">
                                         <label for="kategori">Kategori</label>
                                         <select name="kategori" class="form-control form-select" data-bs-placeholder="Select Country">
+                                            <option value="news">news</option>
+                                            <option value="competition">competition</option>
                                             <option value="achievement">achievement</option>
-                                            <option value="lomba">lomba</option>
-                                            <option value="kegiatan_internal">kegiatan internal</option>
-                                            <option value="berita" selected="">berita</option>
                                         </select>
                                     </div>
                                 </div>
@@ -56,10 +55,11 @@
                                         <input type="text" name="lokasi" class="form-control" placeholder="Gedung BU UNM" required>
                                     </div>
                                 </div>
+                                
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="sumber">Sumber</label>
-                                        <input type="text" name="sumber" class="form-control" placeholder="Arfah Awaluddin T" required>
+                                        <input type="text" name="sumber" class="form-control" placeholder="PINISI CHOIR" readonly>
                                     </div>
                                 </div>
                            

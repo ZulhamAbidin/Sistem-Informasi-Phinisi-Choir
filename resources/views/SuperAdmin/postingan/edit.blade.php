@@ -38,21 +38,25 @@
                                         value="{{ old('judul_postingan', $postingan->judul_postingan) }}" required>
                                 </div>
                             </div>
+
                             <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="judul_postingan">Kategori</label>
+                                    <input type="text" name="judul_postingan" class="form-control"
+                                        value="{{ old('judul_postingan', $postingan->kategori) }}" readonly>
+                                </div>
+                            </div>
+
+                            {{-- <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="kategori">Kategori</label>
                                     <select name="kategori" class="form-control form-select" required>
-                                        <option value="achievement" {{ old('kategori', $postingan->kategori) ==
-                                            'achievement' ? 'selected' : '' }}>achievement</option>
-                                        <option value="lomba" {{ old('kategori', $postingan->kategori) == 'lomba' ?
-                                            'selected' : '' }}>lomba</option>
-                                        <option value="kegiatan_internal" {{ old('kategori', $postingan->kategori) ==
-                                            'kegiatan_internal' ? 'selected' : '' }}>kegiatan internal</option>
-                                        <option value="berita" {{ old('kategori', $postingan->kategori) == 'berita' ?
-                                            'selected' : '' }}>berita</option>
+                                        <option value="achievement" {{ old('kategori', $postingan->kategori) == 'achievement' ? 'selected' : '' }}>achievement</option>
+                                        <option value="competition" {{ old('kategori', $postingan->kategori) == 'competition' ? 'selected' : '' }}>competition</option>
+                                        <option value="news" {{ old('kategori', $postingan->kategori) == 'news' ? 'selected' : '' }}>news</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -64,8 +68,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="sumber">Sumber</label>
-                                    <input type="text" name="sumber" class="form-control"
-                                        value="{{ old('sumber', $postingan->sumber) }}" required>
+                                    <input type="text" name="sumber" class="form-control" value="{{ old('sumber', $postingan->sumber) }}" readonly>
                                 </div>
                             </div>
 

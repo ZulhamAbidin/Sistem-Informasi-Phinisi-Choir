@@ -1,4 +1,4 @@
-<div class="top sticky overflow-hidden">
+{{-- <div class="top sticky overflow-hidden">
     <!--APP-SIDEBAR-->
     <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
     <div class="app-sidebar bg-transparent horizontal-main">
@@ -74,4 +74,4 @@
             /* Anda dapat menambahkan properti styling lain untuk menyesuaikan tampilan */
         }
     }
-</style>
+</style> --}}

@@ -18,20 +18,10 @@ class DataAnggotaController extends Controller
         return view('SuperAdmin.dataanggota.index', compact('anggota'));
     }
 
- 
-
     public function create()
-{
-    return view('SuperAdmin.dataanggota.create');
-}
-
-
-    // public function show($id)
-    // {
-    //     $anggota = Anggota::find($id);
-    //     // return view('SuperAdmin.dataanggota.show', compact('anggota'));
-    //     return view('SuperAdmin\dataanggota\show', ['anggota' => $anggota]);
-    // }
+    {
+        return view('SuperAdmin.dataanggota.create');
+    }
 
     public function show($id)
     {
@@ -43,6 +33,64 @@ class DataAnggotaController extends Controller
             return view('SuperAdmin.dataanggota.create');
         }
     }
+
+    public function edit($id)
+    {
+        $anggota = Anggota::find($id);
+
+        if (!$anggota) {
+            return redirect()->route('dataanggota.index')->with('error', 'Anggota tidak ditemukan.');
+        }
+
+        return view('SuperAdmin.dataanggota.edit', compact('anggota'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nama_lengkap' => 'required',
+            'jabatan' => 'required',
+            'generasi' => 'required',
+            'alamat' => 'required',
+            'notelfon' => 'required',
+            'motto' => 'required',
+            'deskripsi' => 'required',
+            'foto' => 'required',
+        ]);
+
+        $anggota = Anggota::find($id);
+
+        if (!$anggota) {
+            return redirect()->route('dataanggota.index')->with('error', 'Anggota tidak ditemukan.');
+        }
+
+        $anggota->nama_lengkap = $request->input('nama_lengkap');
+        $anggota->jabatan = $request->input('jabatan');
+        $anggota->generasi = $request->input('generasi');
+        $anggota->alamat = $request->input('alamat');
+        $anggota->notelfon = $request->input('notelfon');
+        $anggota->motto = $request->input('motto');
+        $anggota->deskripsi = $request->input('deskripsi');
+
+        if ($request->hasFile('foto')) {
+            // Proses upload foto baru dan hapus foto lama jika diperlukan
+            $uploadedFile = $request->file('foto');
+            $imageName = time() . '.' . $uploadedFile->getClientOriginalExtension();
+            $uploadedFile->storeAs('uploads', $imageName, 'public');
+            
+            // Hapus foto lama jika ada dan tidak sama dengan foto default
+            if ($anggota->foto && $anggota->foto !== 'default.jpg') {
+                Storage::disk('public')->delete('uploads/' . $anggota->foto);
+            }
+
+            $anggota->foto = $imageName;
+        }
+
+        $anggota->save();
+
+        return redirect()->route('dataanggota.index')->with('success', 'Anggota berhasil diperbarui.');
+    }
+
 
     public function store(Request $request)
     {
@@ -67,7 +115,6 @@ class DataAnggotaController extends Controller
         $anggota->motto = $request->input('motto');
         $anggota->deskripsi = $request->input('deskripsi');
 
-
         if ($request->hasFile('foto')) {
             $uploadedFile = $request->file('foto');
             $imageName = time() . '.' . $uploadedFile->getClientOriginalExtension();
@@ -81,8 +128,7 @@ class DataAnggotaController extends Controller
         return redirect()->route('dataanggota.index');
     }
 
-
-     public function destroy($id)
+    public function destroy($id)
     {
         $anggota = Anggota::find($id);
 
@@ -98,5 +144,4 @@ class DataAnggotaController extends Controller
             ->route('dataanggota.index')
             ->with('success', 'anggota berhasil dihapus.');
     }
-
 }

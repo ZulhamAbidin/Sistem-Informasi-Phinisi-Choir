@@ -31,7 +31,45 @@ class PengunjungController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('pengunjung.news.list', compact('listberita', 'search'));
+        return view('pengunjung.list', compact('listberita', 'search'));
+    }
+
+    public function ListAchievement(Request $request)
+    {
+        $search = $request->input('search');
+        $listAchievement = Postingan::where('kategori', 'achievement')
+            ->when($search, function ($query) use ($search) {
+                $query->where(function ($query) use ($search) {
+                    $query
+                        ->where('judul_postingan', 'like', '%' . $search . '%')
+                        ->orWhere('deskripsi', 'like', '%' . $search . '%')
+                        ->orWhere('lokasi', 'like', '%' . $search . '%')
+                        ->orWhere('sumber', 'like', '%' . $search . '%');
+                });
+            })
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('pengunjung.achievement', compact('listAchievement', 'search'));
+    }
+
+    public function ListCompetition(Request $request)
+    {
+        $search = $request->input('search');
+        $listCompetition = Postingan::where('kategori', 'competition')
+            ->when($search, function ($query) use ($search) {
+                $query->where(function ($query) use ($search) {
+                    $query
+                        ->where('judul_postingan', 'like', '%' . $search . '%')
+                        ->orWhere('deskripsi', 'like', '%' . $search . '%')
+                        ->orWhere('lokasi', 'like', '%' . $search . '%')
+                        ->orWhere('sumber', 'like', '%' . $search . '%');
+                });
+            })
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('pengunjung.competition', compact('listCompetition', 'search'));
     }
 
     public function DetailBerita($id)
@@ -39,7 +77,7 @@ class PengunjungController extends Controller
         $beritadetail = Postingan::withCount('komentars')->find($id);
 
         if (!$beritadetail) {
-            return redirect()->route('pengunjung.news.list');
+            return redirect()->route('pengunjung.list');
         }
 
         $beritadetail->selisihWaktu = Carbon::parse($beritadetail->created_at)->diffForHumans();
@@ -50,7 +88,7 @@ class PengunjungController extends Controller
             ->take(5)
             ->get();
 
-        return view('pengunjung.news.detail', compact('beritadetail', 'averageRating', 'postinganLainnya'));
+        return view('pengunjung.detail', compact('beritadetail', 'averageRating', 'postinganLainnya'));
     }
 
     public function totalRating(Postingan $beritadetail)
@@ -152,12 +190,11 @@ class PengunjungController extends Controller
     }
 
     public function showKomentar()
-{
-    $komentar = Komentar::find($id); // Mengambil data komentar dari model
+    {
+        $komentar = Komentar::find($id); // Mengambil data komentar dari model
 
-    return view('pengunjung.news.detail', ['komentar' => $komentar]);
-}
-
+        return view('pengunjung.detail', ['komentar' => $komentar]);
+    }
 
     public function hapusKomentar($komentarId)
     {

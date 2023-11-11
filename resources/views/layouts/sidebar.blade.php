@@ -55,13 +55,38 @@
           
                 <li class="slide">
                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
-                        <i class="side-menu__icon fa fa-pencil-square"></i><span class="side-menu__label">Postingan</span>
+                        <i class="side-menu__icon fa fa-book"></i><span class="side-menu__label">News</span>
                         <i class="angle fe fe-chevron-right"></i>
                     </a>
                     <ul class="slide-menu">
                         <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
-                        <li><a href="{{ route('admin.postingan.index') }}" class="slide-item">List Postingan</a></li>
-                        <li><a href="{{ route('admin.postingan.create') }}" class="slide-item">Buat Postingan</a></li>
+                        <li><a href="{{ route('admin.postingan.index') }}" class="slide-item">List News</a></li>
+                        <li><a href="{{ route('admin.postingan.create') }}" class="slide-item">Buat News</a></li>
+                    </ul>
+                </li>
+
+
+                <li class="slide">
+                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
+                        <i class="side-menu__icon fa fa-trophy"></i><span class="side-menu__label">Achievement</span>
+                        <i class="angle fe fe-chevron-right"></i>
+                    </a>
+                    <ul class="slide-menu">
+                        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
+                        <li><a href="{{ route('admin.achievement.index') }}" class="slide-item">List Achievement</a></li>
+                        <li><a href="{{ route('admin.postingan.create') }}" class="slide-item">Buat Achievement</a></li>
+                    </ul>
+                </li>
+
+                <li class="slide">
+                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
+                        <i class="side-menu__icon fa fa-bookmark"></i><span class="side-menu__label">Competition</span>
+                        <i class="angle fe fe-chevron-right"></i>
+                    </a>
+                    <ul class="slide-menu">
+                        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
+                        <li><a href="{{ route('admin.competition.index') }}" class="slide-item">List Competition</a></li>
+                        <li><a href="{{ route('admin.postingan.create') }}" class="slide-item">Buat Competition</a></li>
                     </ul>
                 </li>
 
@@ -74,18 +99,7 @@
                         <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
                         <li><a href="{{ route('dataanggota.index') }}" class="slide-item">List Data Anggota</a></li>
                         <li><a href="{{ route('dataanggota.create') }}" class="slide-item">Tambah Data Anggota</a></li>
-                    </ul>
-                </li>
-
-                <li class="slide">
-                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
-                        <i class="side-menu__icon fa fa-trophy"></i><span class="side-menu__label">Achievement</span>
-                        <i class="angle fe fe-chevron-right"></i>
-                    </a>
-                    <ul class="slide-menu">
-                        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
-                        <li><a href="{{-- {{ route('destinasi-hotel.index') }} --}}" class="slide-item">List Achievement </a></li>
-                        <li><a href="{{-- {{ route('destinasi-hotel.create') }} --}}" class="slide-item">Testimonials </a></li>
+                        <li><a href="{{ route('admin.users.index') }}" class="slide-item">Aprroval Anggota </a></li>
                     </ul>
                 </li>
 
@@ -97,7 +111,6 @@
                     <ul class="slide-menu">
                         <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
                         <li><a href="{{-- {{ route('destinasi-hotel.index') }} --}}" class="slide-item">Tambah User Login </a></li>
-                        <li><a href="{{ route('admin.users.index') }}" class="slide-item">Aprroval Anggota </a></li>
                     </ul>
                 </li>
 
