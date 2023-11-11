@@ -36,7 +36,8 @@
                                 <div class="modal-footer">
                                     <a href="javascript:void(0)" class="btn btn-white"
                                         onclick="hideCustomAlert({{ $postingan->id }})">Cancel</a>
-                                    <form action="{{ route('admin.postingan.destroy', ['id' => $postingan->id]) }}" method="POST">
+                                    <form action="{{ route('admin.postingan.destroy', ['id' => $postingan->id]) }}"
+                                        method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Delete</button>
@@ -52,70 +53,85 @@
                 <div class="card">
                     <div class="card-body">
                         @if (count($postingans) > 0)
-                        <div class="row">
-                            @foreach ($postingans as $postingan)
-                            <div class="col-12 col-md-6 col-lg-4">
-                            <div class="card border p-0 shadow-none">
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <div class="media mt-0">
-                                            <div class="media-user me-2">
-                                                <div class=""><img alt="" class="rounded-circle avatar avatar-md"
-                                                        src="{{ asset('assets/images/brand/logo-2.png') }}"></div>
+                            <div class="row">
+                                @foreach ($postingans as $postingan)
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                        <div class="card border p-0 shadow-none">
+                                            <div class="card-body">
+                                                <div class="d-flex">
+                                                    <div class="media mt-0">
+                                                        <div class="media-user me-2">
+                                                            <div class=""><img alt=""
+                                                                    class="rounded-circle avatar avatar-md"
+                                                                    src="{{ asset('assets/images/brand/logo-2.png') }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <h6 class="mb-0 mt-1">{{ auth()->user()->nama_lengkap }}</h6>
+                                                            <small class="text-muted">{{ $postingan->selisihWaktu }}</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ms-auto">
+                                                        <div class="dropdown show">
+                                                            <a class="new option-dots" href="JavaScript:void(0);"
+                                                                data-bs-toggle="dropdown">
+                                                                <span class=""><i
+                                                                        class="fe fe-more-vertical"></i></span>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-end">
+                                                                <a class="dropdown-item"
+                                                                    href="{{ route('admin.postingan.edit', ['id' => $postingan->id]) }}">Edit
+                                                                    Postingan</a>
+                                                                <a class="dropdown-item"
+                                                                    href="{{ route('admin.postingan.show', $postingan->id) }}">
+                                                                    Lihat Postingan</a>
+                                                                <button class="dropdown-item"
+                                                                    onclick="showCustomAlert({{ $postingan->id }})">Hapus</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-4">
+                                                    <div class="d-flex">
+                                                        <a href="{{ route('admin.postingan.show', $postingan->id) }}"
+                                                            class="w-100"><img
+                                                                src="{{ asset('storage/uploads/' . $postingan->sampul) }}"
+                                                                alt="img" class="br-5"></a>
+                                                    </div>
+                                                    <h4 class="fw-semibold mt-3">
+                                                        {{ Str::limit($postingan->judul_postingan, 30) }}</h4>
+                                                    <p class="mb-0">{{ Str::limit($postingan->deskripsi, 150) }}</p>
+                                                </div>
                                             </div>
-                                            <div class="media-body">
-                                                <h6 class="mb-0 mt-1">{{auth()->user()->nama_lengkap }}</h6>
-                                                <small class="text-muted">{{ $postingan->selisihWaktu }}</small>
-                                            </div>
-                                        </div>
-                                        <div class="ms-auto">
-                                            <div class="dropdown show">
-                                                <a class="new option-dots" href="JavaScript:void(0);" data-bs-toggle="dropdown">
-                                                    <span class=""><i class="fe fe-more-vertical"></i></span>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item" href="{{ route('admin.postingan.edit', ['id' => $postingan->id]) }}">Edit Postingan</a>
-                                                    <a class="dropdown-item" href="{{ route('admin.postingan.show', $postingan->id) }}"> Lihat Postingan</a>
-                                                    <button class="dropdown-item" onclick="showCustomAlert({{ $postingan->id }})">Hapus</button>
+
+
+
+                                            <div class="card-footer user-pro-2">
+                                                <div class="media mt-0">
+                                                    <div class="media-body">
+                                                        <h6 class="mb-0 mt-2 ms-2">{{ $postingan->jumlah_suka }} Menyukai
+                                                            Postingan Ini</h6>
+                                                    </div>
+                                                    <div class="ms-auto">
+                                                        <div class="d-flex mt-1">
+                                                            <a class="new me-2 text-muted fs-16"
+                                                                href="JavaScript:void(0);"><span class=""><i
+                                                                        class="fe fe-heart"></i></span></a>
+                                                            <a class="new me-2 text-muted fs-16"
+                                                                href="JavaScript:void(0);"><span class=""><i
+                                                                        class="fe fe-message-square"></i></span></a>
+                                                            <a class="new text-muted fs-16" href="JavaScript:void(0);"><span
+                                                                    class=""><i class="fe fe-share-2"></i></span></a>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="mt-4">
-                                        <div class="d-flex">
-                                            <a href="{{ route('admin.postingan.show', $postingan->id) }}" class="w-100"><img src="{{ asset('storage/uploads/' . $postingan->sampul) }}" alt="img"
-                                                    class="br-5"></a>
-                                        </div>
-                                        <h4 class="fw-semibold mt-3">{{ Str::limit($postingan->judul_postingan, 30) }}</h4>
-                                        <p class="mb-0">{{ Str::limit($postingan->deskripsi, 150) }}</p>
-                                    </div>
-                                </div>
-                              
-                                               
-                                            
-                                <div class="card-footer user-pro-2">
-                                    <div class="media mt-0">
-                                        <div class="media-body">
-                                            <h6 class="mb-0 mt-2 ms-2">{{ $postingan->jumlah_suka }} Menyukai Postingan Ini</h6>
-                                        </div>
-                                        <div class="ms-auto">
-                                            <div class="d-flex mt-1">
-                                                <a class="new me-2 text-muted fs-16" href="JavaScript:void(0);"><span class=""><i
-                                                            class="fe fe-heart"></i></span></a>
-                                                <a class="new me-2 text-muted fs-16" href="JavaScript:void(0);"><span class=""><i
-                                                            class="fe fe-message-square"></i></span></a>
-                                                <a class="new text-muted fs-16" href="JavaScript:void(0);"><span class=""><i
-                                                            class="fe fe-share-2"></i></span></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
-                            </div>
-                            @endforeach
-                        </div>
                         @else
-                        <p>Anda Belum Mengunggah Postingan Apapun.</p>
+                            <p>Anda Belum Mengunggah Postingan Apapun.</p>
                         @endif
                     </div>
                 </div>
@@ -124,79 +140,77 @@
     </div>
 
     @if (session('success'))
-    <div class="sweet-alert showSweetAlert visible" data-custom-class="" data-has-cancel-button="false"
-        data-has-confirm-button="true" data-allow-outside-click="false" data-has-done-function="false" data-animation="pop"
-        data-timer="null" style="display: block; margin-top: -176px;">
-        <!-- Konten SweetAlert Anda -->
-        <div class="sa-icon sa-error" style="display: none;">
-            <span class="sa-x-mark">
-                <span class="sa-line sa-left"></span>
-                <span class="sa-line sa-right"></span>
-            </span>
-        </div>
-        <div class="sa-icon sa-warning" style="display: none;">
-            <span class="sa-body"></span>
-            <span class="sa-dot"></span>
-        </div>
-        <div class="sa-icon sa-info" style="display: none;"></div>
-        <div class="sa-icon sa-success" style="display: none;">
-            <span class="sa-line sa-tip"></span>
-            <span class="sa-line sa-long"></span>
-    
-            <div class="sa-placeholder"></div>
-            <div class="sa-fix"></div>
-        </div>
-        <div class="sa-icon sa-custom"
-            style="display: block; background-image: url(&quot;{{ asset('assets/images/brand/logo-2.png') }}&quot;); width: 80px; height: 80px;width:80px; height:80px">
-        </div>
-        <h3>Berhasil</h3>
-        <p style="display: block;">{{ session('success') }}</p>
-        <fieldset>
-            <input type="text" tabindex="3" placeholder="">
-            <div class="sa-input-error"></div>
-        </fieldset>
-        <div class="sa-error-container">
-            <div class="icon">!</div>
-            <p>Not valid!</p>
-        </div>
-        <div class="sa-button-container">
-            <button class="cancel" tabindex="2" style="display: none; box-shadow: none;">Cancel</button>
-            <div class="sa-confirm-button-container">
-                <button class="confirm" tabindex="1"
-                    style="display: inline-block; background-color: rgb(140, 212, 245); box-shadow: rgba(140, 212, 245, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset;"
-                    onclick="hideSweetAlert()">OK</button>
-                <div class="la-ball-fall">
-                    <div></div>
-                    <div></div>
-                    <div></div>
+        <div class="sweet-alert visible" data-custom-class="" data-has-cancel-button="false"
+            data-has-confirm-button="true" data-allow-outside-click="false" data-has-done-function="false"
+            data-animation="pop" data-timer="null" style="display: block; margin-top: -176px;">
+            <!-- Konten SweetAlert Anda -->
+            <div class="sa-icon sa-error" style="display: none;">
+                <span class="sa-x-mark">
+                    <span class="sa-line sa-left"></span>
+                    <span class="sa-line sa-right"></span>
+                </span>
+            </div>
+            <div class="sa-icon sa-warning" style="display: none;">
+                <span class="sa-body"></span>
+                <span class="sa-dot"></span>
+            </div>
+            <div class="sa-icon sa-info" style="display: none;"></div>
+            <div class="sa-icon sa-success" style="display: none;">
+                <span class="sa-line sa-tip"></span>
+                <span class="sa-line sa-long"></span>
+
+                <div class="sa-placeholder"></div>
+                <div class="sa-fix"></div>
+            </div>
+            <div class="sa-icon sa-custom"
+                style="display: block; background-image: url(&quot;{{ asset('assets/images/brand/logo-2.png') }}&quot;); width: 80px; height: 80px;width:80px; height:80px">
+            </div>
+            <h3>Berhasil</h3>
+            <p style="display: block;">{{ session('success') }}</p>
+            <fieldset>
+                <input type="text" tabindex="3" placeholder="">
+                <div class="sa-input-error"></div>
+            </fieldset>
+            <div class="sa-error-container">
+                <div class="icon">!</div>
+                <p>Not valid!</p>
+            </div>
+            <div class="sa-button-container">
+                <button class="cancel" tabindex="2" style="display: none; box-shadow: none;">Cancel</button>
+                <div class="sa-confirm-button-container">
+                    <button class="confirm" tabindex="1"
+                        style="display: inline-block; background-color: rgb(140, 212, 245); box-shadow: rgba(140, 212, 245, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset;"
+                        onclick="hideSweetAlert()">OK</button>
+                    <div class="la-ball-fall">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    
+    @endif
+
     <script>
         function hideSweetAlert() {
-                        const sweetAlert = document.querySelector('.sweet-alert');
-                        sweetAlert.classList.remove('visible');
-                        sweetAlert.classList.add('invisible');
-                    }
+            const sweetAlert = document.querySelector('.sweet-alert');
+            sweetAlert.classList.remove('visible');
+            sweetAlert.classList.add('invisible');
+        }
     </script>
 
     <script>
         function showCustomAlert(postinganId) {
-                        var modalId = "confirmDeleteModal" + postinganId;
-                        $("#" + modalId).modal("show");
-                    }
-            
-                    function hideCustomAlert(postinganId) {
-                        var modalId = "confirmDeleteModal" + postinganId;
-                        $("#" + modalId).modal("hide");
-                        
-                    }
+            var modalId = "confirmDeleteModal" + postinganId;
+            $("#" + modalId).modal("show");
+        }
+
+        function hideCustomAlert(postinganId) {
+            var modalId = "confirmDeleteModal" + postinganId;
+            $("#" + modalId).modal("hide");
+
+        }
     </script>
-    @endif
-    
-   
 @endsection
 
 {{-- LIST POSTINGAN DALAM BENTUK TABEL --}}

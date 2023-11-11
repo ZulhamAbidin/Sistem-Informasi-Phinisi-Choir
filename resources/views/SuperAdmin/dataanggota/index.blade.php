@@ -90,7 +90,7 @@
     </div>
 </div>
 @if (session('success'))
-<div class="sweet-alert showSweetAlert visible" data-custom-class="" data-has-cancel-button="false"
+<div class="sweet-alert  visible" data-custom-class="" data-has-cancel-button="false"
     data-has-confirm-button="true" data-allow-outside-click="false" data-has-done-function="false" data-animation="pop"
     data-timer="null" style="display: block; margin-top: -176px;">
     <!-- Konten SweetAlert Anda -->
