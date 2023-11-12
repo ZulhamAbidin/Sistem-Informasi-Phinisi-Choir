@@ -47,7 +47,7 @@
     </style>
 
     <div class="main-container container-fluid">
-        <div class="page-header">
+        {{-- <div class="page-header">
             <h1 class="page-title">Kelola Slider</h1>
             <div>
                 <ol class="breadcrumb">
@@ -55,7 +55,17 @@
                     <li class="breadcrumb-item active" aria-current="page">Kelola Slider</li>
                 </ol>
             </div>
+        </div> --}}
+
+        <div class="page-header">
+            <h1 class="page-title">Kelola Slider</h1>
+            <div>
+                <div class="breadcrumb">
+                    <a href="{{ route('superadmin.home.create') }}" class="btn btn-primary"><i  class="fa fa-plus-square me-2"></i>Tambah Slider</a>
+                </div>
+            </div>
         </div>
+
     </div>
 
     <div class="row justify-content-center mt-4">

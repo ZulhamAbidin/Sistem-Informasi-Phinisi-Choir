@@ -35,7 +35,7 @@
                                     </div>
                                 </div>
 
-                                {{-- <div class="col-md-6">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="kategori">Kategori</label>
                                         <select name="kategori" class="form-control form-select" data-bs-placeholder="Select Country">
@@ -44,7 +44,7 @@
                                             <option value="achievement">achievement</option>
                                         </select>
                                     </div>
-                                </div> --}}
+                                </div>
 
                                 <div class="col-md-6 d-none">
                                     <div class="form-group">
@@ -82,7 +82,7 @@
                                     </div>
                                 </div>
                             
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="deskripsi">Deskripsi</label>
                                         <textarea name="deskripsi" class="form-control" rows="4"required></textarea>

@@ -2,13 +2,23 @@
 @section('container')
 <div class="main-container container-fluid">
 
-    <div class="page-header">
+    {{-- <div class="page-header">
         <h1 class="page-title">Postingan</h1>
         <div>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Postingan</a></li>
                 <li class="breadcrumb-item active" aria-current="page">List Postingan</li>
             </ol>
+        </div>
+    </div> --}}
+
+    <div class="page-header">
+        <h1 class="page-title">List Postingan</h1>
+        <div>
+            <div class="breadcrumb">
+                <a href="{{ route('admin.postingan.create') }}" class="btn btn-primary"><i
+                        class="fa fa-plus-square me-2"></i>Tambah Postingan</a>
+            </div>
         </div>
     </div>
 

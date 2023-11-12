@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('container')
     <div class="main-container container-fluid">
-        <div class="page-header">
+        {{-- <div class="page-header">
             <h1 class="page-title">Lihat Data Anggota</h1>
             <div>
                 <ol class="breadcrumb">
@@ -9,8 +9,19 @@
                     <li class="breadcrumb-item active" aria-current="page">Data Anggota</li>
                 </ol>
             </div>
+        </div> --}}
+
+        <div class="page-header">
+            <h1 class="page-title">List Data Anggota</h1>
+            <div>
+                <div class="breadcrumb">
+                    <a href="{{ route('dataanggota.create') }}" class="btn btn-primary"><i
+                            class="fa fa-plus-square me-2"></i>Tambah Data Anggota</a>
+                </div>
+            </div>
         </div>
     </div>
+    
 
 
     <div class="row justify-content-center mt-4">

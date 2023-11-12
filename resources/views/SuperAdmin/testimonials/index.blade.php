@@ -1,13 +1,22 @@
 @extends('layouts.main')
 @section('container')
 <div class="main-container container-fluid">
-    <div class="page-header">
+    {{-- <div class="page-header">
         <h1 class="page-title">List testimonial</h1>
         <div>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">List</a></li>
                 <li class="breadcrumb-item active" aria-current="page">testimonial</li>
             </ol>
+        </div>
+    </div> --}}
+
+    <div class="page-header">
+        <h1 class="page-title">List testimonial</h1>
+        <div>
+            <div class="breadcrumb">
+                <a href="{{ route('testimonials.create') }}" class="btn btn-primary"><i class="fa fa-plus-square me-2"></i>Tambah Testimonial</a>
+            </div>
         </div>
     </div>
 </div>
