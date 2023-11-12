@@ -12,7 +12,7 @@ class CarouselController extends Controller
 {
     public function index()
     {
-        $carousels = Carousel::all();
+        $carousels = Carousel::paginate(3);
         return view('SuperAdmin.home.index', compact('carousels'));
     }
 

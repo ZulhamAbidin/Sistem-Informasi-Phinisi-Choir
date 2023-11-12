@@ -8,7 +8,6 @@
         <div class="side-app">
             <div class="main-container">
 
-
                 {{-- POSTINGAN DENGAN RATING TERTINGGI --}}
                 <div class="section bg-landing" id="Blog">
                     <div class="container">
@@ -106,6 +105,7 @@
                     </div>
                 </div>
 
+                {{-- TESTIMONIALS --}}
                 <div class="testimonial-owl-landing section pb-0" id="testimonials">
                     <div class="container">
                         <div class="row">
@@ -141,7 +141,51 @@
                         </div>
                     </div>
                 </div>
-                <!-- ROW-9 CLOSED -->
+
+                {{-- SARAN DAN TANGGAPAN PENGGUNA --}}
+                <div class="bg-image-landing section pb-0" id="Contact">
+                    <div class="container">
+                        <div class="">
+                            <div class="card card-shadow reveal active">
+                                <h4 class="text-center fw-semibold mt-7">Saran dan Tanggapan Penngguna</h4>
+                                <span class="landing-title"></span>
+                                </h2>
+                                <div class="card-body p-5 pb-6 text-dark">
+                                    <div class="statistics-info p-4">
+                                        <div class="row justify-content-center">
+
+                                            <div class="col-xl-9">
+                                                <div class="">
+                                                    <form class="form-horizontal reveal revealrotate m-t-20" action="{{ route('submit-saran') }}" method="post">
+                                                        @csrf
+                                                        <div class="form-group">
+                                                            <div class="col-xs-12">
+                                                                <input class="form-control" type="text" required="" placeholder="Username*" name="nama">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-xs-12">
+                                                                <input class="form-control" type="email" required="" placeholder="Email*" name="email">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-xs-12">
+                                                                <textarea class="form-control" rows="5" placeholder="Your Comment*" name="pesan"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <button type="submit" class="btn btn-primary btn-rounded waves-effect waves-light">Submit</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 

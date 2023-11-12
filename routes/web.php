@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\SuperAdminController;
+use App\Http\Controllers\Admin\SaranController;
 use App\Http\Controllers\DataAnggotaController;
 use App\Http\Controllers\Admin\ApprovalController;
 use App\Http\Controllers\Admin\CarouselController;
@@ -19,6 +20,11 @@ use App\Http\Controllers\Admin\DataAnggotaController as DataAnggotaControllerLis
 
 //HALAMAN UTAMA
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+Route::post('/submit-saran', [WelcomeController::class, 'submitSaran'])->name('submit-saran');
+
+// Menampilkan daftar saran
+Route::get('/SuperAdmin/saran', [WelcomeController::class, 'indexsaran'])->name('admin.saran.index')->middleware(['super_admin']);
+Route::delete('/SuperAdmin/saran/{id}', [WelcomeController::class, 'destroy'])->name('admin.saran.destroy')->middleware(['super_admin']);
 
 //INPUT DATA ANGGOTA PENGURUS ROLE = USER ADMIN
 Route::middleware(['auth', 'admin', 'super_admin'])->group(function () {
