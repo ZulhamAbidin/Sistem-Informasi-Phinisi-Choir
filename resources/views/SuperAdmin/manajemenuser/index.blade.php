@@ -6,7 +6,6 @@
         <div class="page-header">
             <h1 class="page-title">Pengajuan Data Anggota Unit Kegiatan Mahasiswa Paduan Suara Universitas Negeri Makassar</h1>
         </div>
-        
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title"></h3>
@@ -35,10 +34,13 @@
                     </table>
                 </div>
             </div>
+            
         </div>
 
 
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {

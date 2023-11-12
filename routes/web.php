@@ -59,8 +59,8 @@ Route::get('/dashboard', function () {
 Route::prefix('admin')
     ->name('admin.')
     ->group(function () {
-        Route::post('users/{user}/update-status', [ApprovalController::class, 'updateStatus'])->name('admin.users.updateStatus');
-        Route::get('users', [ApprovalController::class, 'index'])->name('users.index');
+        Route::post('users/{user}/update-status', [ApprovalController::class, 'updateStatus'])->name('admin.users.updateStatus')->middleware(['super_admin']);
+        Route::get('users', [ApprovalController::class, 'index'])->name('users.index')->middleware(['super_admin']);
     });
 
 Route::middleware(['auth', 'super_admin'])->group(function () {
