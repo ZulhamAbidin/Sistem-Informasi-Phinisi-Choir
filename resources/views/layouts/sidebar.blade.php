@@ -30,7 +30,7 @@
                 </li>
 
                 <li class="slide">
-                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="">
+                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="{{ route('profile-lembaga.index') }}">
                         <i class="side-menu__icon fa fa-music"></i>
                         <span class="side-menu__label">Profile Lembaga</span>
                     </a>

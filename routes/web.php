@@ -15,19 +15,21 @@ use App\Http\Controllers\Admin\AchievementController;
 use App\Http\Controllers\Admin\CompetitionController;
 use App\Http\Controllers\Admin\TestimonialsController;
 use App\Http\Controllers\Admin\ManajemenUserController;
+use App\Http\Controllers\Admin\ProfileLembagaController;
 use App\Http\Controllers\Pengunjung\PengunjungController;
 use App\Http\Controllers\Admin\DataAnggotaController as DataAnggotaControllerList;
 
 //HALAMAN UTAMA
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::post('/submit-saran', [WelcomeController::class, 'submitSaran'])->name('submit-saran');
+Route::get('/about', [ProfileLembagaController::class, 'about'])->name('about');
 
 // Menampilkan daftar saran
 Route::get('/SuperAdmin/saran', [WelcomeController::class, 'indexsaran'])->name('admin.saran.index')->middleware(['super_admin']);
 Route::delete('/SuperAdmin/saran/{id}', [WelcomeController::class, 'destroy'])->name('admin.saran.destroy')->middleware(['super_admin']);
 
 //INPUT DATA ANGGOTA PENGURUS ROLE = USER ADMIN
-Route::middleware(['auth', 'admin', 'super_admin'])->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [DataAnggotaController::class, 'index'])->name('admin.index');
     Route::get('/admin/get-user-data', [DataAnggotaController::class, 'getUserData'])->name('get.user.data');
     Route::get('/admin/create', [DataAnggotaController::class, 'create'])->name('admin.create');
@@ -65,9 +67,9 @@ Route::prefix('admin')
 
 Route::middleware(['auth', 'super_admin'])->group(function () {
     //UPDATE PROFILE PRIBADI ROLE = USER SUPER ADMIN, ADMIN
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 // PENGUNJUNG LIST ALL KATEGORY
@@ -150,5 +152,13 @@ Route::prefix('SuperAdmin/home')->group(function () {
         Route::put('list/{id}', [ManajemenUserController::class, 'update'])->name('manajemenuser.update');
         Route::delete('list/{id}', [ManajemenUserController::class, 'destroy'])->name('manajemenuser.destroy');
 });
+
+Route::get('/superadmin/profilelembaga', [ProfileLembagaController::class, 'index'])->name('profile-lembaga.index')->middleware(['super_admin']);
+Route::get('/superadmin/profilelembaga/create', [ProfileLembagaController::class, 'create'])->name('profile-lembaga.create')->middleware(['super_admin']);
+Route::post('/superadmin/profilelembaga', [ProfileLembagaController::class, 'store'])->name('profile-lembaga.store')->middleware(['super_admin']);
+Route::get('/superadmin/profilelembaga/{id}', [ProfileLembagaController::class, 'show'])->name('profile-lembaga.show')->middleware(['super_admin']);
+Route::get('/superadmin/profilelembaga/{id}/edit', [ProfileLembagaController::class, 'edit'])->name('profile-lembaga.edit')->middleware(['super_admin']);
+Route::put('/superadmin/profilelembaga/{id}', [ProfileLembagaController::class, 'update'])->name('profile-lembaga.update')->middleware(['super_admin']);
+Route::delete('/superadmin/profilelembaga/{id}', [ProfileLembagaController::class, 'destroy'])->name('profile-lembaga.destroy')->middleware(['super_admin']);
 
 require __DIR__ . '/auth.php';

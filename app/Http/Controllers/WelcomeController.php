@@ -81,5 +81,6 @@ class WelcomeController extends Controller
             ->route('admin.saran.index')
             ->with('success', 'saran dan tanggapan berhasil dihapus.');
     }
+
 }
 

@@ -94,7 +94,7 @@
                                                 <a class="bok" data-bs-toggle="slide" href="{{ route('welcome') }}#testimonials"><span class="side-menu__label">Testimonials</span></a>
                                             </li>
                                             <li class="slide">
-                                                <a class="bok" data-bs-toggle="slide" href="{{ route('ListCompetition') }}"><span class="side-menu__label">Histories</span></a>
+                                                <a class="bok" data-bs-toggle="slide" href="{{ route('about') }}"><span class="side-menu__label">About</span></a>
                                             </li>
                                         </ul>
                                         <div class="header-nav-right d-none d-lg-flex">

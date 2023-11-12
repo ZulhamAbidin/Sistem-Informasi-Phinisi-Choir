@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row align-items-center flex-row-reverse">
             <div class="col-md-12 col-sm-12 text-center">
-                Copyright © <span id="year"></span> <a href="https://www.instagram.com/zlhm.a/"> Zulham Abidin </a> All
+                Copyright © <span id="year"></span> <a href="https://www.instagram.com/zlhm.a/"> UKM PSM UNM Pinisi Choir </a> All
                 rights reserved.
             </div>
         </div>

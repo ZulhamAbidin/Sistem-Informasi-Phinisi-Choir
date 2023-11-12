@@ -14,6 +14,7 @@
     <link href="{{ asset('assets/css/skin-modes.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet " />
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="{{ asset('assets/colors/color1.css') }}" />
+
 </head>
 
 <body class="app sidebar-mini ltr light-mode">
@@ -89,6 +90,10 @@
     <script src="{{ asset('assets/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
     <script src="{{ asset('assets/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
     <script src="{{ asset('assets/plugins/fancyuploder/fancy-uploader.js') }}"></script>
+
+    <!-- INTERNAL SUMMERNOTE Editor JS -->
+    <script src="{{ asset('assets/plugins/summernote/summernote1.js') }}"></script>
+    <script src="{{ asset('assets/js/summernote.js') }}"></script>
     
     @stack('scripts')
 

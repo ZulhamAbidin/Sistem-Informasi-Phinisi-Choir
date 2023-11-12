@@ -240,7 +240,7 @@
                                                             <div class="form-group">
                                                                 <label for="nama_lengkap">Nama Lengkap</label>
                                                                 <input type="text" class="form-control"
-                                                                    name="nama_lengkap" placeholder="Contoh : Arfah Awaluddin T" required>
+                                                                    name="nama_lengkap" placeholder="Contoh : Zulham Abidin" required>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="jabatan">Jabatan</label>
@@ -269,7 +269,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="deskripsi">Deskripsi</label>
-                                                                <textarea class="form-control" name="deskripsi" rows="4" placeholder="Contoh : Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis voluptas, provident aut quidem recusandae atque esse accusamus reiciendis assumenda ea, fugit laudantium commodi, id ratione. Dolore eos laboriosam molestias temporibus alias dolores ea maiores incidunt deleniti odio vero voluptate, exercitationem repellat accusantium quod, perferendis impedit, minima ipsa obcaecati necessitatibus? Sunt minus eos, deserunt architecto ipsam nihil consequuntur asperiores ipsum facere eaque voluptas voluptate similique eum nostrum soluta doloremque, laboriosam commodi velit. Praesentium tenetur nesciunt architecto sed, fugiat possimus perferendis impedit, quaerat facilis voluptate officiis fuga! Voluptatibus harum commodi laborum numquam beatae repellat inventore! Vero doloremque facere modi. Corporis, unde consectetur." ></textarea>
+                                                                <textarea class="form-control" name="deskripsi" rows="4" ></textarea>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="foto">Foto</label>
@@ -313,11 +313,8 @@
         </div>
         <!-- FOOTER CLOSED -->
     </div>
-
-    <script src="{{ asset('assets/js/alert/sweetalert2.all.js') }}"></script>
-    <script src="{{ asset('assets/js/alert/sweetalert2.all.min.js') }}"></script>
-    <script src="{{ asset('assets/js/alert/sweetalert2.js') }}"></script>
-    <script src="{{ asset('assets/js/alert/sweetalert2.min.js') }}"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
 
     <script>

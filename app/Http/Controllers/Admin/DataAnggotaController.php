@@ -53,7 +53,7 @@ class DataAnggotaController extends Controller
             'notelfon' => 'required',
             'motto' => 'required',
             'deskripsi' => 'required',
-            'foto' => 'required',
+            'foto' => '',
         ]);
 
         $anggota = Anggota::find($id);
