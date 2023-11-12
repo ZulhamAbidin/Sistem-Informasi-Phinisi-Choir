@@ -16,16 +16,16 @@ class DatabaseSeeder extends Seeder
     {
         $usersData = [
             [
-                'nama_lengkap' => 'admin',
-                'nra' => 'admin',
-                'password' => bcrypt('admin'), 
+                'nama_lengkap' => 'Anggota Biasa',
+                'nra' => 'G02.002.002',
+                'password' => bcrypt('G02.002.002'), 
                 'role' => 'admin',
                 'status' => 'terverifikasi',
             ],
             [
                 'nama_lengkap' => 'super_admin',
-                'nra' => 'super_admin',
-                'password' => bcrypt('super_admin'), 
+                'nra' => 'G01.001.001',
+                'password' => bcrypt('G01.001.001'), 
                 'role' => 'super_admin',
                 'status' => 'terverifikasi',
             ],

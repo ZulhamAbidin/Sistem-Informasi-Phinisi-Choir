@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('container')
-<div class="main-container container-fluid">
 
+<div class="main-container container-fluid">
     <div class="page-header">
         <h1 class="page-title">Profile Lembaga</h1>
     </div>

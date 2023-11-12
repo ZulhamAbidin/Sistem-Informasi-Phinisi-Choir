@@ -77,8 +77,8 @@
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="mb-3">
-                                <label for="jabatan" class="form-label">Jabatan</label>
-                                <input type="text" class="form-control" id="jabatan" name="jabatan" value="{{ $anggota->jabatan }}"
+                                <label for="nra" class="form-label">NRA</label>
+                                <input type="text" class="form-control" id="nra" name="nra" value="{{ $anggota->nra }}"
                                     readonly>
                             </div>
                         </div>

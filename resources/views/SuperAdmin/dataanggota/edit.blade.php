@@ -29,6 +29,11 @@
                             </div>
 
                             <div class="mb-3 col-12 col-md-6">
+                                <label for="nra" class="form-label">NRA</label>
+                                <input type="text" class="form-control" placeholder="G10.015.2021" id="nra" name="nra" required value="{{ $anggota->nra }}">
+                            </div>
+
+                            <div class="mb-3 col-12 col-md-6">
                                 <label for="jabatan" class="form-label">Jabatan</label>
                                 <input type="text" class="form-control" id="jabatan" name="jabatan" required
                                     value="{{ $anggota->jabatan }}">
@@ -52,15 +57,16 @@
                                     value="{{ $anggota->notelfon }}">
                             </div>
 
+                            <div class="mb-3 col-12 col-md-12">
+                                <label for="deskripsi" class="form-label">Deskripsi</label>
+                                <textarea class="form-control" id="deskripsi" name="deskripsi" required
+                                    value="a">{{ $anggota->deskripsi }}</textarea>
+                            </div>
+
                             <div class="mb-3 col-12 col-md-6">
                                 <label for="motto" class="form-label">Motto</label>
                                 <input type="text" class="form-control" id="motto" name="motto" required
                                     value="{{ $anggota->motto }}">
-                            </div>
-
-                            <div class="mb-3 col-12 col-md-6">
-                                <label for="deskripsi" class="form-label">Deskripsi</label>
-                                <textarea class="form-control" id="deskripsi" name="deskripsi" required value="a">{{ $anggota->deskripsi }}</textarea>
                             </div>
 
                             <div class="mb-3 col-12 col-md-6">

@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link id="style" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
-    {{-- <!-- Referensi ke file CSS SweetAlert -->--}}
     <link href="{{ asset('assets/js/alert/sweetalert2.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/js/alert/sweetalert2.min.css') }}" rel="stylesheet" />
     <title>LOGIN</title>
@@ -20,7 +19,6 @@
         body.authentication-bg-2 {
             background-image: url('https://thumbs.dreamstime.com/b/vector-music-pattern-music-seamless-background-vector-music-pattern-music-seamless-background-vector-illustration-113988721.jpg');
             background-position: center;
-            /* font-family: "Poppins", sans-serif; */
         }
     </style>
     
@@ -55,7 +53,7 @@
 
                             <div class="form-group">
                                 <label class="" for="nra">Nomor Induk Anggota</label>
-                                <input class="form-control @error('nra') is-invalid @enderror" type="text" name="nra" id="nra" required autofocus>
+                                <input class="form-control @error('nra') is-invalid  @enderror" type="text" name="nra" id="nra" placeholder="G10.015.2021" required autofocus>
                                 @error('nra')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -65,7 +63,7 @@
 
                             <div class="form-group">
                                 <label class="" for="password">password</label>
-                                <input class="form-control @error('password') is-invalid @enderror" type="text" name="password" id="password" required autofocus>
+                                <input class="form-control @error('password') is-invalid @enderror" type="password" name="password" id="password" required autofocus>
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -98,8 +96,7 @@
             </div>
         </div>
     </div>
-    
-
+   
     
 </body>
 </html>

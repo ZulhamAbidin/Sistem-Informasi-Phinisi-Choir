@@ -1,7 +1,6 @@
 @extends('layouts.pengunjung.main')
 
 @section('container')
-
     @if ($profiles && $profiles->count() > 0)
         @php
             $profile = $profiles->first();
@@ -25,10 +24,10 @@
                         <div class="row">
                             <div class="col-12 col-md-8 col-xl-8 mx-auto">
                                 <div class="testimonial-owl-landing buynow-landing reveal revealrotate active">
-                                    <div class="row pt-6">
+                                    <div class="row pt-6 pb-6">
                                         <div class="col-md-12 mx-auto">
                                             <div class="card bg-transparent">
-                                                <div class="card-body pt-5 px-7">
+                                                <div class="card-body pt-5 pb-5 px-7">
                                                     <div class="row">
                                                         <div class="col-12 col-md-12 col-lg-12">
                                                             <h1 class="fw-semibold text-white">Hadirkan Phisi Choir Dalam
@@ -43,8 +42,8 @@
                                                             </p>
                                                         </div>
                                                         <div class="col-12 col-md-12 col-lg-12 text-end my-auto">
-                                                            <a href="https://themeforest.net/item/sash-bootstrap-5-admin-dashboard-template/35183671"
-                                                                target="_blank" class="btn btn-pink w-lg pt-2 pb-2"><i
+                                                            <a href="https://wa.me/{{ $profile->noponsel }}" target="_blank"
+                                                                class="btn btn-pink w-lg pt-2 pb-2"><i
                                                                     class="fa fa-whatsapp me-2"></i>Hubungi Kami
                                                             </a>
                                                         </div>
@@ -67,7 +66,7 @@
                                     <h2 class="text-center fw-semibold mb-0 px-2">Hubungi Kami <span
                                             class="text-primary">US.</span>
                                     </h2>
-                                    <div class="card-body p-5 pb-6 text-dark">
+                                    <div class="card-body pt-6 pb-6 text-dark">
                                         <div class="statistics-info p-4">
                                             <div class="row justify-content-center">
                                                 <div class="col-lg-9">
@@ -104,7 +103,9 @@
                                                                                     </div>
                                                                                     <h4 class="mb-2 fw-semibold">
                                                                                         Phone </h4>
-                                                                                    <p class="mb-0">{{  $profile->noponsel  }} <br> ( HUMAS ) </p>
+                                                                                    <p class="mb-0">
+                                                                                        {{ $profile->noponsel }} <br> (
+                                                                                        HUMAS ) </p>
 
                                                                                 </div>
                                                                             </div>
@@ -164,9 +165,7 @@
 
             </div>
         </div>
-
     @else
-    <p>Tidak ada data profil lembaga.</p>
+        <p>Tidak ada data profil lembaga.</p>
     @endif
-
-    @endsection
+@endsection

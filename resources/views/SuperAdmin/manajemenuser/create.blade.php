@@ -40,7 +40,7 @@
                 
                         <div class="mb-3 col-12 col-md-4">
                             <label for="nra" class="form-label">NRA</label>
-                            <input type="number" class="form-control @error('nra') is-invalid @enderror" id="nra" name="nra" required
+                            <input type="teks" placeholder="G10.015.2021" class="form-control @error('nra') is-invalid @enderror" id="nra" name="nra" required
                                 value="{{ old('nra') }}">
                             @error('nra')
                             <div class="invalid-feedback">{{ $message }}</div>

@@ -34,6 +34,7 @@ class DataAnggotaController extends Controller
     {
         $validatedData = $request->validate([
             'nama_lengkap' => 'nullable|string',
+            'nra' => 'required',
             'jabatan' => 'nullable|string',
             'generasi' => 'nullable|string',
             'alamat' => 'nullable|string',

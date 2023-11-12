@@ -54,7 +54,7 @@
                             <div class="form-group">
                                 <label for="nra">NRA (Nomor Registrasi Anggota)</label>
                                 <input class="form-control @error('nra') is-invalid @enderror" type="text"
-                                    name="nra" id="nra" required>
+                                    name="nra" id="nra" placeholder="G10.015.2021" required>
                                 @error('nra')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

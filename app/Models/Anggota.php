@@ -12,6 +12,7 @@ class Anggota extends Model
         'nama_lengkap',
         'jabatan',
         'generasi',
+        'nra',
         'alamat',
         'notelfon',
         'motto',

@@ -165,6 +165,14 @@
                                                                             readonly>
                                                                     </div>
                                                                 </div>
+
+                                                                <div class="col-12 col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="nra" class="form-label">nra</label>
+                                                                        <input type="text" class="form-control" id="nra" name="nra" value="{{ $anggota->nra }}" readonly>
+                                                                    </div>
+                                                                </div>
+
                                                                 <div class="col-12 col-md-6">
                                                                     <div class="mb-3">
                                                                         <label for="generasi" class="form-label">Generasi</label>
@@ -186,7 +194,7 @@
                                                                             readonly>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-12 col-md-6">
+                                                                <div class="col-12 col-md-12">
                                                                     <div class="mb-3">
                                                                         <label for="motto" class="form-label">Motto</label>
                                                                         <input type="text" class="form-control" id="motto" name="motto" value="{{ $anggota->motto }}" readonly>
@@ -246,6 +254,10 @@
                                                                 <label for="jabatan">Jabatan</label>
                                                                 <input type="text" class="form-control"
                                                                     name="jabatan" placeholder="Contoh : Sekretaris Umum" required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="nra">NRA</label>
+                                                                <input type="text" class="form-control" name="nra" placeholder="G10.015.2021" required>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="generasi">Generasi</label>
@@ -319,10 +331,7 @@
 
     <script>
         function confirmLogout(event) {
-        // Menghentikan pemrosesan formulir bawaan
         event.preventDefault();
-    
-        // Menampilkan pesan konfirmasi SweetAlert
         Swal.fire({
             title: 'Alert',
             text: 'Anda yakin ingin logout?',
@@ -331,14 +340,12 @@
             confirmButtonText: 'Exit',
             cancelButtonText: 'Stay on the page',
             customClass: {
-                // Menambahkan kelas "small" untuk membuat alert lebih kecil
                 popup: 'swal2-small',
                 title: 'swal2-title-small',
                 content: 'swal2-content-small'
             }
         }).then((result) => {
             if (result.isConfirmed) {
-                // Jika pengguna memilih "Exit," maka kirimkan formulir logout
                 document.getElementById('logout-form').submit();
             }
         });
@@ -346,7 +353,8 @@
     </script>
 
     <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
-    <script type="text/javascript">
+   
+   <script type="text/javascript">
         $(document).ready(function() {
             $.ajax({
                 url: '{{ route('get.user.data') }}',
@@ -354,11 +362,10 @@
                 dataType: 'json',
                 success: function(response) {
                     var anggotaData = response.anggota;
-
-                    // Tampilkan data dalam elemen dengan ID sesuai dengan field
                     $('#nama_lengkap').text(anggotaData.nama_lengkap);
                     $('#jabatan').text(anggotaData.jabatan);
                     $('#generasi').text(anggotaData.generasi);
+                    $('#nra').text(anggotaData.nra);
                     $('#alamat').text(anggotaData.alamat);
                     $('#notelfon').text(anggotaData.notelfon);
                     $('#motto').text(anggotaData.motto);
@@ -366,7 +373,6 @@
                     $('#foto').attr('src', anggotaData.foto);
                 },
                 error: function(xhr) {
-                    // Handle kesalahan jika terjadi
                     console.log('Error:', xhr);
                 }
             });
@@ -378,18 +384,13 @@
 
     <script type="text/javascript">
         function openEditModal(anggotaId) {
-            // Di sini Anda dapat mengisi formulir dengan data anggota menggunakan AJAX
             $.ajax({
-                url: "/admin/" + anggotaId + "/edit", // Ganti URL sesuai dengan rute yang sesuai di Laravel
+                url: "/admin/" + anggotaId + "/edit", 
                 type: "GET",
                 dataType: "json",
                 success: function(data) {
-                    // Isi formulir dengan data anggota yang diterima dari server
                     $("#editForm input[name='nama_lengkap']").val(data.nama_lengkap);
                     $("#editForm input[name='jabatan']").val(data.jabatan);
-                    // Sisipkan field lainnya disini
-
-                    // Tampilkan modal
                     $('#editModal').modal('show');
                 }
             });

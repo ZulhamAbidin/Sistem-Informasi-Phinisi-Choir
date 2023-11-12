@@ -210,6 +210,23 @@
     </div>
 
     <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+    <script>
+        function formatNRA(input) {
+            // Hapus karakter selain "G" dan angka
+            input.value = input.value.replace(/[^G0-9]/gi, '');
+    
+            // Pertahankan maksimal dua karakter pertama (huruf "G" dan dua angka)
+            let prefix = input.value.substr(0, 2);
+            let suffix = input.value.substr(2);
+    
+            // Menambahkan tanda "." setiap tiga digit pada angka berikutnya
+            suffix = suffix.replace(/(\d)(?=(\d{3})+$)/g, '$1.');
+    
+            // Gabungkan kembali
+            input.value = prefix + suffix;
+        }
+    </script>
     
     @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>

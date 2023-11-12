@@ -47,6 +47,7 @@ class DataAnggotaController extends Controller
     {
         $request->validate([
             'nama_lengkap' => 'required',
+            'nra' => 'required',
             'jabatan' => 'required',
             'generasi' => 'required',
             'alamat' => 'required',
@@ -61,8 +62,9 @@ class DataAnggotaController extends Controller
         if (!$anggota) {
             return redirect()->route('dataanggota.index')->with('error', 'Anggota tidak ditemukan.');
         }
-
+        
         $anggota->nama_lengkap = $request->input('nama_lengkap');
+        $anggota->nra = $request->input('nra');
         $anggota->jabatan = $request->input('jabatan');
         $anggota->generasi = $request->input('generasi');
         $anggota->alamat = $request->input('alamat');
@@ -94,6 +96,7 @@ class DataAnggotaController extends Controller
     {
         $request->validate([
             'nama_lengkap' => 'required',
+            'nra' => 'required',
             'jabatan' => 'required',
             'generasi' => 'required',
             'alamat' => 'required',
@@ -106,6 +109,7 @@ class DataAnggotaController extends Controller
         $anggota = new Anggota();
 
         $anggota->nama_lengkap = $request->input('nama_lengkap');
+        $anggota->nra = $request->input('nra');
         $anggota->jabatan = $request->input('jabatan');
         $anggota->generasi = $request->input('generasi');
         $anggota->alamat = $request->input('alamat');
