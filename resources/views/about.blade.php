@@ -176,6 +176,8 @@
                                                 referrerpolicy="no-referrer-when-downgrade"></iframe>
                                             </div>
                                         </div>
+                                        <a href="https://www.google.com/maps/place/Pinisi+Choir" target="_blank" class="btn btn-primary mt-3">Menuju Google
+                                            Maps</a>
                                     </div>
                                 </div>
                             </div>
