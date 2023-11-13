@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\SaranController;
 use App\Http\Controllers\DataAnggotaController;
 use App\Http\Controllers\Admin\ApprovalController;
 use App\Http\Controllers\Admin\CarouselController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PostinganController;
 use App\Http\Controllers\Admin\AchievementController;
 use App\Http\Controllers\Admin\CompetitionController;
@@ -24,9 +25,18 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::post('/submit-saran', [WelcomeController::class, 'submitSaran'])->name('submit-saran');
 Route::get('/about', [ProfileLembagaController::class, 'about'])->name('about');
 
+//DASHBOARD
+Route::get('/SuperAdmin/dashboard', [DashboardController::class, 'index'])
+    ->name('admin.dashboard')
+    ->middleware(['super_admin']);
+
 // Menampilkan daftar saran
-Route::get('/SuperAdmin/saran', [WelcomeController::class, 'indexsaran'])->name('admin.saran.index')->middleware(['super_admin']);
-Route::delete('/SuperAdmin/saran/{id}', [WelcomeController::class, 'destroy'])->name('admin.saran.destroy')->middleware(['super_admin']);
+Route::get('/SuperAdmin/saran', [WelcomeController::class, 'indexsaran'])
+    ->name('admin.saran.index')
+    ->middleware(['super_admin']);
+Route::delete('/SuperAdmin/saran/{id}', [WelcomeController::class, 'destroy'])
+    ->name('admin.saran.destroy')
+    ->middleware(['super_admin']);
 
 //INPUT DATA ANGGOTA PENGURUS ROLE = USER ADMIN
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -61,8 +71,12 @@ Route::get('/dashboard', function () {
 Route::prefix('admin')
     ->name('admin.')
     ->group(function () {
-        Route::post('users/{user}/update-status', [ApprovalController::class, 'updateStatus'])->name('admin.users.updateStatus')->middleware(['super_admin']);
-        Route::get('users', [ApprovalController::class, 'index'])->name('users.index')->middleware(['super_admin']);
+        Route::post('users/{user}/update-status', [ApprovalController::class, 'updateStatus'])
+            ->name('admin.users.updateStatus')
+            ->middleware(['super_admin']);
+        Route::get('users', [ApprovalController::class, 'index'])
+            ->name('users.index')
+            ->middleware(['super_admin']);
     });
 
 Route::middleware(['auth', 'super_admin'])->group(function () {
@@ -109,7 +123,6 @@ Route::middleware(['super_admin'])->group(function () {
     Route::delete('/admin/postingan/{id}', [PostinganController::class, 'destroy'])->name('admin.postingan.destroy');
     Route::get('/admin/postingan/{id}/edit', [PostinganController::class, 'edit'])->name('admin.postingan.edit');
     Route::put('/admin/postingan/{id}', [PostinganController::class, 'update'])->name('admin.postingan.update');
-
 });
 
 // TAMBAH SLIDER PADA HALAMAN HOME  ROLE = USER SUPER ADMIN
@@ -134,31 +147,57 @@ Route::prefix('SuperAdmin/home')->group(function () {
         ->middleware(['super_admin']);
 });
 
+//TESTIMONIALS
+Route::get('/SuperAdmin/testimonials', [TestimonialsController::class, 'index'])
+    ->name('testimonials.index')
+    ->middleware(['super_admin']);
+Route::get('/SuperAdmin/testimonials/create', [TestimonialsController::class, 'create'])
+    ->name('testimonials.create')
+    ->middleware(['super_admin']);
+Route::post('/SuperAdmin/testimonials', [TestimonialsController::class, 'store'])
+    ->name('testimonials.store')
+    ->middleware(['super_admin']);
+Route::get('/SuperAdmin/testimonials/{id}/edit', [TestimonialsController::class, 'edit'])
+    ->name('testimonials.edit')
+    ->middleware(['super_admin']);
+Route::put('/SuperAdmin/testimonials/{id}', [TestimonialsController::class, 'update'])
+    ->name('testimonials.update')
+    ->middleware(['super_admin']);
+Route::delete('/SuperAdmin/testimonials/{id}', [TestimonialsController::class, 'destroy'])
+    ->name('testimonials.destroy')
+    ->middleware(['super_admin']);
 
-    //TESTIMONIALS
-    Route::get('/SuperAdmin/testimonials', [TestimonialsController::class, 'index'])->name('testimonials.index')->middleware(['super_admin']);
-    Route::get('/SuperAdmin/testimonials/create', [TestimonialsController::class, 'create'])->name('testimonials.create')->middleware(['super_admin']);
-    Route::post('/SuperAdmin/testimonials', [TestimonialsController::class, 'store'])->name('testimonials.store')->middleware(['super_admin']);
-    Route::get('/SuperAdmin/testimonials/{id}/edit', [TestimonialsController::class, 'edit'])->name('testimonials.edit')->middleware(['super_admin']);
-    Route::put('/SuperAdmin/testimonials/{id}', [TestimonialsController::class, 'update'])->name('testimonials.update')->middleware(['super_admin']);
-    Route::delete('/SuperAdmin/testimonials/{id}', [TestimonialsController::class, 'destroy'])->name('testimonials.destroy')->middleware(['super_admin']);
-
-
-    Route::prefix('SuperAdmin/manajemenuser')->middleware(['super_admin'])->group(function () {
+Route::prefix('SuperAdmin/manajemenuser')
+    ->middleware(['super_admin'])
+    ->group(function () {
         Route::get('list', [ManajemenUserController::class, 'index'])->name('manajemenuser.index');
         Route::get('list/create', [ManajemenUserController::class, 'create'])->name('manajemenuser.create');
         Route::post('list', [ManajemenUserController::class, 'store'])->name('manajemenuser.store');
         Route::get('list/{id}/edit', [ManajemenUserController::class, 'edit'])->name('manajemenuser.edit');
         Route::put('list/{id}', [ManajemenUserController::class, 'update'])->name('manajemenuser.update');
         Route::delete('list/{id}', [ManajemenUserController::class, 'destroy'])->name('manajemenuser.destroy');
-});
+    });
 
-Route::get('/superadmin/profilelembaga', [ProfileLembagaController::class, 'index'])->name('profile-lembaga.index')->middleware(['super_admin']);
-Route::get('/superadmin/profilelembaga/create', [ProfileLembagaController::class, 'create'])->name('profile-lembaga.create')->middleware(['super_admin']);
-Route::post('/superadmin/profilelembaga', [ProfileLembagaController::class, 'store'])->name('profile-lembaga.store')->middleware(['super_admin']);
-Route::get('/superadmin/profilelembaga/{id}', [ProfileLembagaController::class, 'show'])->name('profile-lembaga.show')->middleware(['super_admin']);
-Route::get('/superadmin/profilelembaga/{id}/edit', [ProfileLembagaController::class, 'edit'])->name('profile-lembaga.edit')->middleware(['super_admin']);
-Route::put('/superadmin/profilelembaga/{id}', [ProfileLembagaController::class, 'update'])->name('profile-lembaga.update')->middleware(['super_admin']);
-Route::delete('/superadmin/profilelembaga/{id}', [ProfileLembagaController::class, 'destroy'])->name('profile-lembaga.destroy')->middleware(['super_admin']);
+Route::get('/superadmin/profilelembaga', [ProfileLembagaController::class, 'index'])
+    ->name('profile-lembaga.index')
+    ->middleware(['super_admin']);
+Route::get('/superadmin/profilelembaga/create', [ProfileLembagaController::class, 'create'])
+    ->name('profile-lembaga.create')
+    ->middleware(['super_admin']);
+Route::post('/superadmin/profilelembaga', [ProfileLembagaController::class, 'store'])
+    ->name('profile-lembaga.store')
+    ->middleware(['super_admin']);
+Route::get('/superadmin/profilelembaga/{id}', [ProfileLembagaController::class, 'show'])
+    ->name('profile-lembaga.show')
+    ->middleware(['super_admin']);
+Route::get('/superadmin/profilelembaga/{id}/edit', [ProfileLembagaController::class, 'edit'])
+    ->name('profile-lembaga.edit')
+    ->middleware(['super_admin']);
+Route::put('/superadmin/profilelembaga/{id}', [ProfileLembagaController::class, 'update'])
+    ->name('profile-lembaga.update')
+    ->middleware(['super_admin']);
+Route::delete('/superadmin/profilelembaga/{id}', [ProfileLembagaController::class, 'destroy'])
+    ->name('profile-lembaga.destroy')
+    ->middleware(['super_admin']);
 
 require __DIR__ . '/auth.php';

@@ -33,10 +33,9 @@ class LoginController extends Controller
             if ($user->role === 'admin') {
                 return redirect()->route('admin.index');
             } elseif ($user->role === 'super_admin') {
-                return redirect()->route('super_admin.index');
+                return redirect()->route('admin.dashboard');
             }
         } elseif ($user->status === 'belum_terverifikasi') {
-            // Jika status "belum_terverifikasi," arahkan kembali ke halaman login dengan pesan kesalahan.
             return redirect()->route('login')->with('error', 'Admin belum mengkonfirmasi pendaftaran Anda sebagai anggota');
         }
     }
