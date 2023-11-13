@@ -157,6 +157,29 @@
                                     </div>
                                 </div>
                             </div>
+                       
+                        </div>
+                    </div>
+
+                    <div class="bg-image-landing section pb-0" id="Contact">
+                        <div class="container">
+                            <div class="">
+                                <div class="card card-shadow reveal active">
+                                    <h4 class="text-center fw-semibold">Maps</h4>
+                                    <span class="landing-title"></span>
+                                    <h2 class="text-center fw-semibold mb-0 px-2">Mari Berkunjung Ke Tempat Kami</h2>
+                                    <div class="card-body pt-6 pb-6 text-dark">
+                                        <div class="statistics-info p-4">
+                                            <iframe
+                                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3973.597102046322!2d119.43375837409967!3d-5.168327852190021!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dbee329d551a545%3A0x3798c730fc0df0a0!2sPinisi%20Choir!5e0!3m2!1sid!2sid!4v1699896890735!5m2!1sid!2sid"
+                                                width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    
                         </div>
                     </div>
 
