@@ -45,18 +45,11 @@
                                         </select>
                                     </div>
                                 </div>
-
-                                <div class="col-md-6 d-none">
-                                    <div class="form-group">
-                                        <label for="kategori">Kategori</label>
-                                        <input type="text" name="kategori" class="form-control" value="news" readonly>
-                                    </div>
-                                </div>
                             
-                                <div class="col-md-6 d-none">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="sumber">Sumber</label>
-                                        <input type="text" name="sumber" class="form-control" value="Pinisi Choir" readonly>
+                                        <input type="text" name="sumber" class="form-control" value="">
                                     </div>
                                 </div>
                                 
@@ -82,7 +75,7 @@
                                     </div>
                                 </div>
                             
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="deskripsi">Deskripsi</label>
                                         <textarea name="deskripsi" class="form-control" rows="4"required></textarea>

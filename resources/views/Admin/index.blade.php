@@ -8,8 +8,8 @@
     <meta name="description" content="PSM UNM">
     <meta name="Zulham Abidin" content="PSM">
     <meta name="keywords" content="PADUAN SUARA UNM.">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/brand/favicon.ico') }}" />
-    <title>DATA PENGURUS</title>
+    <title>DATA ANGGOTA.</title>
+    <link rel="icon" href="{{ asset('assets/images/brand/logo-2.png')}}">
     <link id="style" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/dark-style.css') }}" rel="stylesheet" />
@@ -123,7 +123,7 @@
                                         
                                                                                 <div class="profile-img-1">
                                                                                     @if ($anggota->foto)
-                                                                                    <img src="{{ asset('storage/uploads/' . $anggota->foto) }}" alt="img">
+                                                                                    <img src="{{ asset('storage/uploads/' . $anggota->foto) }}" alt="img" style="width: 100px; height: 100px; object-fit: cover;">
                                                                                     @endif
                                                                                 </div>
                                                                                 <div class="profile-img-content text-dark text-start">

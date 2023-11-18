@@ -14,12 +14,12 @@ class DataAnggotaController extends Controller
     {
         $user = Auth::user();
         $anggota = $user->anggota;
-        return view('admin.index', compact('anggota'));
+        return view('Admin.index', compact('anggota'));
     }
 
     public function create()
     {
-        return view('admin.index');
+        return view('Admin.index');
     }
 
     public function edit()
@@ -27,7 +27,7 @@ class DataAnggotaController extends Controller
         $user = Auth::user();
         $anggota = $user->anggota;
         $editMode = $anggota ? true : false;
-        return view('admin.index', compact('anggota', 'editMode'));
+        return view('Admin.index', compact('anggota', 'editMode'));
     }
 
     public function store(Request $request)

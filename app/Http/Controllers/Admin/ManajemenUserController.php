@@ -24,7 +24,7 @@ class ManajemenUserController extends Controller
     {
         $request->validate([
             'nama_lengkap' => 'required',
-            'nra' => 'required|numeric|unique:users',
+            'nra' => 'required|unique:users',
             'password' => 'required',
             'role' => 'required|in:admin,super_admin',
             'status' => 'required|in:terverifikasi,belum_terverifikasi',

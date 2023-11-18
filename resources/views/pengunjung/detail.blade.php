@@ -1,11 +1,12 @@
 @extends('layouts.pengunjung.main')
 
 @section('container')
-    <div class="main-content mt-0">
+    <div class="main-content">
         <div class="side-app">
             <div class="main-container container-fluid">
 
                 <div class="container mt-4 pt-5">
+                    <br>
                     <div class="row">
 
                         {{-- POSTINGAN DETAIL  --}}
@@ -79,8 +80,7 @@
 
                                         <a href="javascript:void(0);" class="d-flex me-4 mb-2"><i
                                                 class="fe fe-map fs-16 me-1 p-3 bg-secondary-transparent text-success bradius"></i>
-                                            <div class="mt-3 ms-1 text-muted font-weight-semibold">
-                                                {{ $beritadetail->lokasi }}</div>
+                                            <div class="mt-3 ms-1 text-muted font-weight-semibold">{{ Illuminate\Support\Str::limit($beritadetail->lokasi, 20) }}</div>
                                         </a>
                                         <a href="javascript:void(0);" class="d-flex me-4 mb-2"><i
                                                 class="fe fe-calendar fs-16 me-1 p-3 bg-secondary-transparent text-success bradius"></i>
@@ -97,13 +97,13 @@
                                             <div class="mt-3 ms-1 text-muted font-weight-semibold">Like {{ $beritadetail->jumlah_suka }} </div>
                                         </a> --}}
                                         <!-- HTML -->
-                                        <a href="{{ route('pengunjung.news.like', ['id' => $beritadetail->id]) }}"
-                                            class="d-flex me-4 mb-2" id="likeButton">
-                                            <i
-                                                class="fe fe-heart fs-16 me-1 p-3 bg-secondary-transparent text-success bradius"></i>
-                                            <div class="mt-3 ms-1 text-muted font-weight-semibold">Like
-                                                {{ $beritadetail->jumlah_suka }} </div>
-                                        </a>
+                                      <form id="likeForm" action="{{ route('pengunjung.news.like', ['id' => $beritadetail->id]) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="d-flex me-4 mb-2" id="likeButton" style="border: none; background: none;">
+                                            <i class="fe fe-heart fs-16 me-1 p-3 bg-secondary-transparent text-success bradius"></i>
+                                            <div class="mt-3 ms-1 text-muted font-weight-semibold">Like {{ $beritadetail->jumlah_suka }}</div>
+                                        </button>
+                                    </form>
                                         <a href="javascript:void(0);" class="d-flex me-4 mb-2"><i
                                                 class="fe fe-award fs-16 me-1 p-3 bg-secondary-transparent text-success bradius"></i>
                                             <div class="mt-3 ms-1 text-muted font-weight-semibold">Rating:
@@ -135,9 +135,9 @@
                                 <div class="card-header">
                                     <div class="card-title">Postingan Lainya</div>
                                 </div>
-                                <div class="card-body">
+                                @foreach ($postinganLainnya as $postingan)
+                                <div class="card-body pb-2">
                                     <div class="">
-                                        @foreach ($postinganLainnya as $postingan)
                                             <div class="d-flex overflow-visible">
                                                 <a href="{{ route('pengunjung.news.show', $postingan->id) }}"
                                                     class="card-aside-column br-5 cover-image"
@@ -147,14 +147,13 @@
                                                     <h5><a
                                                             href="{{ route('pengunjung.news.show', $postingan->id) }}">{{ $postingan->judul_postingan }}.</a>
                                                     </h5>
-                                                    <div class="text-muted">{{ Str::limit($postingan->deskripsi, 50) }}.
+                                                    <div class="text-muted">{{ $postingan->judul_postingan }}.
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endforeach
-
                                     </div>
                                 </div>
+                                @endforeach
                             </div>
 
 
@@ -354,13 +353,14 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-xs-12">
-                                            <textarea class="form-control" id="isi_komentar" name="isi_komentar">{{ old('isi_komentar') }}</textarea>
+                                            <textarea class="form-control" placeholder="isi komentar"  id="isi_komentar" name="isi_komentar">{{ old('isi_komentar') }}</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-xs-12">
+                                            <small>Rating</small>
                                             <div class="rating-stars block" id="rating-1" style="cursor: pointer;">
-                                                <input type="hidden" id="rating-input" name="rating"
+                                                <input type="hidden" id="rating-input" name="rating" required
                                                     value="{{ old('rating') }}" min="1">
                                                 <i class="fa fa-star" data-value="1"
                                                     style="color: rgb(236, 240, 241);"></i>

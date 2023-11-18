@@ -100,12 +100,13 @@
 
                     </ul>
 
-                
                 </li>
+
+                
                 
 
                 {{-- SUB SUB MENU POSTINGAN --}}
-                <li class="slide">
+                {{-- <li class="slide">
                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i class="side-menu__icon fa fa-pencil"></i>
                     <span class="side-menu__label">Postingan</span><i class="angle fe fe-chevron-right"></i></a>
 
@@ -141,7 +142,7 @@
                         </li>
                     </ul>
                     
-                </li>
+                </li> --}}
           
                 {{-- <li class="slide">
                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
@@ -178,6 +179,18 @@
                         <li><a href="{{ route('admin.postingan.create') }}" class="slide-item">Create Competition</a></li>
                     </ul>
                 </li> --}}
+
+                <li class="slide">
+                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
+                        <i class="side-menu__icon fa fa-pencil"></i><span class="side-menu__label">Postingan</span>
+                        <i class="angle fe fe-chevron-right"></i>
+                    </a>
+                    <ul class="slide-menu">
+                        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
+                        <li><a href="{{ route('admin.postingan.index') }}" class="slide-item">List Postingan</a></li>
+                        <li><a href="{{ route('admin.postingan.create') }}" class="slide-item">Tambah Postingan</a></li>
+                    </ul>
+                </li>
 
                 <li class="slide">
                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">

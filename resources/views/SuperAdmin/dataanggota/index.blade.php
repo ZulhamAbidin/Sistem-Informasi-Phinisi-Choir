@@ -73,53 +73,46 @@
 
         </div>
 
-        <div class="row row-cols-4">
-            @foreach ($anggota as $anggotas)
-                <div class="col-md-6 col-xl-4 col-sm-6">
-                    <div class="card">
-                        <div class="product-grid6">
-                            <div class="product-image6 p-5">
-                                <ul class="icons">
-
-                                    <li>
-                                        <a href="{{ route('detail.anggota', ['id' => $anggotas->id]) }}"
-                                            class="btn btn-primary"> <i class="fe fe-eye"> </i> </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="{{ route('dataanggota.edit', ['id' => $anggotas->id]) }}" class="btn btn-success">
-                                            <i class="fe fe-edit"></i>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <button class="btn btn-danger" onclick="showCustomAlert({{ $anggotas->id }})">
-                                            <i class="fe fe-x"></i>
-                                        </button>
-                                    </li>
-                                    
-                                </ul>
-                                <a href="{{ route('detail.anggota', ['id' => $anggotas->id]) }}">
-                                    <img class="rounded-circle d-block mx-auto"
-                                        style="width: 100px; height: 100px; object-fit: cover;"
-                                        src="{{ asset('storage/uploads/' . $anggotas->foto) }}" alt="img">
-                                </a>
-                            </div>
-                            <div class="card-body pt-0 pb-0">
-                                <div class="product-content text-center">
-                                    <h1 class="title fw-bold fs-20"><a href="#">{{ $anggotas->nama_lengkap }}</a></h1>
-                                    <p class="">{{ $anggotas->nama_lengkap }} </p>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        @foreach ($anggota as $anggotas)
+                        <div class="col-12 col-md-6 col-lg-4">
+        
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <div class="media mt-0">
+                                        <div class="media-user me-2">
+                                            <div class=""><img alt="" class="rounded-circle avatar avatar-md" style="width: 50px; height: 50px; object-fit: cover;"
+                                                    src="{{ asset('storage/uploads/' . $anggotas->foto) }}"></div>
+                                        </div>
+                                        <div class="media-body">
+                                            <h6 class="mb-0 mt-1">{{ $anggotas->nama_lengkap }}</h6>
+                                            <small class="text-muted">{{ $anggotas->jabatan }}</small><br>
+                                            <small class="text-muted">{{ $anggotas->created_at->format('d F Y H:i') }}</small>
+                                        </div>
+                                    </div>
+        
+                                    <div class="ms-auto">
+                                        <div class="dropdown show">
+                                            <a class="new option-dots" href="JavaScript:void(0);" data-bs-toggle="dropdown">
+                                                <span class=""><i class="fe fe-more-vertical"></i></span>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item" href="{{ route('dataanggota.edit', ['id' => $anggotas->id]) }}">Edit  Anggota </a>
+                                                <a class="dropdown-item" href="{{ route('detail.anggota', ['id' => $anggotas->id]) }}">Lihat Detail  Anggota </a>
+                                                <button class="dropdown-item" onclick="showCustomAlert({{ $anggotas->id }})">Hapus  Anggota</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="card-footer text-center">
-                                <a href="{{ route('detail.anggota', ['id' => $anggotas->id]) }}"
-                                    class="btn btn-primary mb-1"><i class="fe fe fe-eye mx-2"></i>Lihat Detail</a>
-                            </div>
                         </div>
+                        @endforeach
                     </div>
                 </div>
-            @endforeach
-
+            </div>
         </div>
 
         <div class="card-footer">

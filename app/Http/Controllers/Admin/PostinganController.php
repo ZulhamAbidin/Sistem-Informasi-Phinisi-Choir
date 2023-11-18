@@ -13,8 +13,8 @@ use RealRashid\SweetAlert\Facades\Alert;
 class PostinganController extends Controller
 {
     public function index()
-    {
-        $postingans = Postingan::where('kategori', 'news')->paginate(3);
+    {   
+        $postingans = Postingan::paginate(3);
         $postingans->transform(function ($postingan) {
             $postingan->selisihWaktu = Carbon::parse($postingan->created_at)->diffForHumans();
             return $postingan;

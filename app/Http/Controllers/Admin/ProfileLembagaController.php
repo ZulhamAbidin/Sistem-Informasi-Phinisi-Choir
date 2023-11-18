@@ -5,17 +5,18 @@ namespace App\Http\Controllers\Admin;
 use DOMDocument;
 use Illuminate\Http\Request;
 use App\Models\ProfileLembaga;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 
 class ProfileLembagaController extends Controller
 {
     public function index()
     {
         $profiles = ProfileLembaga::first();
-        return view('SuperAdmin.ProfileLembaga.index', compact('profiles'));
+        return view('SuperAdmin.profilelembaga.index', compact('profiles'));
     }
 
     public function create()
@@ -41,30 +42,18 @@ class ProfileLembagaController extends Controller
             $src = $img->getAttribute('src');
 
             if ($src) {
-                $srcParts = explode(';', $src);
+                $srcParts = explode(',', $src);
 
                 if (isset($srcParts[1])) {
-                    $data = base64_decode(explode(',', $srcParts[1])[1]);
-
-                    // Cek panjang maksimum
-                    if (strlen($data) > 20000000) {
-                        Alert::error('Error', 'Panjang gambar terlalu besar.');
-                        return redirect()
-                            ->back()
-                            ->withInput();
-                    }
-
-                    // Simpan gambar seperti yang Anda lakukan sebelumnya
-                    $image_name = '/upload/' . time() . $key . '.png';
-                    file_put_contents(public_path() . $image_name, $data);
-
+                    $data = base64_decode($srcParts[1]);
+                    $image_name = 'uploads/' . time() . $key . '.png';
+                    Storage::put($image_name, $data);
                     $img->removeAttribute('src');
-                    $img->setAttribute('src', $image_name);
+                    $img->setAttribute('src', asset('storage/' . $image_name));
                 }
             }
         }
 
-        // Validasi tidak berhasil
         if ($validator->fails()) {
             Alert::error('Error', 'Panjang gambar dan teks terlalu besar. Pastikan gambar dan teks memiliki ukuran yang sesuai untuk memastikan tampilan halaman website yang baik.');
             return redirect()
@@ -73,7 +62,6 @@ class ProfileLembagaController extends Controller
                 ->withInput();
         }
 
-        // Simpan data ke database
         $body = $dom->saveHTML();
         ProfileLembaga::create([
             'judul' => $request->judul,
@@ -99,14 +87,12 @@ class ProfileLembagaController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Validasi input
         $validator = Validator::make($request->all(), [
             'noponsel' => 'required',
             'body' => 'required',
-            'judul' => '', // Ubah sesuai kebutuhan
+            'judul' => '',
         ]);
 
-        // Cek apakah data profile ditemukan
         $profile = ProfileLembaga::find($id);
 
         if (!$profile) {
@@ -114,7 +100,6 @@ class ProfileLembagaController extends Controller
             return redirect()->route('profile-lembaga.index');
         }
 
-        // Proses update
         $dom = new \DOMDocument();
         libxml_use_internal_errors(true);
 
@@ -126,30 +111,18 @@ class ProfileLembagaController extends Controller
             $src = $img->getAttribute('src');
 
             if ($src) {
-                $srcParts = explode(';', $src);
+                $srcParts = explode(',', $src);
 
                 if (isset($srcParts[1])) {
-                    $data = base64_decode(explode(',', $srcParts[1])[1]);
-
-                    // Cek panjang maksimum
-                    if (strlen($data) > 20000000) {
-                        Alert::error('Error', 'Panjang gambar terlalu besar.');
-                        return redirect()
-                            ->back()
-                            ->withInput();
-                    }
-
-                    // Simpan gambar seperti yang Anda lakukan sebelumnya
-                    $image_name = '/upload/' . time() . $key . '.png';
-                    file_put_contents(public_path() . $image_name, $data);
-
+                    $data = base64_decode($srcParts[1]);
+                    $image_name = 'uploads/' . time() . $key . '.png';
+                    Storage::put($image_name, $data);
                     $img->removeAttribute('src');
-                    $img->setAttribute('src', $image_name);
+                    $img->setAttribute('src', asset('storage/' . $image_name));
                 }
             }
         }
 
-        // Validasi tidak berhasil
         if ($validator->fails()) {
             Alert::error('Error', 'Panjang gambar dan teks terlalu besar. Pastikan gambar dan teks memiliki ukuran yang sesuai untuk memastikan tampilan halaman website yang baik.');
             return redirect()
@@ -158,7 +131,6 @@ class ProfileLembagaController extends Controller
                 ->withInput();
         }
 
-        // Update data profile
         $profile->update([
             'judul' => $request->judul,
             'noponsel' => $request->noponsel,

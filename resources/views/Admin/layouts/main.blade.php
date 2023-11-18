@@ -7,8 +7,8 @@
     <meta name="description" content="Zulham Abidin">
     <meta name="author" content="Zulham Abidin">
     <meta name="keywords" content="Zulham Abidin">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/brand/logo-2.png') }}" />
     <title>ANGGOTA</title>
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/brand/favicon.ico')}}" />
     <link id="style" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" />
     <link href="{{ asset('assets/css/style.css')}}" rel="stylesheet" />
     <link href="{{ asset('assets/css/dark-style.css')}}" rel="stylesheet" />

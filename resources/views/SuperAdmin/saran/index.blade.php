@@ -86,7 +86,7 @@
                             </span>
                         </h6>
                         <h4 class="h4 mb-3 mt-3">Peringatan</h4>
-                        <p class="card-text">Apakah kamu yakin ingin slider ini?</p>
+                        <p class="card-text">Apakah kamu yakin ingin Menghapus Saran dari {{ $sarans->nama }} ?</p>
                     </div>
                     <div class="modal-footer">
                         <a href="javascript:void(0)" class="btn btn-white"

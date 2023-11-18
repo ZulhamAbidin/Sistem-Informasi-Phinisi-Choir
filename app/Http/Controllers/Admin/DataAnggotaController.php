@@ -26,7 +26,7 @@ class DataAnggotaController extends Controller
         $anggota = Anggota::find($id); // Mengambil data anggota dari model berdasarkan ID
 
         if ($anggota) {
-            return view('SuperAdmin\dataanggota\show', ['anggota' => $anggota]);
+            return view('SuperAdmin.dataanggota.show', ['anggota' => $anggota]);
         } else {
             return view('SuperAdmin.dataanggota.create');
         }

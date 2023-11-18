@@ -67,56 +67,68 @@
         @endforeach
 
     </div>
-   
+    
 
-    <div class="row row-cols-4">
-        @foreach ($testimonials as $testimonial)
-        <div class="col-md-6 col-xl-4 col-sm-6">
-            <div class="card">
-                <div class="product-grid6">
-                    <div class="product-image6 p-5">
-                        <ul class="icons">
-
-                            <li>
-                                <a href="{{ route('testimonials.edit', ['id' => $testimonial->id]) }}"
-                                    class="btn btn-success">
-                                    <i class="fe fe-edit"></i>
-                                </a>
-                            </li>
-
-                            <li>
-                                <button class="btn btn-danger" onclick="showCustomAlert({{ $testimonial->id }})">
-                                    <i class="fe fe-x"></i>
-                                </button>
-                            </li>
-
-                        </ul>
-                        <a href="{{ route('detail.anggota', ['id' => $testimonial->id]) }}">
-                            <img class="rounded-circle d-block mx-auto"
-                                style="width: 100px; height: 100px; object-fit: cover;"
-                                src="{{ asset('storage/uploads/' . $testimonial->foto) }}" alt="img">
-                        </a>
-                    </div>
-                    <div class="card-body pt-0 pb-0">
-                        <div class="product-content text-center">
-                            <h1 class="title fw-bold fs-20"><a href="#">{{ $testimonial->name }}</a></h1>
-                            <p class=""><a href="#">{{ $testimonial->jabatan }}</a></p>
-                            <p class="pb-4">"{{ $testimonial->content }}"</p>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    @foreach ($testimonials as $testimonial)
+                    <div class="col-12 col-md-6 col-lg-4">
+    
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <div class="media mt-0">
+                                    <div class="media-user me-2">
+                                        <div class=""><img alt="" class="rounded-circle avatar avatar-md" style="width: 50px; height: 50px; object-fit: cover;"
+                                                src="{{ asset('assets/images/brand/logo-2.png') }}"></div>
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="mb-0 mt-1">Testimonial Dari {{ $testimonial->name }}</h6>
+                                        <small class="text-muted">{{ $testimonial->created_at->format('d F Y H:i') }}</small>
+                                    </div>
+                                </div>
+    
+                                <div class="ms-auto">
+                                    <div class="dropdown show">
+                                        <a class="new option-dots" href="JavaScript:void(0);" data-bs-toggle="dropdown">
+                                            <span class=""><i class="fe fe-more-vertical"></i></span>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <a class="dropdown-item"
+                                                href="{{ route('testimonials.edit', ['id' => $testimonial->id]) }}">Edit Testimonial </a>
+                                            <button class="dropdown-item"
+                                                onclick="showCustomAlert({{ $testimonial->id }})">Hapus</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <div style="display: flex; justify-content: center; align-items: center; height: 120px;">
+                                    <img src="{{ asset('storage/uploads/' . $testimonial->foto) }}" alt="" class="rounded-circle avatar avatar-md" style="width: 100px; height: 100px; object-fit: cover;">
+                                </div>
+                                <h4 class="fw-semibold text-center">{{ $testimonial->name }}</h4>
+                                <h5 class="fw-semibold text-center">{{ $testimonial->jabatan }}</h5>
+                                <p class="mb-0">{{ $testimonial->content }}</p>
+                            </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>
-        @endforeach
-
-        <div class="col-md-12">
-            {{ $testimonials->links('pagination::bootstrap-5') }}
-        </div>
-
-        <div class="col-md-12">
-            <a href="{{ route('welcome') }}/#testimonials" class="btn btn-primary">Lihat Hasil</a>
-        </div>
+       
     </div>
+
+    <div class="col-md-12">
+        {{ $testimonials->links('pagination::bootstrap-5') }}
+    </div>
+    
+    <div class="col-md-12">
+        <a href="{{ route('welcome') }}/#testimonials" class="btn btn-primary">Lihat Hasil</a>
+    </div>
+
+   
 
 </div>
 @if (session('success'))

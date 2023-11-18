@@ -24,7 +24,7 @@
                                         <div class="profile-cover__action bg-img"></div>
                                         <div class="profile-cover__img">
                                             <div class="profile-img-1">
-                                                <img src="{{ asset('storage/uploads/' . $anggota->foto) }}" alt="img">
+                                                <img src="{{ asset('storage/uploads/' . $anggota->foto) }}" style="width: 100px; height: 100px; object-fit: cover;" alt="img">
                                             </div>
                                             <div class="profile-img-content text-dark text-start">
                                                 <div class="text-dark">

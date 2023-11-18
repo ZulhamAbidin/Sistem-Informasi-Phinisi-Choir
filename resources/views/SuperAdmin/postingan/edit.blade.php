@@ -41,14 +41,6 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="judul_postingan">Kategori</label>
-                                    <input type="text" name="judul_postingan" class="form-control"
-                                        value="{{ old('judul_postingan', $postingan->kategori) }}" readonly>
-                                </div>
-                            </div>
-
-                            {{-- <div class="col-md-6">
-                                <div class="form-group">
                                     <label for="kategori">Kategori</label>
                                     <select name="kategori" class="form-control form-select" required>
                                         <option value="achievement" {{ old('kategori', $postingan->kategori) == 'achievement' ? 'selected' : '' }}>achievement</option>
@@ -56,7 +48,7 @@
                                         <option value="news" {{ old('kategori', $postingan->kategori) == 'news' ? 'selected' : '' }}>news</option>
                                     </select>
                                 </div>
-                            </div> --}}
+                            </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -68,7 +60,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="sumber">Sumber</label>
-                                    <input type="text" name="sumber" class="form-control" value="{{ old('sumber', $postingan->sumber) }}" readonly>
+                                    <input type="text" name="sumber" class="form-control">
                                 </div>
                             </div>
 

@@ -31,7 +31,7 @@ public function store(Request $request)
 {
     $request->validate([
         'nama_lengkap' => ['required', 'string', 'max:255'],
-        'nra' => ['required', 'string', 'max:255', 'unique:users'],
+        'nra' => ['required', 'max:255', 'unique:users'],
         'password' => ['required', 'confirmed', Rules\Password::defaults()],
     ], [
         'nra.unique' => 'NRA sudah digunakan oleh pengguna lain.',

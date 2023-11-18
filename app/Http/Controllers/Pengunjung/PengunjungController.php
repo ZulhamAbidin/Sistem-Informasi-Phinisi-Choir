@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
 class PengunjungController extends Controller
-{
+{   
     public function ListBerita(Request $request)
-    {
-        $search = $request->input('search');
-        $listberita = Postingan::when($search, function ($query) use ($search) {
+{
+    $search = $request->input('search');
+    $listberita = Postingan::when($search, function ($query) use ($search) {
             $query->where(function ($query) use ($search) {
                 $query
                     ->where('judul_postingan', 'like', '%' . $search . '%')
@@ -28,11 +28,31 @@ class PengunjungController extends Controller
                     ->orWhere('sumber', 'like', '%' . $search . '%');
             });
         })
-            ->orderBy('created_at', 'desc')
-            ->get();
+        ->where('kategori', 'news') // Menambahkan kondisi untuk kategori 'news'
+        ->orderBy('created_at', 'desc')
+        ->get();
 
-        return view('pengunjung.list', compact('listberita', 'search'));
-    }
+    return view('pengunjung.list', compact('listberita', 'search'));
+}
+
+    // public function ListBerita(Request $request)
+    // {
+    //     $search = $request->input('search');
+    //     $listberita = Postingan::when($search, function ($query) use ($search) {
+    //         $query->where(function ($query) use ($search) {
+    //             $query
+    //                 ->where('judul_postingan', 'like', '%' . $search . '%')
+    //                 ->orWhere('kategori', 'like', '%' . $search . '%')
+    //                 ->orWhere('deskripsi', 'like', '%' . $search . '%')
+    //                 ->orWhere('lokasi', 'like', '%' . $search . '%')
+    //                 ->orWhere('sumber', 'like', '%' . $search . '%');
+    //         });
+    //     })
+    //         ->orderBy('created_at', 'desc')
+    //         ->get();
+
+    //     return view('pengunjung.list', compact('listberita', 'search'));
+    // }
 
     public function ListAchievement(Request $request)
     {

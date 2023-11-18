@@ -33,7 +33,7 @@
                     <div class="d-flex">
                         <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar"
                             href="javascript:void(0)"></a>
-                        <a class="logo-horizontal " href="">
+                        <a class="logo-horizontal " href="{{ route('welcome') }}">
                             <img src="{{ asset('assets/images/brand/logo.png') }}" class="header-brand-img desktop-logo" alt="logaaao">
                             <img src="{{ asset('assets/images/brand/logo-3.png') }}" class="header-brand-img light-logo1"
                                 alt="sslogo">
@@ -73,7 +73,7 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="main-sidemenu navbar px-0">
-                                        <a class="navbar-brand ps-0 d-none d-lg-block" href="">
+                                        <a class="navbar-brand ps-0 d-none d-lg-block" href="{{ route('welcome') }}">
                                             <img alt="" class="logo-2" src="{{ asset('assets/images/brand/logo-3.png')}}">
                                             <img src="{{ asset('assets/images/brand/logo.png')}}" class="logo-3" alt="logaao">
                                         </a>

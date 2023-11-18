@@ -77,7 +77,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="media-body">
-                                                            <h6 class="mb-0 mt-1">{{ auth()->user()->nama_lengkap }}</h6>
+                                                            <h6 class="mb-0 mt-1">{{ $postingan->sumber }}</h6>
                                                             <small class="text-muted">{{ $postingan->selisihWaktu }}</small>
                                                         </div>
                                                     </div>

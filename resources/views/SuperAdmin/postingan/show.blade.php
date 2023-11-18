@@ -55,6 +55,11 @@
                         <div class="mt-3 ms-1 text-muted font-weight-semibold">Rating
                             {{ $postingan->rating }} </div>
                     </a>
+                    <a href="javascript:void(0);" class="d-flex me-4 mb-2"><i
+                            class="fe fe-camera fs-16 me-1 p-3 bg-secondary-transparent text-success bradius"></i>
+                        <div class="mt-3 ms-1 text-muted font-weight-semibold">
+                            {{ $postingan->sumber }} </div>
+                    </a>
                     <div class="ms-auto">
                         <a href="javascript:void(0);" class="d-flex mb-2"><i
                                 class="fe fe-message-square fs-16 me-1 p-3 bg-secondary-transparent text-success bradius"></i>
@@ -64,11 +69,16 @@
                     </div>
                 </div>
             </div>
+            {{-- <div class="media-body">
+                <h6 class="mb-0 mt-1">{{ $postingan->judul_postingan }}</h6>
+                <small class="text-muted">{{ $postingan->sumber }}</small>
+            </div> --}}
             <div class="card-body">
                 <h3><a href="javascript:void(0)"> {{ $postingan->judul_postingan }}.</a></h3>
                 <p class="card-text">{{ $postingan->deskripsi }}.</p>
             </div>
             <div class="card-footer">
+                {{-- <small class="text-muted">Sumber : {{ $postingan->sumber }} {{ $postingan->selisihWaktu }}</small> --}}
                 <div class="email-attch">
                     <p class="font-weight-semibold">Dokumentasi</p>
                 </div>

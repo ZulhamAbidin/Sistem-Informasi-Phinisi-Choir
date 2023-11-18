@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link id="style" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
+    <link rel="icon" href="{{ asset('assets/images/brand/logo-2.png')}}">
     <link href="{{ asset('assets/js/alert/sweetalert2.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/js/alert/sweetalert2.min.css') }}" rel="stylesheet" />
     <title>LOGIN</title>
@@ -89,6 +90,10 @@
                                 </a>
                                 @endif
                                 <button type="submit" class="btn btn-block btn-primary bg-dark">{{ __('Log in') }}</button>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                <a href="register" class="btn btn-block btn-primary bg-dark">Daftar Sebagai Anggota PSM UNM</a>
                             </div>
                         </form>
                     </div>
