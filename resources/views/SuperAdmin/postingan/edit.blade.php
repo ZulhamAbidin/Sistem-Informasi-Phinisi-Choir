@@ -60,7 +60,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="sumber">Sumber</label>
-                                    <input type="text" name="sumber" class="form-control">
+                                    <input type="text" value="{{ $postingan->sumber }}" name="sumber" class="form-control">
                                 </div>
                             </div>
 

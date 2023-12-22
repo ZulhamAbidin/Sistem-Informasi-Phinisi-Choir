@@ -4,11 +4,17 @@
 
         <!-- PAGE-HEADER -->
         <div class="page-header">
-            <h1 class="page-title">Pengajuan Data Anggota Unit Kegiatan Mahasiswa Paduan Suara Universitas Negeri Makassar</h1>
+            <h1 class="page-title">  Data Anggota Unit Kegiatan Mahasiswa Paduan Suara Universitas Negeri Makassar
+            </h1>
         </div>
+
+        <!-- Konten lainnya di halaman ini -->
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title"></h3>
+            </div>
+            <div class="card-header">
+                <button id="toggleRegistrationStatus" class="btn btn-info btn-block mt-4">Aktifkan Status Registrasi</button>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -26,7 +32,8 @@
                                     <td>{{ $user->nama_lengkap }}</td>
                                     <td>{{ $user->nra }}</td>
                                     <td>
-                                        <button class="ubah-status btn btn-outline-primary" data-user-id="{{ $user->id }}">Konfirmasi Pendaftaran</button>
+                                        <button class="ubah-status btn btn-outline-primary"
+                                            data-user-id="{{ $user->id }}">Konfirmasi Pendaftaran</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -34,13 +41,58 @@
                     </table>
                 </div>
             </div>
-            
         </div>
-
 
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var toggleRegistrationButton = document.getElementById('toggleRegistrationStatus');
+    
+            toggleRegistrationButton.addEventListener('click', function() {
+                fetch('/admin/registration/update', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                            .getAttribute('content')
+                    },
+                    body: JSON.stringify({
+                        _token: '{{ csrf_token() }}'
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    var statusMessage = data.new_status === '1' ? 'Pendaftaran saat ini terbuka.' : 'Pendaftaran saat ini tertutup.';
+                    var buttonText = data.new_status === '1' ? 'Pendaftaran saat ini Terbuka, Apakah Anda Ingin Menutup Pendaftaran ?' : 'Pendaftaran saat ini Tertutup, Apakah Anda Ingin Membuka Pendaftaran ?';
+                    toggleRegistrationButton.textContent = buttonText;
+    
+                    var buttonClass = data.new_status === '1' ? 'btn-primary' : 'btn-danger';
+                    toggleRegistrationButton.classList.remove('btn-primary', 'btn-danger');
+                    toggleRegistrationButton.classList.add(buttonClass);
+    
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Status Registrasi Berhasil Diubah!',
+                        text: statusMessage,
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                })
+                .catch(error => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Terjadi Kesalahan',
+                        text: 'Terjadi kesalahan saat mengubah status registrasi.'
+                    });
+                    console.error(error);
+                });
+            });
+        });
+    </script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {

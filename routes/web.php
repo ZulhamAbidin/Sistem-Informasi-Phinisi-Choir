@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\TestimonialsController;
 use App\Http\Controllers\Admin\ManajemenUserController;
 use App\Http\Controllers\Admin\ProfileLembagaController;
 use App\Http\Controllers\Pengunjung\PengunjungController;
+use App\Http\Controllers\Admin\RegistrationStatusController;
 use App\Http\Controllers\Admin\DataAnggotaController as DataAnggotaControllerList;
 
 //HALAMAN UTAMA
@@ -74,10 +75,18 @@ Route::prefix('admin')
         Route::post('users/{user}/update-status', [ApprovalController::class, 'updateStatus'])
             ->name('admin.users.updateStatus')
             ->middleware(['super_admin']);
+
         Route::get('users', [ApprovalController::class, 'index'])
             ->name('users.index')
             ->middleware(['super_admin']);
+
+            Route::post('registration/update', [ApprovalController::class, 'toggleRegistrationStatus'])
+    ->name('admin.registration.update')
+    ->middleware(['super_admin']);
+
+
     });
+
 
 Route::middleware(['auth', 'super_admin'])->group(function () {
     //UPDATE PROFILE PRIBADI ROLE = USER SUPER ADMIN, ADMIN
@@ -168,7 +177,8 @@ Route::delete('/SuperAdmin/testimonials/{id}', [TestimonialsController::class, '
     ->name('testimonials.destroy')
     ->middleware(['super_admin']);
 
-Route::prefix('SuperAdmin/manajemenuser')
+
+    Route::prefix('SuperAdmin/manajemenuser')
     ->middleware(['super_admin'])
     ->group(function () {
         Route::get('list', [ManajemenUserController::class, 'index'])->name('manajemenuser.index');

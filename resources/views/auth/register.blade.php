@@ -36,37 +36,37 @@
                     @endif
                 </div>
 
+                @if($registrationStatus === '1')
                 <div class="card">
                     <div class="">
                         <h3 class="text-center pt-6">REGISTER</h3>
                     </div>
-
+                   
                     <div class="card-body">
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
-
+                    
                             <div class="form-group">
                                 <label for="nama_lengkap">Nama Lengkap</label>
-                                <input class="form-control" type="text" name="nama_lengkap" id="nama_lengkap"
-                                    required autofocus>
+                                <input class="form-control" type="text" name="nama_lengkap" id="nama_lengkap" required autofocus>
                             </div>
-
+                    
                             <div class="form-group">
                                 <label for="nra">NRA (Nomor Registrasi Anggota)</label>
-                                <input class="form-control @error('nra') is-invalid @enderror" type="text"
-                                    name="nra" id="nra" placeholder="G10.015.2021" required>
+                                <input class="form-control @error('nra') is-invalid @enderror" type="text" name="nra" id="nra"
+                                    placeholder="G10.015.2021" required>
                                 @error('nra')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
-
+                    
                             <div class="form-group">
                                 <label for="password">Password</label>
                                 <div class="input-group">
-                                    <input class="form-control @error('password') is-invalid @enderror" type="password" name="password" id="passwordInput"
-                                        required>
+                                    <input class="form-control @error('password') is-invalid @enderror" type="password" name="password"
+                                        id="passwordInput" required>
                                     <div class="input-group-append">
                                         <button class="btn btn-primary bg-dark" type="button" id="togglePassword">
                                             <i class="fas fa-eye"></i>
@@ -79,15 +79,14 @@
                                     @enderror
                                 </div>
                             </div>
-
+                    
                             <div class="form-group">
                                 <label for="password_confirmation">Confirm Password</label>
                                 <div class="input-group">
-                                    <input class="form-control @error('password') is-invalid @enderror" type="password" name="password_confirmation"
-                                        id="confirmPasswordInput" required>
+                                    <input class="form-control @error('password') is-invalid @enderror" type="password"
+                                        name="password_confirmation" id="confirmPasswordInput" required>
                                     <div class="input-group-append">
-                                        <button class="btn btn-primary bg-dark" type="button"
-                                            id="toggleConfirmPassword">
+                                        <button class="btn btn-primary bg-dark" type="button" id="toggleConfirmPassword">
                                             <i class="fas fa-eye"></i>
                                         </button>
                                     </div>
@@ -98,13 +97,20 @@
                                     @enderror
                                 </div>
                             </div>
-
+                    
                             <div class="d-flex justify-content-between align-items-center">
                                 <button type="submit" class="btn btn-block bg-dark btn-primary">Register</button>
                             </div>
                         </form>
                     </div>
+                     
                 </div>
+                @else
+                <!-- Tampilkan pesan bahwa registrasi ditutup -->
+                <div class="bg-white alert alert-danger text-center">
+                    Pendaftaran Anggota Unit Kegiatan Mahasiswa Paduan Suara Saat ini Sedang Ditutup.
+                </div>
+                @endif
             </div>
         </div>
     </div>
