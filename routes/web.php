@@ -91,7 +91,6 @@ Route::prefix('admin')
 Route::middleware(['auth', 'super_admin'])->group(function () {
     //UPDATE PROFILE PRIBADI ROLE = USER SUPER ADMIN, ADMIN
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 });
 

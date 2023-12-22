@@ -76,7 +76,7 @@
     
                     Swal.fire({
                         icon: 'success',
-                        title: 'Status Registrasi Berhasil Diubah!',
+                        title: 'Status Pendaftaran Berhasil Diubah!',
                         text: statusMessage,
                         showConfirmButton: false,
                         timer: 2000
@@ -86,7 +86,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'Terjadi Kesalahan',
-                        text: 'Terjadi kesalahan saat mengubah status registrasi.'
+                        text: 'Terjadi kesalahan saat mengubah status Pendaftaran.'
                     });
                     console.error(error);
                 });

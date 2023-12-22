@@ -57,8 +57,6 @@
                                         <a href="{{ route('login') }}"
                                             class="btn ripple btn-min w-sm btn-primary me-2 my-auto">Login
                                         </a>
-                                        <a href="{{ route('register') }}" class="btn ripple btn-min w-sm btn-primary me-2 my-auto">register
-                                        </a>
                                         @endif
                                     </div>
                                 </div>
@@ -114,9 +112,6 @@
                                             @guest
                                                 <div class="d-lg-none d-xl-block">
                                                     <a href="{{ route('login') }}" class="btn ripple btn-min w-sm btn-primary me-2 my-auto">Login</a>
-                                                </div>
-                                                <div class="d-lg-none d-xl-block">
-                                                    <a href="{{ route('register') }}" class="btn ripple btn-min w-sm btn-primary me-2 my-auto">register</a>
                                                 </div>
                                             @endguest
 
