@@ -11,7 +11,7 @@
     <link href="{{ asset('assets/images/brand/logo-2.png') }}" rel="shortcut icon" type="image/x-icon" />
     <title>HOME</title>
     <link href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" id="style" />
-    <link href="{{ asset('assets/css/landingpage.css')}}" rel="stylesheet" />
+    {{-- <link href="{{ asset('assets/css/landingpage.css')}}" rel="stylesheet" /> --}}
     <link href="{{ asset('assets/css/style.css')}}" rel="stylesheet" />
     <link href="{{ asset('assets/css/dark-style.css')}}" rel="stylesheet" />
     <link href="{{ asset('assets/css/icons.css')}}" rel="stylesheet" />
