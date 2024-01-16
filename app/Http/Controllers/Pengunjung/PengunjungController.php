@@ -35,24 +35,6 @@ class PengunjungController extends Controller
     return view('pengunjung.list', compact('listberita', 'search'));
 }
 
-    // public function ListBerita(Request $request)
-    // {
-    //     $search = $request->input('search');
-    //     $listberita = Postingan::when($search, function ($query) use ($search) {
-    //         $query->where(function ($query) use ($search) {
-    //             $query
-    //                 ->where('judul_postingan', 'like', '%' . $search . '%')
-    //                 ->orWhere('kategori', 'like', '%' . $search . '%')
-    //                 ->orWhere('deskripsi', 'like', '%' . $search . '%')
-    //                 ->orWhere('lokasi', 'like', '%' . $search . '%')
-    //                 ->orWhere('sumber', 'like', '%' . $search . '%');
-    //         });
-    //     })
-    //         ->orderBy('created_at', 'desc')
-    //         ->get();
-
-    //     return view('pengunjung.list', compact('listberita', 'search'));
-    // }
 
     public function ListAchievement(Request $request)
     {
@@ -162,6 +144,16 @@ class PengunjungController extends Controller
         return redirect()->back();
     }
 
+    private function hitungSelisihWaktu($createdAt)
+    {
+        $now = Carbon::now();
+        $createdAt = Carbon::parse($createdAt);
+
+        return $createdAt->diffForHumans($now, [
+            'syntax' => CarbonInterface::DIFF_RELATIVE_TO_NOW,
+        ]);
+    }
+
     public function tambahBalasanKomentar(Request $request, Postingan $beritadetail, $komentarId)
     {
         $komentar = Komentar::findOrFail($komentarId);
@@ -258,47 +250,20 @@ class PengunjungController extends Controller
     }
 
     public function likePostingan($id)
-    {
-        $beritadetail = Postingan::find($id);
+{
+    $beritadetail = Postingan::find($id);
 
-        if ($beritadetail) {
-            $beritadetail->jumlah_suka += 1;
-            $beritadetail->save();
-            Alert::success('Berhasil', 'Menambahkan Like.'); // Menampilkan alert sukses
-            return redirect()->back(); // Kembali ke halaman sebelumnya
-        }
+    if ($beritadetail) {
+        $beritadetail->jumlah_suka += 1;
+        $beritadetail->save();
 
-        Alert::error('Gagal', 'Postingan tidak ditemukan.'); // Menampilkan alert error
-        return redirect()->back(); // Kembali ke halaman sebelumnya
+        // Kirim respons JSON dengan jumlah like yang baru
+        return response()->json(['success' => true, 'newLikeCount' => $beritadetail->jumlah_suka]);
     }
 
-    public function likeKomentar($id)
-    {
-        $komentar = Komentar::find($id);
+    // Kirim respons JSON dengan pesan error
+    return response()->json(['success' => false, 'message' => 'Postingan tidak ditemukan'], 404);
+}
 
-        if ($komentar) {
-            $komentar->jumlah_suka += 1;
-            $komentar->save();
-            Alert::success('Berhasil', 'Menambahkan Like pada Komentar.'); // Menampilkan alert sukses
-            return redirect()->back(); // Kembali ke halaman sebelumnya
-        }
-
-        Alert::error('Gagal', 'Komentar tidak ditemukan.'); // Menampilkan alert error
-        return redirect()->back(); // Kembali ke halaman sebelumnya
-    }
-
-    public function likeBalasanKomentar($id)
-    {
-        $balasanKomentar = BalasanKomentar::find($id);
-
-        if ($balasanKomentar) {
-            $balasanKomentar->jumlah_suka += 1;
-            $balasanKomentar->save();
-            Alert::success('Berhasil', 'Menambahkan Like pada Balasan Komentar.');
-            return redirect()->back();
-        }
-
-        Alert::error('Gagal', 'Balasan Komentar tidak ditemukan.');
-        return redirect()->back();
-    }
+    
 }

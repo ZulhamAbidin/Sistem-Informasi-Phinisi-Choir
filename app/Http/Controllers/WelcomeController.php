@@ -17,7 +17,7 @@ class WelcomeController extends Controller
     public function index()
     {
         $posts = Postingan::orderBy('rating', 'desc')
-            ->take(3)
+            ->take(2)
             ->get();
         $carousels = Carousel::all();
         $testimonials = Testimonial::all();

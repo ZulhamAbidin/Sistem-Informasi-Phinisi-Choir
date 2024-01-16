@@ -245,7 +245,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Pinisi Choir</title>
     <link rel="icon" type="image/png" href="{{ asset('assets/images/brand/logo-2.png') }}" />
 
@@ -270,7 +270,7 @@
     <div class="app-preloader fixed z-50 grid h-full w-full place-content-center bg-slate-50 dark:bg-navy-900">
         <img class="h-11 w-fit mx-auto transition-transform duration-500 rotate-[360deg]"
             src="{{ asset('assets/images/brand/logo-3.png') }}" alt="logo" />
-        <p class="mt-3 font-semibold text-center"> UNIT KEGIATAN PADUAN SUARA MAHASISWA UNIVERSITAS NEGERI MAKASSAR </p>
+        <p class="mt-3 font-semibold text-center mx-4"> UNIT KEGIATAN PADUAN SUARA MAHASISWA UNIVERSITAS NEGERI MAKASSAR </p>
     </div>
 
     <!-- Page Wrapper -->
@@ -310,9 +310,7 @@
                         <li>
 
                             
-                            <a x-data="navLink" href="{{ route('welcome') }}"
-                                :class="isActive ? 'font-medium text-primary dark:text-accent-light' : 'text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50'"
-                                class="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4">
+                            <a href="{{ route('welcome') }}" class="{{ request()->is('/') ? 'font-medium text-primary dark:text-accent-light' : 'text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50' }} flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4">
                                 <div class="flex items-center space-x-2"><svg class="h-6 w-6"
                                         xmlns="../www.w3.org/2000/svg.html" fill="none" viewBox="0 0 24 24">
                                         <path fill="currentColor" fill-opacity=".3"
@@ -330,9 +328,7 @@
                         </li>
                        
                         <li>
-                            <a x-data="navLink" href="{{ route('ListCompetition') }}"
-                                :class="isActive ? '' : 'text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50'"
-                                class="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4">
+                                <a href="{{ route('ListCompetition') }}" class="{{ request()->is('pengunjung/competition') ? 'font-medium text-primary dark:text-accent-light' : 'text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50' }} flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4">
                                 <div class="flex items-center space-x-2">
                                     <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-opacity="0.25"
@@ -351,9 +347,8 @@
                         </li>
 
                         <li>
-                            <a x-data="navLink" href="{{ route('ListAchievement') }}"
-                                :class="isActive ? '' : 'text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50'"
-                                class="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4">
+                            <a href="{{ route('ListAchievement') }}"
+                            class="{{ request()->is('pengunjung/achievement') ? 'font-medium text-primary dark:text-accent-light' : 'text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50' }} flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4">
                                 <div class="flex items-center space-x-2">
                                     <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-opacity="0.5"
@@ -372,9 +367,8 @@
                         </li>
 
                         <li>
-                            <a x-data="navLink" href="{{ route('welcome') }}#testimonials"
-                                :class="isActive ? 'tambahkan aktif' : 'text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50'"
-                                class="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4">
+                           <a href="{{ route('welcome') }}#testimonials"
+                            class="{{ request()->is('x') ? 'font-medium text-primary dark:text-accent-light' : 'text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50' }} flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4">
                                 <div class="flex items-center space-x-2">
                                     <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -395,9 +389,8 @@
                         </li>
 
                         <li>
-                            <a x-data="navLink" href="{{ route('about') }}"
-                                :class="isActive ? '' : 'text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50'"
-                                class="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4">
+                            <a href="{{ route('about') }}"
+                                class="{{ request()->is('about') ? 'font-medium text-primary dark:text-accent-light' : 'text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50' }} flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4">
                                 <div class="flex items-center space-x-2">
                                     <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-opacity="0.25"

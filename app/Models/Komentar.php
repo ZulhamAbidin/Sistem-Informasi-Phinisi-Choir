@@ -2,6 +2,7 @@
 
 
 namespace App\Models;
+use Carbon\Carbon;
 use App\Models\Postingan;
 use Illuminate\Database\Eloquent\Model;
 
@@ -33,6 +34,17 @@ class Komentar extends Model
 public function balasanKomentars()
     {
         return $this->hasMany(BalasanKomentar::class, 'parent_komentar_id');
+    }
+
+
+    public function timeElapsedString()
+    {
+        $now = Carbon::now();
+        $created = Carbon::parse($this->created_at);
+
+        $diff = $created->diffForHumans($now);
+
+        return $diff;
     }
 
     

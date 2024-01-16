@@ -155,6 +155,8 @@ Route::prefix('SuperAdmin/home')->group(function () {
         ->name('superadmin.home.destroy')
         ->middleware(['super_admin']);
 });
+// web.php
+Route::post('/like-postingan/{postId}', [PengunjungController::class, 'likePostingan']);
 
 //TESTIMONIALS
 Route::get('/SuperAdmin/testimonials', [TestimonialsController::class, 'index'])
