@@ -213,3 +213,8 @@ Route::delete('/superadmin/profilelembaga/{id}', [ProfileLembagaController::clas
     ->middleware(['super_admin']);
 
 require __DIR__ . '/auth.php';
+
+
+Route::get('/archivement', [PengunjungController::class, 'archivement']);
+Route::get('/competition', [PengunjungController::class, 'ListCompetition']); // Adjusted the method name
+Route::get('/search', [PengunjungController::class, 'liveSearch']);

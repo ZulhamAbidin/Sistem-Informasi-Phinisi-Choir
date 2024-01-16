@@ -26,7 +26,6 @@ class WelcomeController extends Controller
         }
 
         $listberita = Postingan::latest()->get();
-        // $listberita = Postingan::all();
         return view('welcome', compact('posts', 'carousels', 'testimonials', 'listberita'));
     }
 
@@ -66,7 +65,6 @@ class WelcomeController extends Controller
         return view('SuperAdmin.saran.index', compact('saran'));
     }
 
-
     public function destroy($id)
     {
         $saran = Saran::find($id);
@@ -83,6 +81,7 @@ class WelcomeController extends Controller
             ->route('admin.saran.index')
             ->with('success', 'saran dan tanggapan berhasil dihapus.');
     }
+    
 
 }
 

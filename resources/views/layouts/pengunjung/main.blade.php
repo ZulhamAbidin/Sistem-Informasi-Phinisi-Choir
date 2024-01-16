@@ -267,11 +267,11 @@
     <!-- App preloader-->
 
     
-    <div class="app-preloader fixed z-50 grid h-full w-full place-content-center bg-slate-50 dark:bg-navy-900">
+    {{-- <div class="app-preloader fixed z-50 grid h-full w-full place-content-center bg-slate-50 dark:bg-navy-900">
         <img class="h-11 w-fit mx-auto transition-transform duration-500 rotate-[360deg]"
             src="{{ asset('assets/images/brand/logo-3.png') }}" alt="logo" />
         <p class="mt-3 font-semibold text-center mx-4"> UNIT KEGIATAN PADUAN SUARA MAHASISWA UNIVERSITAS NEGERI MAKASSAR </p>
-    </div>
+    </div> --}}
 
     <!-- Page Wrapper -->
     <div id="root" class="min-h-100vh flex grow bg-slate-50 dark:bg-navy-900" x-cloak>
