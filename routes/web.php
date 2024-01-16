@@ -214,7 +214,3 @@ Route::delete('/superadmin/profilelembaga/{id}', [ProfileLembagaController::clas
 
 require __DIR__ . '/auth.php';
 
-
-Route::get('/archivement', [PengunjungController::class, 'archivement']);
-Route::get('/competition', [PengunjungController::class, 'ListCompetition']); // Adjusted the method name
-Route::get('/search', [PengunjungController::class, 'liveSearch']);

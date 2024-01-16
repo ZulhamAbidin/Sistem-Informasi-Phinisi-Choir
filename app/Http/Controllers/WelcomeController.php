@@ -14,7 +14,7 @@ use App\Http\Controllers\WelcomeController;
 
 class WelcomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $posts = Postingan::orderBy('rating', 'desc')
             ->take(2)
@@ -25,8 +25,21 @@ class WelcomeController extends Controller
             $post->selisihWaktu = $this->hitungSelisihWaktu($post->created_at);
         }
 
-        $listberita = Postingan::latest()->get();
-        return view('welcome', compact('posts', 'carousels', 'testimonials', 'listberita'));
+        $search = $request->input('search');
+
+        $listberita = Postingan::latest()
+            ->when($search, function ($query) use ($search) {
+                $query->where(function ($query) use ($search) {
+                    $query
+                        ->where('judul_postingan', 'like', '%' . $search . '%')
+                        ->orWhere('deskripsi', 'like', '%' . $search . '%')
+                        ->orWhere('lokasi', 'like', '%' . $search . '%')
+                        ->orWhere('sumber', 'like', '%' . $search . '%');
+                });
+            })
+            ->paginate(8); // Sesuaikan jumlah item per halaman dengan kebutuhan Anda
+
+        return view('welcome', compact('posts', 'carousels', 'testimonials', 'listberita', 'search'));
     }
 
     private function hitungSelisihWaktu($createdAt)

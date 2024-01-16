@@ -16,62 +16,86 @@ use Illuminate\Validation\ValidationException;
 class PengunjungController extends Controller
 {   
     public function ListBerita(Request $request)
+{
+    $search = $request->input('search');
+    $listberita = Postingan::when($search, function ($query) use ($search) {
+            $query->where(function ($query) use ($search) {
+                $query
+                    ->where('judul_postingan', 'like', '%' . $search . '%')
+                    ->orWhere('kategori', 'like', '%' . $search . '%')
+                    ->orWhere('deskripsi', 'like', '%' . $search . '%')
+                    ->orWhere('lokasi', 'like', '%' . $search . '%')
+                    ->orWhere('sumber', 'like', '%' . $search . '%');
+            });
+        })
+        ->where('kategori', 'news') // Menambahkan kondisi untuk kategori 'news'
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    return view('pengunjung.list', compact('listberita', 'search'));
+}
+
+    public function ListAchievement(Request $request)
     {
-        $search = $request->input('search');
-        $listberita = Postingan::when($search, function ($query) use ($search) {
+        // Inisialisasi variabel $search
+        $search = $request->input('search', '');
+
+        // Fungsi pencarian yang sudah Anda buat
+        $ListAchievement = Postingan::where('kategori', 'achievement')
+            ->when($search, function ($query) use ($search) {
                 $query->where(function ($query) use ($search) {
                     $query
                         ->where('judul_postingan', 'like', '%' . $search . '%')
-                        ->orWhere('kategori', 'like', '%' . $search . '%')
                         ->orWhere('deskripsi', 'like', '%' . $search . '%')
                         ->orWhere('lokasi', 'like', '%' . $search . '%')
                         ->orWhere('sumber', 'like', '%' . $search . '%');
                 });
             })
-            ->where('kategori', 'news') // Menambahkan kondisi untuk kategori 'news'
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(10);
 
-        return view('pengunjung.list', compact('listberita', 'search'));
+        return view('pengunjung.achievement', compact('ListAchievement', 'search'));
+
+        // $search = $request->input('search');
+        // $listAchievement = Postingan::where('kategori', 'achievement')
+        //     ->when($search, function ($query) use ($search) {
+        //         $query->where(function ($query) use ($search) {
+        //             $query
+        //                 ->where('judul_postingan', 'like', '%' . $search . '%')
+        //                 ->orWhere('deskripsi', 'like', '%' . $search . '%')
+        //                 ->orWhere('lokasi', 'like', '%' . $search . '%')
+        //                 ->orWhere('sumber', 'like', '%' . $search . '%');
+        //         });
+        //     })
+        //     ->orderBy('created_at', 'desc')
+        //     ->get();
+
+        // return view('pengunjung.achievement', compact('listAchievement', 'search'));
     }
 
-    // public function ListAchievement(Request $request)
-    // {
-    //     $search = $request->input('search');
-    //     $listAchievement = Postingan::where('kategori', 'achievement')
-    //         ->when($search, function ($query) use ($search) {
-    //             $query->where(function ($query) use ($search) {
-    //                 $query
-    //                     ->where('judul_postingan', 'like', '%' . $search . '%')
-    //                     ->orWhere('deskripsi', 'like', '%' . $search . '%')
-    //                     ->orWhere('lokasi', 'like', '%' . $search . '%')
-    //                     ->orWhere('sumber', 'like', '%' . $search . '%');
-    //             });
-    //         })
-    //         ->orderBy('created_at', 'desc')
-    //         ->get();
+    
+    public function ListCompetition(Request $request)
+    {
+        // Inisialisasi variabel $search
+        $search = $request->input('search', '');
 
-    //     return view('pengunjung.achievement', compact('listAchievement', 'search'));
-    // }
+        // Fungsi pencarian yang sudah Anda buat
+        $listCompetition = Postingan::where('kategori', 'competition')
+            ->when($search, function ($query) use ($search) {
+                $query->where(function ($query) use ($search) {
+                    $query
+                        ->where('judul_postingan', 'like', '%' . $search . '%')
+                        ->orWhere('deskripsi', 'like', '%' . $search . '%')
+                        ->orWhere('lokasi', 'like', '%' . $search . '%')
+                        ->orWhere('sumber', 'like', '%' . $search . '%');
+                });
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
 
-    // public function ListCompetition(Request $request)
-    // {
-    //     $search = $request->input('search');
-    //     $listCompetition = Postingan::where('kategori', 'competition')
-    //         ->when($search, function ($query) use ($search) {
-    //             $query->where(function ($query) use ($search) {
-    //                 $query
-    //                     ->where('judul_postingan', 'like', '%' . $search . '%')
-    //                     ->orWhere('deskripsi', 'like', '%' . $search . '%')
-    //                     ->orWhere('lokasi', 'like', '%' . $search . '%')
-    //                     ->orWhere('sumber', 'like', '%' . $search . '%');
-    //             });
-    //         })
-    //         ->orderBy('created_at', 'desc')
-    //         ->get();
+        return view('pengunjung.competition', compact('listCompetition', 'search'));
+    }
 
-    //     return view('pengunjung.competition', compact('listCompetition', 'search'));
-    // }
 
     public function DetailBerita($id)
     {
@@ -264,52 +288,4 @@ class PengunjungController extends Controller
     return response()->json(['success' => false, 'message' => 'Postingan tidak ditemukan'], 404);
 }
 
-    public function archivement(Request $request)
-    {
-        $results = $this->getSearchResults($request);
-        return view('pengunjung.archivement', ['results' => $results]);
-    }
-
-    public function competition(Request $request)
-    {
-        $results = $this->getSearchResults($request);
-        return view('pengunjung.competition', ['results' => $results]);
-    }
-
-    public function ListAchievement(Request $request)
-    {
-        $search = $request->input('search');
-        $listAchievement = $this->getSearchResults('achievement', $search);
-
-        return view('pengunjung.achievement', compact('listAchievement', 'search'));
-    }
-
-    public function ListCompetition(Request $request)
-{
-    $search = $request->input('query');
-    $listCompetition = $this->getSearchResults('competition', $search);
-
-    return view('pengunjung.competition', compact('listCompetition', 'search'));
-}
-    private function getSearchResults($kategori, $search)
-    {
-        return Postingan::where('kategori', $kategori)
-            ->when($search, function ($query) use ($search) {
-                $query->where(function ($query) use ($search) {
-                    $query
-                        ->where('judul_postingan', 'like', '%' . $search . '%')
-                        ->orWhere('deskripsi', 'like', '%' . $search . '%')
-                        ->orWhere('lokasi', 'like', '%' . $search . '%')
-                        ->orWhere('sumber', 'like', '%' . $search . '%');
-                });
-            })
-            ->orderBy('created_at', 'desc')
-            ->get();
-    }
-public function liveSearch(Request $request)
-{
-    $search = $request->input('query');
-    $results = $this->getSearchResults('competition', $search);
-    return view('pengunjung.competition', ['listCompetition' => $results]);
-}
 }

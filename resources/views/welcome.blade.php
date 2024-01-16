@@ -2,112 +2,6 @@
 
 @section('container')
 
-
-    {{-- <div class="main-content mt-0">
-        <div class="side-app">
-            <div class="main-container">
-
-                POSTINGAN DENGAN RATING TERTINGGI 
-                <div class="section bg-landing" id="Blog">
-                    <div class="container">
-                        <div class="row">
-                            <div class="card-body">
-                                <h4 class="text-center fw-semibold">Postingan Dengan Rating Tertinggi </h4>
-                                <span class="landing-title"></span>
-                                <h2 class="text-center fw-semibold mb-7">Postingan</h2>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                 TESTIMONIALS
-                <div class="testimonial-owl-landing section pb-0" id="testimonials">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card bg-transparent">
-                                    <div class="card-body pt-5">
-                                        <h4 class="text-center fw-semibold text-white-80">Testimonials </h4>
-                                        <span class="landing-title"></span>
-                                        <h3 class="text-center fw-semibold text-white-80 mb-7">Bagaimana Pendapat Orang Mengenai Pinisi Choir</h3>
-                                        <div class="testimonial-carousel">
-                                            @foreach ($testimonials as $testimonial)
-                                                <div class="slide text-center">
-                                                    <div class="row">
-                                                        <div class="col-xl-8 col-md-12 d-block mx-auto">
-                                                            <div class="testimonia">
-                                                                <p class="text-white-80">
-                                                                    "{{ $testimonial->content }}"
-                                                                </p>
-                                                                <h3 class="title">{{ $testimonial->name }}</h3>
-                                                                <span class="post mb-4">{{ $testimonial->jabatan }}</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <img class="rounded-circle d-block mx-auto" src="{{ asset('storage/uploads/' . $testimonial->foto) }}"  style="width: 120px; height: 120px; object-fit: cover;" alt="{{ $testimonial->name }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                 SARAN DAN TANGGAPAN PENGGUNA -
-                <div class="bg-image-landing section pb-0" id="Contact">
-                    <div class="container">
-                        <div class="">
-                            <div class="card card-shadow reveal active">
-                                <h4 class="text-center fw-semibold mt-7">Saran dan Tanggapan Penngguna</h4>
-                                <span class="landing-title"></span>
-                                </h2>
-                                <div class="card-body p-5 pb-6 text-dark">
-                                    <div class="statistics-info p-4">
-                                        <div class="row justify-content-center">
-
-                                            <div class="col-xl-9">
-                                                <div class="">
-                                                    <form class="form-horizontal reveal revealrotate m-t-20" action="{{ route('submit-saran') }}" method="post">
-                                                        @csrf
-                                                        <div class="form-group">
-                                                            <div class="col-xs-12">
-                                                                <input class="form-control" type="text" required="" placeholder="Username*" name="nama">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="col-xs-12">
-                                                                <input class="form-control" type="email" required="" placeholder="Email*" name="email">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="col-xs-12">
-                                                                <textarea class="form-control" rows="5" placeholder="Your Comment*" name="pesan"></textarea>
-                                                            </div>
-                                                        </div>
-                                                        <div class="">
-                                                            <button type="submit" class="btn btn-primary btn-rounded waves-effect waves-light">Submit</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div> --}}
-
     
     @include('layouts.pengunjung.slider')
     
@@ -175,17 +69,35 @@
         {{-- end postingan dengan rating tertinggi --}}
         <br>
 
-
-
         {{-- Semua Postingan --}}
         <div class="relative mt-10 flex flex-col items-center justify-center">
             <h2 class="mt-8 text-xl font-medium text-slate-600 dark:text-navy-100 lg:text-2xl">
                 Semua Postingan
             </h2>
         </div>
+
+        <form action="{{ route('welcome') }}" method="GET">
+                        <div class="relative flex flex-col items-center justify-center">
+                            <div class="relative mt-6 w-full max-w-md">
+                                <input
+                                    class="form-input peer h-12 w-full rounded-full border border-slate-300 bg-slate-50 px-4 py-2 pl-9 text-base placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-900 dark:hover:border-navy-400 dark:focus:border-accent"
+                                    placeholder="Search" name="search" type="text">
+                                <div
+                                    class="absolute left-0 top-0 flex h-12 w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </form>
         <br>
+
+        @if($listberita->isNotEmpty())
         @if (!is_null($posts) && count($posts) > 0)
-        <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6 xl:grid-cols-4">
+        <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6 xl:grid-cols-4 mx-4">
             @foreach ($listberita as $listberitas)
             <div class="flex flex-col">
                 <img class="h-44 w-full rounded-2xl object-cover object-center"
@@ -219,9 +131,32 @@
                 </div>
             </div>
             @endforeach
+           
         </div>
+        <div class="flex mx-auto mt-5">
+            {{ $listberita->links() }}
+        </div>
+        
         @else
             <p>Anda Belum Mengunggah Postingan Apapun.</p>
+        @endif
+
+        @else
+        <div class="flex flex-col items-center p-6 text-center">
+            <div class="w-full max-w-xs">
+                <img class="w-16 flex mx-auto" " src=" {{ asset('assets/images/brand/logo-2.png') }}" alt="image">
+            </div>
+            <p class="pt-4 text-xl font-semibold text-slate-800 dark:text-navy-50">
+                Oops. Hasil Pencarian Anda Tidak Ditemukan
+            </p>
+            <p class="pt-2 text-slate-500 dark:text-navy-200">
+                Unit Kegiatan Paduan Suara Mahasiswa Universitas Negeri Makassar
+            </p>
+            <a href="{{ route('welcome') }}"
+                class="btn mt-10 bg-primary/10 font-medium text-primary hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:bg-accent-light/10 dark:text-accent-light dark:hover:bg-accent-light/20 dark:focus:bg-accent-light/20 dark:active:bg-accent-light/25">
+                Reset Pencarian </a>
+        
+        </div>
         @endif
         {{-- end semua postingan --}}
         <br>
