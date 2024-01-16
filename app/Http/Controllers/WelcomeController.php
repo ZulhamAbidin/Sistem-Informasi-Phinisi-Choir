@@ -25,7 +25,9 @@ class WelcomeController extends Controller
             $post->selisihWaktu = $this->hitungSelisihWaktu($post->created_at);
         }
 
-        return view('welcome', compact('posts', 'carousels', 'testimonials'));
+        $listberita = Postingan::latest()->get();
+        // $listberita = Postingan::all();
+        return view('welcome', compact('posts', 'carousels', 'testimonials', 'listberita'));
     }
 
     private function hitungSelisihWaktu($createdAt)

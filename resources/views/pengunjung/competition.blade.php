@@ -82,11 +82,11 @@
                                         </div>
                                         <div class="card-footer user-pro-2">
                                             <div class="media mt-0">
-                                                <div class="media-body">
+                                                {{-- <div class="media-body">
                                                     <h6 class="mb-0 mt-2 ms-2">
                                                         {{ $postingan->jumlah_suka }} Menyukai Postingan Ini
                                                     </h6>
-                                                </div>
+                                                </div> --}}
                                                 <div class="ms-auto">
                                                     <div class="d-flex mt-1">
                                                         <a class="new me-2 text-muted fs-16" href="JavaScript:void(0);">

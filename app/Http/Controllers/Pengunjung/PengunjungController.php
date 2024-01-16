@@ -212,7 +212,6 @@ class PengunjungController extends Controller
     public function showKomentar()
     {
         $komentar = Komentar::find($id); // Mengambil data komentar dari model
-
         return view('pengunjung.detail', ['komentar' => $komentar]);
     }
 
