@@ -115,13 +115,21 @@ class ProfileLembagaController extends Controller
 
                 if (isset($srcParts[1])) {
                     $data = base64_decode($srcParts[1]);
-                    $image_name = 'uploads/' . time() . $key . '.png';
+                    
+                    // Update the $image_name to include the subdirectory
+                    $subdirectory = 'uploads';
+                    $image_name = 'public/' . $subdirectory . '/' . time() . $key . '.png';
+
+                    // Ensure the subdirectory exists
+                    Storage::makeDirectory($subdirectory);
+
                     Storage::put($image_name, $data);
                     $img->removeAttribute('src');
                     $img->setAttribute('src', asset('storage/' . $image_name));
                 }
             }
         }
+
 
         if ($validator->fails()) {
             Alert::error('Error', 'Panjang gambar dan teks terlalu besar. Pastikan gambar dan teks memiliki ukuran yang sesuai untuk memastikan tampilan halaman website yang baik.');
