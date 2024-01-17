@@ -1,18 +1,16 @@
 @extends('layouts.pengunjung.main')
 
 @section('container')
+
     @if ($profiles && $profiles->count() > 0)
+    
         @php
+
             $profile = $profiles->first();
+
         @endphp
         
         <div class="main-content w-full px-[var(--margin-x)]">
-
-            {{-- <div class="text-center card py-10">
-                <h2 class="text-2xl text-center font-semibold uppercase text-slate-600 dark:text-navy-100">
-                    Tentang Kami
-                </h2>
-            </div> --}}
 
             <div class="grid grid-cols-1 mt-4">
                 <div class="card px-5 py-12 sm:px-18">
@@ -40,8 +38,6 @@
                    
                 </div>
             </div>
-
-            {{-- bg-gradient-to-br from-purple-500 to-indigo-600 text-white --}}
 
             <div class="card mt-4">
                 <div class="card  p-5 sm:mt-0 sm:flex-row btn bg-gradient-to-br from-purple-500 to-indigo-600 text-white">
@@ -82,12 +78,13 @@
             </div>
 
         </div>
-        <br>
 
-        
     @else
+
         <p>Tidak ada data profil lembaga.</p>
+
     @endif
 
     @include('layouts.pengunjung.footer')
+
 @endsection

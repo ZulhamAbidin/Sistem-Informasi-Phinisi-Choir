@@ -510,8 +510,6 @@
     </script>
 
     <!-- BOOTSTRAP JS -->
-
-    
     @push('script')
         <script src="{{ asset('assets/plugins/bootstrap/js/popper.min.js') }}"></script>
         <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
@@ -522,9 +520,7 @@
         <script src="{{ asset('assets/plugins/ratings-2/jquery.star-rating.js') }}"></script>
         <script src="{{ asset('assets/plugins/ratings-2/star-rating.js') }}"></script>
         <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-    @endpush('scripts')
-
-    
+    @endpush
 </body>
 
 

@@ -36,6 +36,7 @@
                     <img class="h-full w-full object-cover" src="{{ asset('storage/uploads/' . $carousel->image_path) }}" alt="" />
                     <div class="overlay"></div>
                     <div class="carousel-caption">
+                        <span ></span>
                         <h3 class="text-sm md:text-md font-medium  lg:text-2xl">{{ $carousel->title }}</h3>
                         <p class="text-sm md:text-md lg:text-2xl">{{ $carousel->description }}.</p>
                     </div>
