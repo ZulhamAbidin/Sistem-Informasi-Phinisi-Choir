@@ -1031,7 +1031,7 @@
 
                                             </div>
                                             <div class="mt-0.5 flex text-slate-700 dark:text-navy-100 text-xs">
-                                                <p class="justify py-2"">{{ $balasan->isi_balasan }}</p>
+                                                <p class="justify py-2">{{ $balasan->isi_balasan }}</p>
                                             </div>
                                             <div class="mt-0.5 flex text-xs text-slate-400 dark:text-navy-300">
                                                 <button
