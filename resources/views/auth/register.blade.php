@@ -35,10 +35,10 @@
                     <img class="mx-auto h-16 w-16" src="{{ asset('assets/images/brand/logo-2.png') }}" alt="logo" />
                     <div class="mt-4">
                         <h2 class="text-2xl font-semibold text-slate-600 dark:text-navy-100">
-                            Welcome Back
+                            DAFTAR
                         </h2>
                         <p class="text-slate-400 dark:text-navy-300">
-                            Please Register in to continue
+                            Silahkan daftar untuk melanjutkan
                         </p>
                     </div>
                 </div>
@@ -63,27 +63,34 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
                         <label class="block">
-                            <span>Email</span>
-                            <span class="relative mt-1.5 flex">
-                                <input name="email" placeholder="Email"
-                                    class="form-input @error('email') is-invalid  @enderror peer w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:z-10 hover:border-slate-400 focus:z-10 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                                    type="email" required />
-                                <span
-                                    class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-colors duration-200" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                    </svg>
-                                </span>
-                            </span>
-                        </label>
+    <span>Email</span>
+    <span class="relative mt-1.5 flex">
+        <input name="email" placeholder="Email"
+            class="form-input @error('email') is-invalid  @enderror peer w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:z-10 hover:border-slate-400 focus:z-10 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+            type="email" required />
 
-                        <label class="block">
+        <!-- Icon for email input -->
+        <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-colors duration-200" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+        </span>
+    </span>
+
+    <!-- Error message for email validation -->
+    @error('email')
+        <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+    @enderror
+</label>
+
+
+                        <label class="mt-4 block ">
                             <span>Nama Lengkap Anggota</span>
                             <span class="relative mt-1.5 flex">
                                 <input name="nama_lengkap" placeholder="Arfah Awaluddin T"
-                                    class="form-input @error('nra') is-invalid  @enderror peer w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:z-10 hover:border-slate-400 focus:z-10 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                    class="form-input @error('nama_lengkap') is-invalid  @enderror peer w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:z-10 hover:border-slate-400 focus:z-10 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
                                     type="text" required />
                                 <span
                                     class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">

@@ -46,11 +46,12 @@ class RegisteredUserController extends Controller
                 'nama_lengkap' => ['required', 'string', 'max:255'],
                 'nra' => ['required', 'max:255', 'unique:users'],
                 // 'email' => ['required', 'max:255', 'unique:email'],
+                'email' => ['required', 'max:255', 'unique:users,email'],
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
             ],
             [
                 'nra.unique' => 'NRA sudah digunakan oleh pengguna lain.',
-                // 'email.unique' => 'alamat Email sudah digunakan oleh pengguna lain.',
+                'email.unique' => 'alamat Email sudah digunakan oleh pengguna lain.',
                 'password.confirmed' => 'Konfirmasi password tidak cocok.',
             ],
         );

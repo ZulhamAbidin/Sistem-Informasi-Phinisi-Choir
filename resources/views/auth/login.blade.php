@@ -34,10 +34,10 @@
                     <img class="mx-auto h-16 w-16" src="{{ asset('assets/images/brand/logo-2.png') }}" alt="logo" />
                     <div class="mt-4">
                         <h2 class="text-2xl font-semibold text-slate-600 dark:text-navy-100">
-                            Welcome Back
+                            LOGIN
                         </h2>
                         <p class="text-slate-400 dark:text-navy-300">
-                            Please sign in to continue
+                            Silahkan login untuk melanjutkan
                         </p>
                    
                     </div>
