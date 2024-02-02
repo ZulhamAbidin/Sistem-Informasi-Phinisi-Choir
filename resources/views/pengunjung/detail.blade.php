@@ -306,14 +306,14 @@
                                                 </button>
 
                                                 <div class="mx-2 my-1 w-px bg-slate-200 dark:bg-navy-500 sm:flex"></div>
-                                                <button data-commentid="{{ $komentar->id }}"
+                                                {{-- <button data-commentid="{{ $komentar->id }}"
                                                     class="reply-badge reply btn h-7 w-7 bg-primary/10 p-0 text-primary hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:bg-accent-light/10 dark:text-accent-light dark:hover:bg-accent-light/20 dark:focus:bg-accent-light/20 dark:active:bg-accent-light/25">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                                             d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
                                                         </path>
                                                     </svg>
-                                                </button>
+                                                </button> --}}
 
                                             </div>
                                         </div>
@@ -321,7 +321,7 @@
                                     </div>
                                     
                                     <!-- Tambahkan Balasan Komentar -->
-                                    <form method="POST" style="display: none;" class="comment-form mt-4 space-y-3.5 mx-4 pb-4"
+                                    {{-- <form method="POST" style="display: none;" class="comment-form mt-4 space-y-3.5 mx-4 pb-4"
                                         data-commentid="{{ $komentar->id }}"
                                         action="{{ route('pengunjung.news.tambah-balasan-komentar', ['beritadetail' => $beritadetail->id, 'komentarId' => $komentar->id]) }}">
                                         @csrf
@@ -372,85 +372,85 @@
                                                 Kirim
                                             </button>
                                         </div>
-                                    </form>
+                                    </form> --}}
                                     
                                    
         
                                     <!-- End Tambahkan Balasan Komentar -->
         
                                     <!-- balasan komentar -->
-                                    @foreach ($komentar->balasanKomentars as $balasan)
-                                    @if ($balasan->parent_komentar_id === $komentar->id)
-                                    <div class="ml-4 pl-4 flex items-center mt-4 space-x-3  xx  border-t border-slate-200 pt-4 text-slate-800 dark:border-navy-600 dark:text-navy-100">
-                                        <div class="flex-1">
-                                            <div class="flex items-center justify-between">
+                                    {{-- @foreach ($komentar->balasanKomentars as $balasan)
+                                        @if ($balasan->parent_komentar_id === $komentar->id)
+                                        <div class="ml-4 pl-4 flex items-center mt-4 space-x-3  xx  border-t border-slate-200 pt-4 text-slate-800 dark:border-navy-600 dark:text-navy-100">
+                                            <div class="flex-1">
+                                                <div class="flex items-center justify-between">
 
-                                                <div class="flex font-medium text-slate-700 dark:text-navy-100">
-                                                        @if ($balasan->centang_biru)
-                                                            <div class="mask is-star mr-1 flex h-5 w-5 shrink-0 items-center justify-center bg-info">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="white">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                                                </svg>
+                                                    <div class="flex font-medium text-slate-700 dark:text-navy-100">
+                                                            @if ($balasan->centang_biru)
+                                                                <div class="mask is-star mr-1 flex h-5 w-5 shrink-0 items-center justify-center bg-info">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="white">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                                    </svg>
+                                                                </div>
+                                                            @endif
+                                                            @php
+                                                            $namaBalasan = $balasan->nama;
+                                                            $namaBalasan = str_replace('(Anggota Pengurus)', '<small class="font-medium">(anggota pengurus)</small>', $namaBalasan);
+                                                            @endphp
+                                                            <div class="font-medium">{!! $namaBalasan !!}</div>
+                                                    </div>
+
+                                                    @if (Auth::check() && Auth::user()->role === 'super_admin')
+                                                    <div x-data="usePopper({placement:'bottom-end',offset:4})"
+                                                        @click.outside="isShowPopper && (isShowPopper = false)"
+                                                        class="inline-flex">
+                                                        <button 
+                                                            class="btn h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                                            <svg xmlns="../www.w3.org/2000/svg.html" class="h-4.5 w-4.5"
+                                                                fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                                                stroke-width="2">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                                                            </svg>
+                                                        </button>
+
+                                                        <div x-ref="popperRoot" class="popper-root"
+                                                            :class="isShowPopper && 'show'">
+                                                            <div
+                                                                class="popper-box rounded-md border border-slate-150 bg-white py-1.5 font-inter dark:border-navy-500 dark:bg-navy-700">
+                                                                <ul>
+                                                                    <li>
+                                                                        <a href="{{ route('pengunjung.news.komentar.balasan.hapus', ['komentarId' => $balasan->id]) }}"
+                                                                            class="flex text-xs h-8 bg-error/25 text-error items-center px-3  tracking-wide outline-none transition-all hover:bg-error/50 hover:bg-error/25 focus:bg-slate-100 focus:bg-error/25 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100"
+                                                                            onclick="event.preventDefault(); document.getElementById('delete-balasan-komentar-{{ $balasan->id }}').submit();">
+                                                                            <i class="fa fa-trash-alt bg-error/25 pr-2"></i> Hapus Balasan Komentar</a>
+                                                                        <form
+                                                                            id="delete-balasan-komentar-{{ $balasan->id }}"
+                                                                            action="{{ route('pengunjung.news.komentar.balasan.hapus', ['komentarId' => $balasan->id]) }}"
+                                                                            method="POST" style="display: none;">
+                                                                            @csrf
+                                                                        </form>
+                                                                    </li>
+                                                                </ul>
                                                             </div>
-                                                        @endif
-                                                        @php
-                                                        $namaBalasan = $balasan->nama;
-                                                        $namaBalasan = str_replace('(Anggota Pengurus)', '<small class="font-medium">(anggota pengurus)</small>', $namaBalasan);
-                                                        @endphp
-                                                        <div class="font-medium">{!! $namaBalasan !!}</div>
-                                                </div>
-
-                                                @if (Auth::check() && Auth::user()->role === 'super_admin')
-                                                <div x-data="usePopper({placement:'bottom-end',offset:4})"
-                                                    @click.outside="isShowPopper && (isShowPopper = false)"
-                                                    class="inline-flex">
-                                                    <button 
-                                                        class="btn h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
-                                                        <svg xmlns="../www.w3.org/2000/svg.html" class="h-4.5 w-4.5"
-                                                            fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                                            stroke-width="2">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-                                                        </svg>
-                                                    </button>
-
-                                                    <div x-ref="popperRoot" class="popper-root"
-                                                        :class="isShowPopper && 'show'">
-                                                        <div
-                                                            class="popper-box rounded-md border border-slate-150 bg-white py-1.5 font-inter dark:border-navy-500 dark:bg-navy-700">
-                                                            <ul>
-                                                                <li>
-                                                                    <a href="{{ route('pengunjung.news.komentar.balasan.hapus', ['komentarId' => $balasan->id]) }}"
-                                                                        class="flex text-xs h-8 bg-error/25 text-error items-center px-3  tracking-wide outline-none transition-all hover:bg-error/50 hover:bg-error/25 focus:bg-slate-100 focus:bg-error/25 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100"
-                                                                        onclick="event.preventDefault(); document.getElementById('delete-balasan-komentar-{{ $balasan->id }}').submit();">
-                                                                        <i class="fa fa-trash-alt bg-error/25 pr-2"></i> Hapus Balasan Komentar</a>
-                                                                    <form
-                                                                        id="delete-balasan-komentar-{{ $balasan->id }}"
-                                                                        action="{{ route('pengunjung.news.komentar.balasan.hapus', ['komentarId' => $balasan->id]) }}"
-                                                                        method="POST" style="display: none;">
-                                                                        @csrf
-                                                                    </form>
-                                                                </li>
-                                                            </ul>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                @endif
+                                                    @endif
 
-                                            </div>
-                                            <div class="mt-0.5 flex text-slate-700 dark:text-navy-100 text-xs">
-                                                <p class="justify py-2"">{{ $balasan->isi_balasan }}</p>
-                                            </div>
-                                            <div class="mt-0.5 flex text-xs text-slate-400 dark:text-navy-300">
-                                                <button
-                                                    class="h-7 px-2 w-fit btn bg-primary/10 p-0 text-primary hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:bg-accent-light/10 dark:text-accent-light dark:hover:bg-accent-light/20 dark:focus:bg-accent-light/20 dark:active:bg-accent-light/25 flex items-center">
-                                                    {{ $komentar->created_at->format('H:i') }} Pada {{ $balasan->created_at->format('d F Y') }}
-                                                </button>
+                                                </div>
+                                                <div class="mt-0.5 flex text-slate-700 dark:text-navy-100 text-xs">
+                                                    <p class="justify py-2"">{{ $balasan->isi_balasan }}</p>
+                                                </div>
+                                                <div class="mt-0.5 flex text-xs text-slate-400 dark:text-navy-300">
+                                                    <button
+                                                        class="h-7 px-2 w-fit btn bg-primary/10 p-0 text-primary hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:bg-accent-light/10 dark:text-accent-light dark:hover:bg-accent-light/20 dark:focus:bg-accent-light/20 dark:active:bg-accent-light/25 flex items-center">
+                                                        {{ $komentar->created_at->format('H:i') }} Pada {{ $balasan->created_at->format('d F Y') }}
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    @endif
-                                    @endforeach
+                                        @endif
+                                    @endforeach --}}
                                     <!-- end balasan komentar -->
                                 </div>
                                 @endforeach

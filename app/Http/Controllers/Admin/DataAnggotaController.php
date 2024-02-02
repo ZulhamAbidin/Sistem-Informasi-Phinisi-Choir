@@ -13,12 +13,9 @@ class DataAnggotaController extends Controller
 {
     public function index(Request $request)
     {
-        // $anggota = Anggota::paginate(3);
-        // return view('SuperAdmin.dataanggota.index', compact('anggota'));
-         if ($request->ajax()) {
+        if ($request->ajax()) {
         $data = Anggota::latest()->get();
 
-        // Mengubah URL gambar sesuai dengan struktur direktori Anda
         $data->transform(function ($item) {
             $item->foto = asset('storage/uploads/' . $item->foto);
             return $item;
@@ -38,7 +35,7 @@ class DataAnggotaController extends Controller
 
     public function show($id)
     {
-        $anggota = Anggota::find($id); // Mengambil data anggota dari model berdasarkan ID
+        $anggota = Anggota::find($id);
 
         if ($anggota) {
             return view('SuperAdmin.dataanggota.show', ['anggota' => $anggota]);
@@ -88,12 +85,10 @@ class DataAnggotaController extends Controller
         $anggota->deskripsi = $request->input('deskripsi');
 
         if ($request->hasFile('foto')) {
-            // Proses upload foto baru dan hapus foto lama jika diperlukan
             $uploadedFile = $request->file('foto');
             $imageName = time() . '.' . $uploadedFile->getClientOriginalExtension();
             $uploadedFile->storeAs('uploads', $imageName, 'public');
-            
-            // Hapus foto lama jika ada dan tidak sama dengan foto default
+
             if ($anggota->foto && $anggota->foto !== 'default.jpg') {
                 Storage::disk('public')->delete('uploads/' . $anggota->foto);
             }
@@ -102,7 +97,6 @@ class DataAnggotaController extends Controller
         }
 
         $anggota->save();
-
         return redirect()->route('dataanggota.index')->with('success', 'Anggota berhasil diperbarui.');
     }
 
@@ -140,25 +134,23 @@ class DataAnggotaController extends Controller
         }
 
         $anggota->save();
-
-        Alert::success('Berhasil', 'Berhasil Mendaftarkan  Baru.');
-        return redirect()->route('dataanggota.index');
+        return redirect()->route('dataanggota.index')->with('success', 'Anggota berhasil ditambahkan.');
     }
 
-    public function destroy(Request $request, $id)
-{
-    $anggota = Anggota::find($id);
+        public function destroy(Request $request, $id)
+    {
+        $anggota = Anggota::find($id);
 
-    if (!$anggota) {
-        return response()->json(['success' => false, 'message' => 'Anggota tidak ditemukan.']);
+        if (!$anggota) {
+            return response()->json(['success' => false, 'message' => 'Anggota tidak ditemukan.']);
+        }
+
+        $anggota->delete();
+
+        if ($request->ajax()) {
+            return response()->json(['success' => true, 'message' => 'Anggota berhasil dihapus.']);
+        } else {
+            return redirect()->route('dataanggota.index')->with('success', 'Anggota berhasil dihapus.');
+        }
     }
-
-    $anggota->delete();
-
-    if ($request->ajax()) {
-        return response()->json(['success' => true, 'message' => 'Anggota berhasil dihapus.']);
-    } else {
-        return redirect()->route('dataanggota.index')->with('success', 'Anggota berhasil dihapus.');
-    }
-}
 }

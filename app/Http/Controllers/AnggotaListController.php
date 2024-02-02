@@ -13,7 +13,6 @@ class AnggotaListController extends Controller
     if ($request->ajax()) {
         $data = Anggota::latest()->get();
 
-        // Mengubah URL gambar sesuai dengan struktur direktori Anda
         $data->transform(function ($item) {
             $item->foto = asset('storage/uploads/' . $item->foto);
             return $item;

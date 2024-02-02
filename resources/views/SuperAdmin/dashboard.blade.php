@@ -99,37 +99,6 @@
                         </div>
                     </div>
                 </div>
-                
-                {{-- TOTAL USER ANGGOTA LEMBAGA --}}
-                {{-- <div class="col-lg-4 col-md-4 col-sm-6 col-xl-3">
-                    <div class="card overflow-hidden">
-                        <div class="card-body text-center">
-                            <div class="">
-                                <div class="mt-2">
-                                    <h6 class="">Total Anggota Lembaga</h6>
-                                    <h2 class="mb-0 number-font">{{ $totalAdmins }}</h2>
-                                </div>
-                            </div><br>
-                            <span class="text-muted fs-12"><span class="text-secondary "><i class="fe fe-arrow-up-circle  text-secondary"></i> </span>
-                                                    Dalam Beberapa Waktu Terakhir</span>
-                        </div>
-                    </div>
-                </div> --}}
-        
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xl-3">
-                    <div class="card overflow-hidden">
-                        <div class="card-body text-center">
-                            <div class="">
-                                <div class="mt-2">
-                                    <h6 class="">Total Postingan</h6>
-                                    <h2 class="mb-0 number-font">{{ $totalPostingan }}</h2>
-                                </div>
-                            </div><br>
-                            <span class="text-muted fs-12"><span class="text-secondary "><i class="fe fe-arrow-up-circle  text-secondary"></i> </span>
-                                                    Dalam Beberapa Waktu Terakhir</span>
-                        </div>
-                    </div>
-                </div>
         
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xl-3">
                     <div class="card overflow-hidden">
@@ -190,21 +159,7 @@
                         </div>
                     </div>
                 </div>
-        
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xl-3">
-                    <div class="card overflow-hidden">
-                        <div class="card-body text-center">
-                            <div class="">
-                                <div class="mt-2">
-                                    <h6 class="">Total Balasan Komentar</h6>
-                                    <h2 class="mb-0 number-font">{{ $totalBalasanKomentar }}</h2>
-                                </div>
-                            </div><br>
-                            <span class="text-muted fs-12"><span class="text-secondary "><i class="fe fe-arrow-up-circle  text-secondary"></i> </span>
-                                                    Dalam Beberapa Waktu Terakhir</span>
-                        </div>
-                    </div>
-                </div>
+    
         
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xl-3">
                     <div class="card overflow-hidden">
@@ -236,20 +191,7 @@
                     </div>
                 </div>
         
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xl-3">
-                    <div class="card overflow-hidden">
-                        <div class="card-body text-center">
-                            <div class="">
-                                <div class="mt-2">
-                                    <h6 class="">Total Rating</h6>
-                                    <h2 class="mb-0 number-font">{{ $totalRating }}</h2>
-                                </div>
-                            </div><br>
-                            <span class="text-muted fs-12"><span class="text-secondary "><i class="fe fe-arrow-up-circle  text-secondary"></i> </span>
-                                                    Dalam Beberapa Waktu Terakhir</span>
-                        </div>
-                    </div>
-                </div>
+                
         
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xl-3">
                     <div class="card overflow-hidden">

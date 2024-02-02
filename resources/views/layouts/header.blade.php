@@ -17,16 +17,13 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
                         <div class="d-flex order-lg-2">
 
-                            
-                          
-                            
                             <!-- THEME -->
-                            <div class="d-flex country">
+                            {{-- <div class="d-flex country">
                                 <a class="nav-link icon theme-layout nav-link-bg layout-setting">
                                     <span class="dark-layout"><i class="fe fe-moon"></i></span>
                                     <span class="light-layout"><i class="fe fe-sun"></i></span>
                                 </a>
-                            </div>
+                            </div> --}}
 
                             <div class="dropdown d-flex">
                                 <a class="nav-link icon full-screen-link nav-link-bg">

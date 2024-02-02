@@ -23,7 +23,6 @@
         <img src="{{ asset('assets/images/loader.svg') }}" class="loader-img" alt="Loader">
     </div>
 
-    
 
     <div class="page">
         <div class="page-main">
