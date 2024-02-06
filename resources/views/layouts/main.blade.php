@@ -15,6 +15,7 @@
     <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet " />
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="{{ asset('assets/colors/color1.css') }}" />
 
+    @stack('styles')
 </head>
 
 <body class="app sidebar-mini ltr light-mode">

@@ -26,22 +26,7 @@ class WelcomeController extends Controller
         foreach ($posts as $post) {
             $post->selisihWaktu = $this->hitungSelisihWaktu($post->created_at);
         }
-
-        $search = $request->input('search');
-
-        $listberita = Postingan::latest()
-            ->when($search, function ($query) use ($search) {
-                $query->where(function ($query) use ($search) {
-                    $query
-                        ->where('judul_postingan', 'like', '%' . $search . '%')
-                        ->orWhere('deskripsi', 'like', '%' . $search . '%')
-                        ->orWhere('lokasi', 'like', '%' . $search . '%')
-                        ->orWhere('sumber', 'like', '%' . $search . '%');
-                });
-            })
-            ->paginate(8); // Sesuaikan jumlah item per halaman dengan kebutuhan Anda
-
-        return view('welcome', compact('posts', 'carousels', 'testimonials', 'listberita', 'search', 'jumbotrons'));
+        return view('welcome', compact('posts', 'carousels', 'testimonials', 'jumbotrons'));
     }
 
     private function hitungSelisihWaktu($createdAt)

@@ -21,7 +21,7 @@
         document.documentElement.classList.add("dark");
     </script>
 
-
+    @stack('styles')
    
 </head>
 
@@ -271,6 +271,8 @@
         window.addEventListener("DOMContentLoaded", () => Alpine.start());
     </script>
 
+    @stack('scripts')
+
     <!-- BOOTSTRAP JS -->
     @push('script')
         <script src="{{ asset('assets/plugins/bootstrap/js/popper.min.js') }}"></script>
@@ -283,6 +285,8 @@
         <script src="{{ asset('assets/plugins/ratings-2/star-rating.js') }}"></script>
         <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     @endpush
+
+   
 </body>
 
 
